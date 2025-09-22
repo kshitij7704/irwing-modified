@@ -12,10 +12,10 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $pages = Page::count(); 
-        $news = News::count();
-        $users = User::count(); 
-        $blogs = Blog::count();
-        return view('dashboard', compact('pages','news','users','blogs'));
+        // $pages = Page::count(); 
+        // $news = News::count();
+        // $users = User::count(); 
+        // $blogs = Blog::count();
+        return view('dashboard');
     }
 }

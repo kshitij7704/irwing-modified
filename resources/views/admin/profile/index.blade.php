@@ -39,6 +39,11 @@
                                     value="{{ old('name', Auth::user()->name) }}" required />
                             </div>
                             <div class="col-md-6">
+                                <label for="name" class="form-label">Staff No</label>
+                                <input class="form-control" type="text" id="name" name="name"
+                                    value="{{ old('name', Auth::user()->staff_no) }}" required />
+                            </div>
+                            <div class="col-md-6">
                                 <label for="email" class="form-label">E-mail</label>
                                 <input class="form-control" type="email" id="email" name="email"
                                     value="{{ old('email', Auth::user()->email) }}" required />

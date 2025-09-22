@@ -6,10 +6,10 @@
         <div class="card">
             <h5 class="card-header">Create personal Performa Details</h5>
 
-            @can("blog create")
+            @can("submission.personal_performa.create")
             <div class="card-body">
                 <form action="{{ route('personal-performa.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
+                @csrf
 
     <!-- Title -->
     <label for="title">Title</label>
@@ -17,6 +17,10 @@
         <option value="Mr.">Mr.</option>
         <option value="Ms.">Ms.</option>
     </select>
+    <!-- Name of the officer (Auto) -->
+    <label>Name of Officer</label>
+    <input type="text" name="name" value="{{ Auth::user()->name }}" class="form-control" readonly>
+
 
     <!-- Service -->
     <label for="service">Service</label>
@@ -30,11 +34,7 @@
 
     <!-- Staff no. -->
     <label for="staff_no">Staff No.</label>
-    <input type="text" name="staff_no" id="staff_no" class="form-control" required>
-
-    <!-- Name of the officer (Auto) -->
-    <label>Name of Officer</label>
-    <input type="text" value="{{ Auth::user()->name }}" class="form-control" readonly>
+    <input type="text" name="staff_no" id="staff_no" value="{{Auth::user()->staff_no}}" class="form-control" required>
 
     <!-- Designation -->
     <label for="designation">Designation</label>
@@ -90,9 +90,9 @@
 
     <!-- Contact Info -->
     <label>Mobile</label>
-    <input type="text" name="mobile" class="form-control">
+    <input type="text" name="mobile" value="{{Auth::user()->phone}}" class="form-control">
     <label>Email</label>
-    <input type="email" name="email" class="form-control">
+    <input type="email" name="email" value="{{Auth::user()->email}}" class="form-control">
 
     <!-- IDs -->
     <label>Aadhaar Card No.</label>
@@ -107,6 +107,28 @@
     <!-- Superannuation -->
     <label>Date of Superannuation</label>
     <input type="text" value="{{ Auth::user()->retirement_date ?? '' }}" class="form-control" readonly>
+<!-- Event Details -->
+    <h5 class="mt-3">Event Details</h5>
+
+    <!-- Name of the Event -->
+    <label for="event_name">Name of the Event</label>
+    <input type="text" name="event_name" id="event_name" class="form-control" required>
+
+    <!-- Location -->
+    <label for="event_location">Location</label>
+    <input type="text" name="event_location" id="event_location" class="form-control" required>
+
+    <!-- Date From / To -->
+    <div class="row">
+        <div class="col-md-6">
+            <label for="event_start_date">Date From</label>
+            <input type="date" name="event_start_date" id="event_start_date" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label for="event_end_date">Date To</label>
+            <input type="date" name="event_end_date" id="event_end_date" class="form-control" required>
+        </div>
+    </div>
 
     <!-- Event Details -->
     <label>Brief about the Event</label>
