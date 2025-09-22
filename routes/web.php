@@ -12,7 +12,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\UnitController;
 use Laravel\Fortify\Features;
 
-
+//////naman/////
 Route::get('/api/unit-offices', [UnitController::class, 'getOffices'])->name('api.unit.offices');
 Route::get('/api/unit-office-divisions', [UnitController::class, 'getDivisions'])->name('api.unitoffice.divisions');
 Route::get('/api/division-designations', [UnitController::class, 'getDesignations'])->name('api.division.designations');
