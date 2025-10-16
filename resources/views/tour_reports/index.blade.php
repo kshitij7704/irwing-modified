@@ -23,14 +23,17 @@
                             </td>
                         </tr>
                         <tr>
-                            <th><input type="checkbox" id="select-all"></th>
-                            <th>Quarter</th>
+                            <th>#</th>
+                            <th>From</th>
+                            <th>To</th>
                             <th>Meeting Name</th>
-                            <th>Duration</th>
+                            <th>Purpose</th>
                             <th>Country</th>
-                            <th>Agency</th>
                             <th>Officers</th>
-                            <th>Status</th>
+                            <th>Tour Report</th>
+                            <th>Presentation</th>
+                            <th>Key Contributions</th>
+                            <th>Followup Actions</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -38,46 +41,20 @@
                         @php $submittedIndex = 1; @endphp
                         @foreach($reports as $qrp)
                         <tr>
-                            <td>
-                                @if(is_null($qrp->nodal_status) || $qrp->nodal_status === 'Saved')
-                                <input type="checkbox" name="qrp_ids[]" value="{{ $qrp->id }}">
-                                @elseif($qrp->nodal_status === 'Submitted')
-                                {{ $submittedIndex++ }}
-                                @endif
+                            <td>#
                             </td>
             </form>
-            <td>{{ $qrp->quarter }}</td>
-            <td>{{ $qrp->meeting_name }}</td>
-            <td>{{ $qrp->meeting_from }} - {{ $qrp->meeting_to }}</td>
-            @php
-            $countries = App\Models\Country::pluck('name', 'id');
-
-            $countriii = json_decode($qrp->country, true) ?? [];
-
-            // Filter out empty/null entries first
-            $countryIds = collect($countriii)
-            ->pluck('country')
-            ->filter() // removes null/empty
-            ->toArray();
-
-            $CountryNames = [];
-            foreach ($countryIds as $cid) {
-            if (isset($countries[$cid])) {
-            $CountryNames[] = $countries[$cid];
-            }
-            }
-
-            $countryStr = implode(', ', $CountryNames);
-            @endphp
-            <td>{{ $countryStr ?? 'N/A' }}</td>
-            <td>{{ $qrp->agencyy->name ?? 'N/A' }}</td>
-            <td>
-                @if(is_null($qrp->nodal_status) || $qrp->nodal_status === 'Saved')
-                <span class="badge bg-info">Saved</span>
-                @elseif($qrp->nodal_status === 'Submitted')
-                <span class="badge bg-success">Submitted</span>
-                @endif
+            <td>{{ $qrp->meeting_from }}</td>
+            <td>{{ $qrp->meeting_to }}</td>
+            <td>{{ $qrp->meeting_name }} - {{ $qrp->meeting_to }}</td>
+            <td>{{ $qrp->purpose }}</td>
+          
+            <td>{{ $qrp->country ?? 'N/A' }}</td>
+            <td>{{ $qrp->city ?? 'N/A' }}</td>
+            <td>{{ $qrp->tour_report_pdf ?? 'N/A' }}</td>
+            <td>{{ $qrp->presentation ?? 'N/A' }}
             </td>
+            <td>{{ $qrp->key_contributions ?? 'N/A' }}</td>
             <td>
                 <a href="{{ route('qrp.show', $qrp) }}" class="btn btn-info btn-sm">View</a>
                 @if(is_null($qrp->nodal_status) || $qrp->nodal_status === 'Saved')

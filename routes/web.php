@@ -19,6 +19,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\MinisterMessageController;
 use App\Http\Controllers\PressReleaseController;
 use App\Http\Controllers\TourReportController;
+use App\Http\Controllers\AchievementController;
 use Laravel\Fortify\Features;
 
 
@@ -132,6 +133,7 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
         Route::resource('sliders', SliderController::class);
         Route::resource('minister-messages', MinisterMessageController::class);
         Route::resource('press-releases', PressReleaseController::class);
+        Route::resource('achievements', AchievementController::class);
 
 
     });

@@ -3,133 +3,211 @@
 @section('content')
 
 <style>
-    .table tr td, .table tr th {
-        text-align: unset !important;
-        padding-left: 10px;
-    }
-    .achievement-card {
-        border: 1px solid #dee2e6;
+    /* Card */
+    .card {
+        border: 1px solid #e1e1e1;
         border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
-    .achievement-title {
+    .card-body {
+        padding: 0 !important;
+    }
+    .card-header {
+        background: #0d6efd;
+        color: #fff;
         font-weight: 600;
-        font-size: 1.1rem;
+        border-radius: 10px 10px 0 0;
+        padding: 15px 20px;
     }
-    .achievement-date {
-        font-size: 0.9rem;
-        color: #6c757d;
+
+    /* Table styling */
+    .table thead th {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #333;
+        padding: 12px 15px;
+        text-align: left !important;
+    }
+    .table tbody td {
+        padding: 12px 15px;
+        vertical-align: middle;
+        text-align: left !important;
+    }
+    .table tbody tr:hover {
+        background-color: #f1f5f9;
+        transition: 0.2s;
+    }
+
+    .table a {
+        color: #0d6efd;
+        font-weight: 500;
+        text-decoration: none;
+    }
+    .table a:hover {
+        text-decoration: underline;
+    }
+
+    /* Search box */
+    .search-container {
+        text-align: right;
+        padding: 10px 15px;
+    }
+    .search-input {
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        padding: 6px 10px;
+        width: 250px;
+    }
+
+    /* Pagination */
+    .pagination-container {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px 15px;
+        gap: 5px;
+    }
+    .pagination-container button {
+        border: 1px solid #dee2e6;
+        background: #f8f9fa;
+        padding: 5px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .pagination-container button.active {
+        background: #0d6efd;
+        color: #fff;
+        border-color: #0d6efd;
     }
 </style>
 
-<main class="main">
-    <div class="page-header text-center" style="background-image: url('front/assets/images/page-header-bg.jpg')">
-        <div class="container">
-            <h1 class="page-title">Achievements</h1>
+<div class="mb-3 mb-lg-5"></div>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="card">
+        <h4 class="card-header d-flex justify-content-between align-items-center">
+            Achievements
+        </h4>
+
+        <!-- Search box -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by Achievement...">
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="achievementsTable">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Achievement</th>
+                            <th>Date</th>
+                            <th>Details</th>
+                            <th>Document</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        @forelse($achievements as $index => $achievement)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $achievement->achievement }}</td>
+                            <td>{{ \Carbon\Carbon::parse($achievement->date)->format('F d, Y') }}</td>
+                            <td>{{ $achievement->details ?? '-' }}</td>
+                            <td>
+                                @if($achievement->document)
+                                    <a href="{{ asset('storage/'.$achievement->document) }}" target="_blank">
+                                        View File
+                                    </a>
+                                @else
+                                    <span class="text-muted">No File</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">No achievements found.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container" id="pagination"></div>
         </div>
     </div>
-
-    <nav aria-label="breadcrumb" class="breadcrumb-nav"></nav>
-
-    <div class="page-content container">
-        
-        <p>Welcome to the Department of Telecommunications Achievements page. Here we highlight our key milestones, awards, and contributions towards improving telecommunication services across the country.</p>
-        
-        <div class="row">
-
-            <!-- Sample Achievement Card -->
-            <div class="col-md-6">
-                <div class="achievement-card">
-                    <div class="achievement-title">Successful Launch of 5G Pilot Project</div>
-                    <div class="achievement-date">March 2025</div>
-                    <p>The department successfully launched the 5G pilot project in select urban regions, aiming to improve broadband connectivity and enhance digital infrastructure.</p>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="achievement-card">
-                    <div class="achievement-title">Telecom Accessibility Awards</div>
-                    <div class="achievement-date">January 2025</div>
-                    <p>Recognized nationally for improving telecom accessibility in rural areas, including expansion of mobile networks and digital services.</p>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="achievement-card">
-                    <div class="achievement-title">Reduction in Call Drop Rates</div>
-                    <div class="achievement-date">December 2024</div>
-                    <p>Implemented advanced monitoring systems resulting in a 30% reduction in call drop rates across major telecom operators.</p>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="achievement-card">
-                    <div class="achievement-title">National Fiber Optic Expansion</div>
-                    <div class="achievement-date">November 2024</div>
-                    <p>Expanded fiber optic networks to over 1,000 villages, improving high-speed internet access in remote areas.</p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Optional Table for Achievements -->
-        <h3 class="mt-5">Recent Achievements Overview</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="achievementsTable">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Achievement</th>
-                        <th>Date</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>5G Pilot Project</td>
-                        <td>March 2025</td>
-                        <td>Launched in select urban areas</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Telecom Accessibility Award</td>
-                        <td>Jan 2025</td>
-                        <td>Recognized for rural network expansion</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Fiber Optic Expansion</td>
-                        <td>Nov 2024</td>
-                        <td>1,000+ villages connected</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Call Drop Rate Reduction</td>
-                        <td>Dec 2024</td>
-                        <td>30% reduction achieved</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-</main>
+</div>
 
 @endsection
 
-@push('scripts')
 <script>
-$(document).ready(function() {
-    $('#achievementsTable').DataTable({
-        pageLength: 5,
-        lengthMenu: [5, 10, 25, 50],
-        searching: true,
-        ordering: true,
+document.addEventListener("DOMContentLoaded", function() {
+    const rowsPerPage = 10;
+    const tableBody = document.getElementById("tableBody");
+    const allRows = Array.from(tableBody.querySelectorAll("tr"));
+    const paginationContainer = document.getElementById("pagination");
+    const searchInput = document.getElementById("searchInput");
+
+    let currentPage = 1;
+    let filteredRows = [...allRows];
+
+    function displayRows(page) {
+        tableBody.innerHTML = "";
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const rowsToShow = filteredRows.slice(start, end);
+        rowsToShow.forEach(row => tableBody.appendChild(row));
+        renderPagination();
+    }
+
+    function renderPagination() {
+        paginationContainer.innerHTML = "";
+        const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+        if (totalPages <= 1) return;
+
+        const prevBtn = document.createElement("button");
+        prevBtn.textContent = "Prev";
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayRows(currentPage);
+            }
+        });
+        paginationContainer.appendChild(prevBtn);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement("button");
+            btn.textContent = i;
+            btn.classList.toggle("active", i === currentPage);
+            btn.addEventListener("click", () => {
+                currentPage = i;
+                displayRows(currentPage);
+            });
+            paginationContainer.appendChild(btn);
+        }
+
+        const nextBtn = document.createElement("button");
+        nextBtn.textContent = "Next";
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.addEventListener("click", () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayRows(currentPage);
+            }
+        });
+        paginationContainer.appendChild(nextBtn);
+    }
+
+    searchInput.addEventListener("keyup", function() {
+        const term = this.value.toLowerCase();
+        filteredRows = allRows.filter(row => {
+            const nameCell = row.querySelector("td:nth-child(2)");
+            return nameCell && nameCell.textContent.toLowerCase().includes(term);
+        });
+        currentPage = 1;
+        displayRows(currentPage);
     });
+
+    displayRows(currentPage);
 });
 </script>
-@endpush

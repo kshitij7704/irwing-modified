@@ -75,49 +75,54 @@ $qrps = QrpForm::with(['agencyy', 'officers'])
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'tour_id' => 'required|unique:tour_reports,tour_id',
-            'key_contributions' => 'required|string|max:1000',
-            'follow_up_action_points' => 'required|string|max:1000',
-            'tour_report_pdf' => 'nullable|mimes:pdf|max:2048',
-            'presentation' => 'nullable|string',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'tour_id' => 'required|unique:tour_reports,tour_id',
+        'meeting_name' => 'required|string',
+        'purpose' => 'required|string',
+        'from_date' => 'required|date',
+        'to_date' => 'required|date',
+        'key_contributions' => 'required|string|max:1000',
+        'follow_up_action_points' => 'required|string|max:1000',
+        'tour_report_pdf' => 'nullable|mimes:pdf|max:2048',
+    ]);
 
-        $user = Auth::user();
+    $user = Auth::user();
 
-        // Auto-fill data from related tables or user profile
-        $data = [
-            'tour_id' => $request->tour_id,
-            'user_id' => $user->id,
-            'staff_number' => $user->staff_number,
-            'meeting_name' => $user->meeting_name,
-            'purpose' => $user->purpose,
-            'service' => $user->service,
-            'name_designation' => $user->designation,
-            'grade' => $user->grade,
-            'level' => $user->level,
-            'mobile_no' => $user->mobile,
-            'email' => $user->email,
-            'equivalent_rank' => $user->rank,
-            'country' => $user->country,
-            'city' => $user->city,
-            'from_date' => $user->from_date,
-            'to_date' => $user->to_date,
-            'key_contributions' => $request->key_contributions,
-            'follow_up_action_points' => $request->follow_up_action_points,
-            'presentation' => $request->presentation,
-        ];
+    $data = [
+        'tour_id' => $request->tour_id,
+        'user_id' => $user->id,
 
-        if ($request->hasFile('tour_report_pdf')) {
-            $data['tour_report_pdf'] = $request->file('tour_report_pdf')->store('tour_reports', 'public');
-        }
+        'staff_number' => $request->staff_number,
+        'meeting_name' => $request->meeting_name,
+        'purpose' => $request->purpose,
+        'service' => $request->service,
+        'name_designation' => $request->name_designation,
+        'grade' => $request->grade,
+        'level' => $request->level,
+        'mobile_no' => $request->mobile_no,
+        'email' => $request->email,
+        'equivalent_rank' => $request->equivalent_rank,
+        'country' => $request->country,
+        'city' => $request->city,
+        'from_date' => $request->from_date,
+        'to_date' => $request->to_date,
 
-        TourReport::create($data);
+        'key_contributions' => $request->key_contributions,
+        'follow_up_action_points' => $request->follow_up_action_points,
+        'presentation' => $request->presentation,
+    ];
 
-        return redirect()->route('tour-reports.index')->with('success', 'Tour Report submitted successfully.');
+    if ($request->hasFile('tour_report_pdf')) {
+        $data['tour_report_pdf'] = $request->file('tour_report_pdf')->store('tour_reports', 'public');
     }
+
+    TourReport::create($data);
+
+    return redirect()->route('tour-reports.index')->with('success', 'Tour Report submitted successfully.');
+}
+
 
     /**
      * Display the specified resource.
@@ -182,7 +187,7 @@ $qrps = QrpForm::with(['agencyy', 'officers'])
         'to_date' => $meeting->meeting_to,
         'country'      => implode(', ', $countryNames),
         'city'         => implode(', ', $cities),
-    'purpose'      => $meeting->justification,
+        'purpose'      => $meeting->justification,
     ]);
 }
 

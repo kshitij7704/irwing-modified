@@ -60,6 +60,7 @@
 	                	</div><!-- End .row -->
 	                </div><!-- End .container -->
             	</div><!-- End .video-banner -->
+				<br>
 				@endforeach
 
 
