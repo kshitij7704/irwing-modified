@@ -3,32 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    public function send(Request $request)
+
+    public function index()
     {
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
-            'email'      => 'required|email',
-            'phone'      => 'required',
-            'company'    => 'required|string|max:255',
-            'num_employees' => 'required',
-            'role'       => 'required',
-            'industry'   => 'required',
-            'country'    => 'required',
-            'message'    => 'required',
-            'consent'    => 'accepted',
+        // Fetch all contacts, newest first
+        $contacts = Contact::latest()->paginate(10);
+
+        return view('admin.contact.index', compact('contacts'));
+    }
+    public function store(Request $request)
+    {
+        // Validation
+        $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
         ]);
 
-        // Send email
-        Mail::send('emails.contact', $validated, function($message) use ($validated) {
-            $message->to('puneet@ailifebot.com')
-                    ->subject('New Contact Form Submission');
-        });
+        // Save to DB
+        Contact::create($request->all());
 
-        return back()->with('success', 'Thank you! Your request has been submitted successfully.');
+        // Redirect with success message
+        return back()->with('success', 'Your message has been submitted successfully!');
     }
-} 
+}

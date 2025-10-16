@@ -20,13 +20,14 @@
                 <table class="table border-top">
                     <thead>
                         <tr>
-                            <td colspan="8" style="text-align:right;">
+                            <td colspan="9" style="text-align:right;">
                                 <button type="button" class="btn btn-info btn-sm">Add More Qrp</button>
                                 <button type="submit" class="btn btn-success btn-sm">Submit Qrps</button>
                             </td>
                         </tr>
                         <tr>
                             <th><input type="checkbox" id="select-all"></th>
+                            <th>Quarter</th>
                             <th>Meeting Name</th>
                             <th>Duration</th>
                             <th>Country</th>
@@ -48,9 +49,30 @@
                                 @endif
                             </td>
             </form>
+            <td>{{ $qrp->quarter }}</td>
             <td>{{ $qrp->meeting_name }}</td>
             <td>{{ $qrp->meeting_from }} - {{ $qrp->meeting_to }}</td>
-            <td>{{ $qrp->countryy->name ?? 'N/A' }}</td>
+            @php
+            $countries = App\Models\Country::pluck('name', 'id');
+
+            $countriii = json_decode($qrp->country, true) ?? [];
+
+            // Filter out empty/null entries first
+            $countryIds = collect($countriii)
+            ->pluck('country')
+            ->filter() // removes null/empty
+            ->toArray();
+
+            $CountryNames = [];
+            foreach ($countryIds as $cid) {
+            if (isset($countries[$cid])) {
+            $CountryNames[] = $countries[$cid];
+            }
+            }
+
+            $countryStr = implode(', ', $CountryNames);
+            @endphp
+            <td>{{ $countryStr ?? 'N/A' }}</td>
             <td>{{ $qrp->agencyy->name ?? 'N/A' }}</td>
             <td>
                 @foreach($qrp->officers as $officers)
@@ -68,11 +90,11 @@
                 <a href="{{ route('qrp.show', $qrp) }}" class="btn btn-info btn-sm">View</a>
                 @if(is_null($qrp->nodal_status) || $qrp->nodal_status === 'Saved')
                 <a href="{{ route('qrp.edit', $qrp) }}" class="btn btn-warning btn-sm">Edit</a>
-                @endif
                 <form action="{{ route('qrp.destroy', $qrp) }}" method="POST" class="d-inline">
                     @csrf @method('DELETE')
                     <button class="btn btn-danger btn-sm">Delete</button>
                 </form>
+                @endif
 
             </td>
             </tr>

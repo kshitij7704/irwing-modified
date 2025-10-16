@@ -7,12 +7,11 @@
     <div class="card">
         <h5 class="card-header d-flex justify-content-between align-items-center">
             <span>Personal Performa Details</span>
-            @can("submission.personal_performa.create")
+            <a href="{{ route('personal-performa.create') }}" class="add-new btn btn-primary">
+                <i class="icon-base ti tabler-plus icon-xs me-0 me-sm-2"></i>
+                <span class="d-none d-sm-inline-block">Add New Details</span>
+            </a>
             
-                <a href="{{ route('personal-performa.export.excel') }}" class="btn btn-success">
-                    Download Excel
-                </a>
-            @endcan
 
         </h5>
         <form method="GET" action="{{ route('personal-performa-generation.index') }}" class="mb-3" style="padding-left: 30px;">
@@ -73,6 +72,9 @@
                                 <a href="{{ route('personal-performa-generation.show', $performa) }}" class="btn btn-info btn-sm">
                                     View
                                 </a>
+    <a href="{{ route('personal-performa.download', $performa->id) }}" class="btn btn-success btn-sm">
+        Download PDF
+    </a>
                             </td>
                         </tr>
                         @empty

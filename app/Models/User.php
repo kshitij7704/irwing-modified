@@ -62,4 +62,24 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function getDefaultRole()
+{
+    $roles = $this->getRoleNames(); // from Spatie
+
+    if ($roles->count() === 1) {
+        return $roles->first();
+    }
+
+    // Priority order
+    if ($roles->contains('admin')) {
+        return 'admin';
+    } elseif ($roles->contains('officer')) {
+        return 'officer';
+    } elseif ($roles->contains('nodal')) {
+        return 'nodal';
+    }
+
+    // fallback
+    return $roles->first();
+}
 }

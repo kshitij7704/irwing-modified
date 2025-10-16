@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\ValidationException;
+use Carbon\Carbon;
+use Auth;
 
 class QrpFormController extends Controller
 {
@@ -59,12 +61,10 @@ public function store(Request $request)
         'meeting_name' => 'required|string|max:255',
         'meeting_from' => 'required|date',
         'meeting_to' => 'required|date|after_or_equal:meeting_from',
-        'country' => 'required|integer',
-        'city' => 'required|string|max:255',
+        'countries' => 'required|array|min:1', // multiple countries
+        'countries.*.country' => 'required|integer',
+        'countries.*.city' => 'required|string|max:255',
         'similar_meeting' => 'nullable|string',
-
-        'justification' => 'nullable|string',
-        'expected_outcome' => 'nullable|string',
 
         // Officer array validation
         'officers' => 'required|array|min:1',
@@ -80,36 +80,68 @@ public function store(Request $request)
         'officers.*.contact' => 'nullable|string|max:20',
         'officers.*.meeting_from' => 'required|date',
         'officers.*.meeting_to' => 'required|date|after_or_equal:officers.*.meeting_from',
-        'officers.*.country' => 'nullable|integer',
-        'officers.*.city' => 'nullable|string|max:255',
+
+
+        'officers.*.justification' => 'nullable|string',
+        'officers.*.expected_outcome' => 'nullable|string',
+
+        'officers.*.countries' => 'required|array|min:1',
+        'officers.*.countries.*.country' => 'required|integer',
+        'officers.*.countries.*.city' => 'required|string|max:255',
 
         // Optional file validations
-        'invitation_letter' => 'nullable|file|mimes:pdf,doc,docx',
-        'previous_report' => 'nullable|file|mimes:pdf,doc,docx',
-        'justification_file' => 'nullable|file|mimes:pdf,doc,docx',
-        'expected_file' => 'nullable|file|mimes:pdf,doc,docx',
+        'invitation_letter' => 'nullable|file|mimes:pdf,doc,docx,jpg,png',
+        'previous_report' => 'nullable|file|mimes:pdf,doc,docx,jpg,png',
+        'officers.*.justification_file' => 'nullable|file|mimes:pdf,doc,docx,jpg,png',
+        'officers.*.expected_file' => 'nullable|file|mimes:pdf,doc,docx,jpg,png',
     ]);
 
     try {
-        // ✅ Use transaction to ensure data consistency
         DB::beginTransaction();
 
+        $quaterdate = Carbon::parse($request->meeting_from);
+        $quarter = $quaterdate->quarter;
+
+        $quarterLabels = [
+            1 => 'Quater 1 (Jan-Mar)',
+            2 => 'Quater 2 (Apr-Jun)',
+            3 => 'Quater 3 (Jul-Sep)',
+            4 => 'Quater 4 (Oct-Dec)',
+        ];
+
+        $yearquater = $quarterLabels[$quarter];
         $data = $validated;
         $data['meeting_id'] = $this->generateMeetingId();
         $data['nodal_status'] = 'Saved';
+        $data['quarter'] = $yearquater;
+        $data['created_by'] = Auth::user()->id;
 
-        // ✅ Handle file uploads
-        foreach (['invitation_letter', 'previous_report', 'justification_file', 'expected_file'] as $fileKey) {
+        // ✅ Handle main form files
+        foreach (['invitation_letter', 'previous_report'] as $fileKey) {
             if ($request->hasFile($fileKey)) {
                 $data[$fileKey] = $request->file($fileKey)->store('qrp_files');
             }
         }
 
+        // ✅ JSON encode multiple countries + cities
+        if ($request->has('countries')) {
+            $data['country'] = json_encode($request->input('countries'));
+        } 
         // ✅ Create main QRP form
         $qrp = QrpForm::create($data);
 
-        // ✅ Create each officer linked to the form
-        foreach ($validated['officers'] as $officer) {
+        // ✅ Create officers linked to the QRP form
+        foreach ($validated['officers'] as $index => $officer) {
+
+            // Handle officer files
+            $justificationFile = $expectedFile = null;
+            if ($request->hasFile("officers.$index.justification_file")) {
+                $justificationFile = $request->file("officers.$index.justification_file")->store('qrp_files');
+            }
+            if ($request->hasFile("officers.$index.expected_file")) {
+                $expectedFile = $request->file("officers.$index.expected_file")->store('qrp_files');
+            }
+
             QrpOfficer::create([
                 'qrp_id' => $qrp->id,
                 'profile_id' => $officer['profile_id'] ?? null,
@@ -124,24 +156,22 @@ public function store(Request $request)
                 'contact' => $officer['contact'] ?? null,
                 'meeting_from' => $officer['meeting_from'],
                 'meeting_to' => $officer['meeting_to'],
-                'country' => $officer['country'] ?? null,
-                'city' => $officer['city'] ?? null,
+                'country' => isset($officer['countries']) ? json_encode($officer['countries']) : null,
+                'justification' => $officer['justification'] ?? null,
+                'justification_file' => $justificationFile,
+                'expected_outcome' => $officer['expected_outcome'] ?? null,
+                'expected_file' => $expectedFile,
             ]);
         }
+        DB::commit();
 
-        DB::commit(); // ✅ All good
+        return redirect()->route('qrp.index')->with('success', 'Form saved successfully.');
 
-        return redirect()->route('qrp.index')->with('success', 'Form submitted successfully.');
-
-    } catch (ValidationException $e) {
-        DB::rollBack();
-        dd($e);
-        return back()->withErrors($e->errors())->withInput();
     } catch (\Exception $e) {
-        DB::rollBack();
         dd($e);
+        DB::rollBack();
         Log::error('QRP form submission failed', ['error' => $e->getMessage()]);
-        return back()->with('error', 'Something went wrong while submitting the form.')->withInput();
+        return back()->with('error', 'Something went wrong while submitting the form.'.$e->getMessage())->withInput();
     }
 }
 

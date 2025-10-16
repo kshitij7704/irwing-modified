@@ -115,7 +115,7 @@
         </div>
     </div>
     <div class="header-bottom sticky-header">
-        <div class="container">
+        <div class="container" style="position: static;">
 
             <div class="header-center">
                 <nav class="main-nav">
@@ -149,13 +149,16 @@
                                     <a href="{{url('pressrelease')}}">Press Releases</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('tweets')}}">Tweets</a>
+                                    <a href="{{url('social-media')}}">Social Media</a>
                                 </li>
                                 <li>
                                     <a href="{{url('orms')}}">IR Wing OMs</a>
                                 </li>
                                 <li>
                                     <a href="{{url('achivements')}}">Achievements</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('internation-forums')}}">International Forums</a>
                                 </li>
                             </ul>
                         </li>

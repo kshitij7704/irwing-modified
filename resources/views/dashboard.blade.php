@@ -92,7 +92,7 @@
             }
             @endphp
             @if($qrps)
-            <div class="col-sm-6 col-xl-12">
+            <!-- <div class="col-sm-6 col-xl-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-start justify-content-between">
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             @endif
                 @endroleCan
 
@@ -128,7 +128,7 @@
 
 @if($qrps->count() > 0)
     @roleCan('generation.qrp.view')
-        <div class="col-sm-6 col-xl-12">
+        <!-- <div class="col-sm-6 col-xl-12">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
@@ -153,7 +153,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     @endroleCan
 @endif
 
@@ -163,7 +163,7 @@
 
 @if($Performa->count() > 0)
                 @roleCan('generation.personal_performa.view')
-            <div class="col-sm-6 col-xl-12">
+            <!-- <div class="col-sm-6 col-xl-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-start justify-content-between">
@@ -186,7 +186,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
                 @endroleCan
                 @endif
 

@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://unpkg.com/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="https://unpkg.com/@tabler/icons@latest/icons-react.min.js"></script>
+
+
 <aside id="layout-menu" class="layout-menu menu-vertical menu">
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
@@ -41,7 +45,17 @@
         @roleCanAny(['submission.personal_performa.view', 'submission.tour_reports.view','submission.qrp.view'])
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-file-text"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon-tabler icon-tabler-file-text" width="24"
+                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                    <path d="M9 9h1m4 0h1" />
+                    <path d="M9 13h6" />
+                    <path d="M9 17h6" />
+                </svg>
+
                 <div data-i18n="Submission">Submission</div>
             </a>
             <ul class="menu-sub">
@@ -55,7 +69,7 @@
 
                 @roleCan('submission.tour_reports.view')
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="{{route('tour-reports.index')}}" class="menu-link">
                         <div>Tour Reports and Presentations</div>
                     </a>
                 </li>
@@ -74,7 +88,14 @@
         'generation.sanction_memos.view', 'generation.qrp.view'])
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-edit"></i>
+                <span class="menu-icon">
+                    <!-- Example SVG icon for 'edit' -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-pencil" viewBox="0 0 16 16">
+                        <path
+                            d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708L4.207 14.793l-3 1a.5.5 0 0 1-.641-.641l1-3L12.146.854zM11.207 2L3 10.207V11h.793L13 2.793 11.207 2zm1.586 1.586L13 4.793 14.207 6 14.793 5.414 12.793 3.414z" />
+                    </svg>
+                </span>
                 <div data-i18n="Generation">Generation</div>
             </a>
             <ul class="menu-sub">
@@ -85,8 +106,8 @@
                 @endroleCan
 
                 @roleCan('generation.visit_tracker.view')
-                <li class="menu-item"><a href="#" class="menu-link">
-                        <div>Visit tracker</div>
+                <li class="menu-item"><a href="{{ route('tourTracker.index') }}" class="menu-link">
+                        <div>Tour tracker</div>
                     </a></li>
                 @endroleCan
 
@@ -112,7 +133,14 @@
         'repository.indian_mission_contact.view', 'repository.country_mission_master_sheet.view'])
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-database"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon-tabler icon-tabler-address-book"
+                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M7 4a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-10z" />
+                    <path d="M10 16v-1a3 3 0 0 1 6 0v1" />
+                    <path d="M13 11a2 2 0 1 0 -2 -2a2 2 0 0 0 2 2z" />
+                </svg>
                 <div data-i18n="Repository">Repository</div>
             </a>
             <ul class="menu-sub">
@@ -167,7 +195,16 @@
         'engagement.itu_council_tracker.view', 'engagement.itu_council_emails.view'])
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-world"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon-tabler icon-tabler-world" width="24"
+                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                    <path d="M3.6 9h16.8" />
+                    <path d="M3.6 15h16.8" />
+                    <path d="M12 3a16 16 0 0 0 0 18" />
+                    <path d="M12 3a16 16 0 0 1 0 18" />
+                </svg>
                 <div data-i18n="Bilateral & Multilateral">Bilateral & Multilateral Engagement</div>
             </a>
             <ul class="menu-sub">
@@ -215,7 +252,15 @@
         'reports.bilateral_summary.view', 'reports.multilateral_summary.view', 'reports.visit_tracker.view'])
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon ti ti-report"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon icon-tabler icon-tabler-report" width="20"
+                    height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M7.86 2h8.28a2 2 0 0 1 1.74 1l4.14 7a2 2 0 0 1 0 2l-4.14 7a2 2 0 0 1 -1.74 1h-8.28a2 2 0 0 1 -1.74 -1l-4.14 -7a2 2 0 0 1 0 -2l4.14 -7a2 2 0 0 1 1.74 -1z" />
+                    <path d="M12 9v4" />
+                    <path d="M12 17h.01" />
+                </svg>
                 <div data-i18n="Reports">Reports</div>
             </a>
             <ul class="menu-sub">
@@ -246,6 +291,11 @@
                 @roleCan('reports.visit_tracker.view')
                 <li class="menu-item"><a href="#" class="menu-link">
                         <div>Visit Tracker</div>
+                    </a></li>
+                @endroleCan
+                @roleCan('reports.visit_tracker.view')
+                <li class="menu-item"><a href="{{ route('masterSheet.index') }}" class="menu-link">
+                        <div>Master Sheet Generation</div>
                     </a></li>
                 @endroleCan
             </ul>
@@ -300,15 +350,56 @@
                 @roleCan('roles.view')
                 <li class="menu-item">
                     <a href="{{route('orm-data.index')}}" class="menu-link">
-                        <div data-i18n="Orms">Orms</div>
+                        <div data-i18n="OM's">OM's</div>
                     </a>
                 </li>
                 @endroleCan
-
-                @roleCan('permissions.view')
+                @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('permissions.index')}}" class="menu-link">
-                        <div data-i18n="page 2">page 2</div>
+                    <a href="{{route('brochures.index')}}" class="menu-link">
+                        <div data-i18n="Brochures">Brochures</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('promotional_videos.index')}}" class="menu-link">
+                        <div data-i18n="Promotional Videos">Promotional Videos</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('international_forms.index')}}" class="menu-link">
+                        <div data-i18n="International Forms">International Forms</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('meeting-calendars.index')}}" class="menu-link">
+                        <div data-i18n="Meeting Calendars">Meeting Calendars</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('sliders.index')}}" class="menu-link">
+                        <div data-i18n="Sliders">Sliders</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('minister-messages.index')}}" class="menu-link">
+                        <div data-i18n="Minister Messages">Minister Messages</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('press-releases.index')}}" class="menu-link">
+                        <div data-i18n="Press Releases">Press Releases</div>
                     </a>
                 </li>
                 @endroleCan
@@ -320,6 +411,12 @@
             <a href="{{ route('profile.index') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-user"></i>
                 <div data-i18n="Profile">Profile</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('contacts.index') }}" class="menu-link">
+                <i class="menu-icon ti tabler-address-book"></i>
+                <div data-i18n="Contacts">Contacts</div>
             </a>
         </li>
 

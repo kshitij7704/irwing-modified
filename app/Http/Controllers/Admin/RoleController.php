@@ -35,32 +35,33 @@ class RoleController extends Controller
 
         return redirect()->back()->with('success', 'Role created successfully.');
     }
-        public function edit($id)
+    public function edit($id)
     {
         $role = Role::with('permissions')->findOrFail($id);
         $permissions = Permission::all();
 
         return view('admin.roles.edit', compact('role', 'permissions'));
-    }public function update(Request $request, $id)
-{
-    $request->validate([
-        'name' => 'required|string|unique:roles,name,' . $id,
-        'permissions' => 'array',
-        'permissions.*' => 'exists:permissions,id',
-    ]);
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|unique:roles,name,' . $id,
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id',
+        ]);
 
-    $role = Role::findOrFail($id);
-    $role->name = $request->name;
-    $role->save();
+        $role = Role::findOrFail($id);
+        $role->name = $request->name;
+        $role->save();
 
-    // Get permission names by IDs
-    $permissions = Permission::whereIn('id', $request->permissions ?? [])->pluck('name')->toArray();
+        // Get permission names by IDs
+        $permissions = Permission::whereIn('id', $request->permissions ?? [])->pluck('name')->toArray();
 
-    // Sync permissions
-    $role->syncPermissions($permissions);
+        // Sync permissions
+        $role->syncPermissions($permissions);
 
-    return redirect()->route('roles.index')->with('success', 'Role updated successfully.');
-}
+        return redirect()->route('roles.index')->with('success', 'Role updated successfully.');
+    }
 
 
     public function switchRole(Request $request)

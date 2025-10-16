@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 use App\Models\NewsLetter;
 use Illuminate\Http\Request;
 
@@ -10,9 +12,22 @@ class NewsLetterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $leads = NewsLetter::orderBy('created_at', 'desc')->get();
+
+        if ($request->ajax()) {
+            return DataTables::of($leads)
+                ->addIndexColumn()
+                ->addColumn('email', fn($row) => $row->email)
+                ->addColumn('created_at', function ($row) {
+                    return \Carbon\Carbon::parse($row->created_at)
+                        ->timezone('Asia/Kolkata')
+                        ->format('d F Y \a\t h:i A (T)');
+                })
+                ->make(true);
+        }
+        return view('admin.newsletters.index', compact('leads'));
     }
 
     /**

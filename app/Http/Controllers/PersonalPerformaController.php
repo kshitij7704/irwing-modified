@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\QrpForm;
 use App\Models\PersonalPerforma;
 use Illuminate\Http\Request;
+use App\Models\Profile;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PersonalPerformaExport;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class PersonalPerformaController extends Controller
 {
@@ -23,7 +27,24 @@ class PersonalPerformaController extends Controller
      */
     public function create()
     {
-        return view('personalperforma.create');
+        $checkprofile = Profile::where('user_id', Auth::id())->first();
+
+        
+$userId = Auth::id(); // safer and cleaner
+
+$qrps = QrpForm::with(['agencyy', 'officers'])
+    ->whereHas('officers', function ($query) use ($checkprofile) {
+        $query->where('profile_id', $checkprofile->id);
+    })
+    ->whereNotExists(function ($query) use ($userId) {
+        $query->select(DB::raw(1))
+            ->from('personal_performas')
+            ->whereRaw('personal_performas.meeting_id = qrp_forms.id')
+            ->whereRaw('personal_performas.user_id = ?', [$userId]);
+    })
+    ->orderByRaw("CASE WHEN nodal_status = 'Saved' OR nodal_status IS NULL THEN 0 ELSE 1 END")
+    ->get();
+        return view('personalperforma.create', compact('qrps','checkprofile'));
     }
 
     /**

@@ -114,7 +114,7 @@
                 <img src="https://dot.gov.in/sites/default/files/styles/150_150/public/Mr%20Scindia3.jpg?itok=bRZ_YU_p" alt="Minister of Communication">
             </div>
             <div class="minister-content">
-                <div class="minister-name">Shri Ashwini Vaishnaw</div>
+                <div class="minister-name">Shri Jyotiraditya M Scindia</div>
                 <div class="minister-designation">Hon’ble Minister of Communications, Government of India</div>
                 <div class="minister-message">
                     <p>Welcome to the Department of Telecommunications. Our commitment is to ensure seamless digital connectivity for every citizen of India. Through innovative programs, improved infrastructure, and technology-driven policies, we aim to bridge the digital divide and empower all communities with access to modern communication services.</p>

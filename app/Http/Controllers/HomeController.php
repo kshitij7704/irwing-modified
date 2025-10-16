@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\PressRelease;
+use App\Models\MeetingCalendar;
+use App\Models\MinisterMessage;
 use App\Models\Orm;
+use App\Models\Brochure;
+use App\Models\InternationalForm;
+use App\Models\PromotionalVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -13,7 +19,11 @@ class HomeController extends Controller
     public function index()
     {
 
-        return view('pages.main');
+        $events = MeetingCalendar::select('title', 'date', 'color')->get();
+        $ministerMessages = MinisterMessage::all();
+        $Orm = MinisterMessage::latest(3);
+
+        return view('pages.main', compact('events','ministerMessages'));
     }
 
 public function orms(Request $request)
@@ -23,8 +33,8 @@ public function orms(Request $request)
 }
 public function videos(Request $request)
 {
-    $orms = Orm::all(); // fetch all records
-    return view('pages.videos', compact('orms'));
+    $PromotionalVideo = PromotionalVideo::all(); // fetch all records
+    return view('pages.videos', compact('PromotionalVideo'));
 }
 public function achivements(Request $request)
 {
@@ -37,13 +47,15 @@ public function achivements(Request $request)
 
 public function brouches(Request $request)
 {
-    $orms = Orm::all(); // fetch all records
-    return view('pages.brouches', compact('orms'));
+        $brochures = Brochure::latest()->paginate(10);
+    return view('pages.brouches', compact('brochures'));
 }
 public function pressrelease(Request $request)
 {
+    $pressReleases = PressRelease::latest()->get(); // your model
+    $ministries = PressRelease::select('ministry')->distinct()->pluck('ministry');
     $orms = Orm::all(); // fetch all records
-    return view('pages.pressrelease', compact('orms'));
+    return view('pages.pressrelease', compact('orms','pressReleases','ministries'));
 }
 
 public function tweets(Request $request)
@@ -70,6 +82,11 @@ public function roleir(Request $request)
 {
     $orms = Orm::all(); // fetch all records
     return view('pages.roleir', compact('orms'));
+}
+public function internationForums(Request $request)
+{
+    $InternationalForm = InternationalForm::all(); // fetch all records
+    return view('pages.internationForums', compact('InternationalForm'));
 }
 
 }

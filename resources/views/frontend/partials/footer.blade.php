@@ -8,7 +8,7 @@
                         <div class="d-flex align-items-center">
     <img src="{{ asset('images/WhatsApp Image 2025-09-13 at 17.48.33.jpeg') }}"
          alt="India Emblem" height="60" style="width: 20%;">
-    <h5 class="mb-0 me-2">Ir Wings Portal
+    <h5 class="mb-0 me-2">IR Wing Portal
         <p>Department of Telecommunications</p>
     </h5>
 </div>
@@ -20,43 +20,24 @@
 
                 <div class="col-sm-4 col-lg-2">
                     <div class="widget">
-                        <h4 class="widget-title">Information</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="{{url('about')}}">About Layerloop</a></li>
-                            <!-- <li><a href="#">How to shop on Molla</a></li> -->
-                            <li><a href="{{url('faq')}}">FAQ</a></li>
-                            <li><a href="{{url('contact_us')}}">Contact us</a></li>
-                            <li><a href="{{url('login')}}">Log in</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-4 col-lg-3 -->
 
                 <div class="col-sm-4 col-lg-2">
                     <div class="widget">
-                        <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Money-back guarantee!</a></li>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Shipping</a></li>
-                            <li><a href="#">Terms and conditions</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-4 col-lg-3 -->
 
                 <div class="col-sm-4 col-lg-2">
                     <div class="widget">
-                        <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="{{url('login')}}">Sign In</a></li>
-                            <li><a href="{{url('cart')}}">View Cart</a></li>
-                            <li><a href="{{url('wishlist')}}">My Wishlist</a></li>
-                            <li><a href="{{url('orders')}}">Track My Order</a></li>
-                            <li><a href="{{url('help')}}">Help</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-64 col-lg-3 -->

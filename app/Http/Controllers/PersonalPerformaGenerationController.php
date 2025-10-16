@@ -6,6 +6,7 @@ use App\Models\PersonalPerforma;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PersonalPerformaExport;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PersonalPerformaGenerationController extends Controller
 {
@@ -148,4 +149,13 @@ public function exportExcel()
 
     return redirect()->back()->with('success', 'Status updated successfully!');
 }
+    public function downloadPdf($id)
+    {
+        $performa = PersonalPerforma::findOrFail($id);
+
+        // Pass data to the PDF view
+        $pdf = Pdf::loadView('personalperformagen.pdf', compact('performa'));
+
+        return $pdf->download('personal_performa_'.$performa->id.'.pdf');
+    }
 }

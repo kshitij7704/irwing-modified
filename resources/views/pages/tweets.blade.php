@@ -3,143 +3,135 @@
 @section('content')
 
 <style>
-    .tweet-container {
-        max-width: 900px;
-        margin: 20px auto;
+    .social-grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* always 3 columns on desktop */
+        gap: 20px;
+        padding: 20px;
     }
 
-    .tweet-card {
+    @media (max-width: 991px) {
+        .social-grid-container {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns tablet */
+        }
+    }
+
+    @media (max-width: 575px) {
+        .social-grid-container {
+            grid-template-columns: 1fr; /* 1 column phone */
+        }
+    }
+
+    .social-card {
+        width: 100%;
+        height: 480px;
         display: flex;
-        padding: 15px;
-        border: 1px solid #e1e8ed;
-        border-radius: 15px;
-        margin-bottom: 20px;
-        background-color: #fff;
-        transition: box-shadow 0.2s;
-    }
-
-    .tweet-card:hover {
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .tweet-avatar {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        margin-right: 15px;
-        flex-shrink: 0;
-        background-color: #1da1f2;
-        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        color: white;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 20px;
+        text-align: center;
+        background: #fff;
+    }
+
+    .social-card iframe {
+        width: 320px;
+        height: 480px;
+    }
+
+    .btn-social {
+        display: inline-block;
+        padding: 10px 18px;
+        margin-top: 10px;
+        border-radius: 4px;
         font-weight: bold;
-        font-size: 1.2rem;
-    }
-
-    .tweet-content {
-        flex: 1;
-    }
-
-    .tweet-author {
-        font-weight: 700;
-        color: #1da1f2;
-        margin-right: 5px;
-    }
-
-    .tweet-handle {
-        color: #657786;
-        margin-right: 5px;
-    }
-
-    .tweet-date {
-        color: #657786;
-        font-size: 0.85rem;
-    }
-
-    .tweet-text {
-        margin: 5px 0 10px 0;
-        font-size: 1rem;
-    }
-
-    .tweet-footer a {
-        color: #1da1f2;
         text-decoration: none;
-        font-weight: 600;
+        color: #fff;
     }
 
-    @media screen and (max-width: 576px) {
-        .tweet-card {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .tweet-avatar {
-            margin-bottom: 10px;
-        }
+    .btn-linkedin {
+        background-color: #0073b1;
     }
+
+    .btn-twitter {
+        background-color: #1DA1F2;
+    }
+
+    .account-title {
+        font-weight: bold;
+        color: #1DA1F2;
+        margin-bottom: 5px;
+    }
+
+    .account-desc {
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .stats {
+        color: #000;
+        margin-bottom: 5px;
+    }
+
 </style>
 
 <main class="main">
     <div class="page-header text-center" style="background-image: url('front/assets/images/page-header-bg.jpg')">
         <div class="container">
-            <h1 class="page-title">Tweets</h1>
+            <h1 class="page-title">Social Media</h1>
         </div>
     </div>
 
-    <div class="page-content tweet-container">
-
-        <!-- Sample Tweet -->
-        <div class="tweet-card">
-            <div class="tweet-avatar">DOT</div>
-            <div class="tweet-content">
-                <div>
-                    <span class="tweet-author">Department of Telecom</span>
-                    <span class="tweet-handle">@DoT_India</span>
-                    <span class="tweet-date">· Sep 10, 2025</span>
-                </div>
-                <div class="tweet-text">
-                    We are excited to announce the successful launch of the 5G pilot project in major urban areas. #5G #DigitalIndia
-                </div>
-                <div class="tweet-footer">
-                    <a href="https://twitter.com/DoT_India/status/1234567890" target="_blank">View on Twitter</a>
-                </div>
-            </div>
+    <div class="social-grid-container">
+        <!-- Instagram Embed -->
+        <div class="social-card">
+            <iframe src="https://www.instagram.com/department_of_telecom/embed" frameborder="0" scrolling="no"></iframe>
         </div>
 
-        <div class="tweet-card">
-            <div class="tweet-avatar">DOT</div>
-            <div class="tweet-content">
-                <div>
-                    <span class="tweet-author">Department of Telecom</span>
-                    <span class="tweet-handle">@DoT_India</span>
-                    <span class="tweet-date">· Sep 05, 2025</span>
-                </div>
-                <div class="tweet-text">
-                    Our Rural Connectivity Program has reached over 1,000 villages, providing high-speed internet access to citizens nationwide. #ConnectivityForAll
-                </div>
-                <div class="tweet-footer">
-                    <a href="https://twitter.com/DoT_India/status/1234567891" target="_blank">View on Twitter</a>
-                </div>
-            </div>
+        <!-- Facebook Page Plugin -->
+        <div class="social-card">
+            <iframe
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDoTIndia&tabs=timeline&width=320&height=480&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+                style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
         </div>
 
-        <div class="tweet-card">
-            <div class="tweet-avatar">DOT</div>
-            <div class="tweet-content">
-                <div>
-                    <span class="tweet-author">Department of Telecom</span>
-                    <span class="tweet-handle">@DoT_India</span>
-                    <span class="tweet-date">· Aug 30, 2025</span>
-                </div>
-                <div class="tweet-text">
-                    The department is recognized nationally for improving telecom accessibility in rural areas. #TelecomAwards
-                </div>
-                <div class="tweet-footer">
-                    <a href="https://twitter.com/DoT_India/status/1234567892" target="_blank">View on Twitter</a>
-                </div>
-            </div>
+        <!-- YouTube Video Embed -->
+        <div class="social-card">
+            <iframe src="https://www.youtube.com/embed/oEvEcF0PZVc" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
         </div>
 
+        <!-- LinkedIn Manual Card -->
+        <div class="social-card">
+            <div class="account-title">Department of Telecommunications (DOT)</div>
+            <div class="stats">5,721 Followers</div>
+            <div class="account-desc">
+                Official LinkedIn Handle of Department of Telecommunications, Govt. of India.
+            </div>
+            <a href="https://www.linkedin.com/company/department-of-telecommunications-dot-" target="_blank"
+               class="btn-social btn-linkedin">Follow Us on LinkedIn</a>
+            <a href="http://www.dot.gov.in" target="_blank"
+               class="btn-social btn-linkedin" style="background:#555;">View our Website</a>
+        </div>
+
+        <!-- Twitter Manual Card -->
+        <div class="social-card">
+            <div class="account-title">@DoT_India</div>
+            <div class="stats"><strong>290,271</strong> Posts &nbsp; | &nbsp; <strong>202,496</strong> Followers &nbsp; | &nbsp; <strong>170</strong> Following</div>
+            <div class="account-desc">
+                DoT India – Official Twitter Handle of Department of Telecommunications, Govt. of India.
+            </div>
+            <a href="https://twitter.com/DoT_India" target="_blank"
+               class="btn-social btn-twitter">Follow on Twitter</a>
+            <a href="http://www.dot.gov.in" target="_blank"
+               class="btn-social btn-twitter" style="background:#555;">Visit Website</a>
+        </div>
     </div>
 </main>
 

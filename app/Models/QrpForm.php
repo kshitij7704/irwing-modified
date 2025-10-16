@@ -37,7 +37,9 @@ class QrpForm extends Model
         'expected_outcome',
         'expected_file',
         'status',
-        'nodal_status'
+        'nodal_status',
+        'created_by',
+        'quarter'
     ];
     public function officers()
     {

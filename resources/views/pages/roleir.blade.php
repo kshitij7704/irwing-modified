@@ -33,7 +33,10 @@
         color: #fff;
         background-color: #0d6efd;
         border-color: #0d6efd #0d6efd #fff;
-    }
+    }.nav.nav-tabs .nav-item .nav-link.active {
+    color: white;
+    text-color: white;
+}
 
     .tab-content {
         border: 1px solid #dee2e6;

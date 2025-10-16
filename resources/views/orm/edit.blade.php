@@ -22,7 +22,8 @@
                     </div>
                 @endif
 
-           <form action="{{ route('orm-data.update', ['orm_data' => $orm->id]) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('ormupdate.update', ['id' => $orm->id]) }}" method="POST" enctype="multipart/form-data">
+
     @csrf
     @method('PUT')
                     <div class="mb-3">
@@ -43,7 +44,7 @@
                         @if($orm->file)
                             <p class="mt-2">
                                 Current file: 
-                                <a href="{{ asset('storage/' . $orm->file) }}" target="_blank">View</a>
+                                <a href="{{ asset($orm->file) }}" target="_blank">View</a>
                             </p>
                         @endif
                     </div>

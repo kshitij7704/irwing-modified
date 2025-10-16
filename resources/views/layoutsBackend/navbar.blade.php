@@ -20,19 +20,22 @@
 
         <ul class="navbar-nav flex-row align-items-center ms-md-auto">
             <ul class="navbar-nav ms-auto">
-                @foreach(auth()->user()->getRoleNames() as $role)
-                    <li class="nav-item">
-                        <form action="{{ route('switch.role') }}" method="POST" class="d-inline">
-                            @csrf
-                            <input type="hidden" name="role" value="{{ $role }}">
-                            <button type="submit" 
-                                    class="btn btn-sm mx-1 
-                                    {{ session('active_role') === $role ? 'btn-success' : 'btn-primary' }}">
-                                {{ ucfirst($role) }}
-                            </button>
-                        </form>
-                    </li>
-                @endforeach
+               @auth
+    @foreach(auth()->user()->getRoleNames() as $role)
+        <li class="nav-item">
+            <form action="{{ route('switch.role') }}" method="POST" class="d-inline">
+                @csrf
+                <input type="hidden" name="role" value="{{ $role }}">
+                <button type="submit" 
+                        class="btn btn-sm mx-1 
+                        {{ session('active_role') === $role ? 'btn-success' : 'btn-primary' }}">
+                    {{ ucfirst($role) }}
+                </button>
+            </form>
+        </li>
+    @endforeach
+@endauth
+
             </ul>
 
 

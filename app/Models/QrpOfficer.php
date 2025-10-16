@@ -12,10 +12,21 @@ class QrpOfficer extends Model
         'unit', 'unit_office', 'division', 'designation',
         'mode', 'email', 'contact',
         'meeting_from', 'meeting_to', 'country', 'city',
+        'justification','justification_file','expected_outcome','expected_file',
     ];
 
     public function qrp(): BelongsTo
     {
         return $this->belongsTo(Qrp::class);
-    }
+    }public function qrpForm()
+{
+    return $this->belongsTo(QrpForm::class, 'qrp_id');
+}
+
+
+public function profile()
+{
+    return $this->belongsTo(\App\Models\Profile::class, 'profile_id');
+}
+
 }

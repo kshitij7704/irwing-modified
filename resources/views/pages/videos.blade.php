@@ -28,90 +28,42 @@
             	<div class="container">
             		<h2 class="title mb-3 text-center">Fullwidth Banner</h2><!-- End .text-center -->
             	</div><!-- End .container -->
-            	<div class="video-banner video-banner-bg bg-image text-center" style="background-image: url(assets/images/video/bg-1.jpg)">
+            	<div class="video-banner video-banner-bg bg-image text-center" style="background-image: url(images/videobanner.png)">
 	                <div class="container">
-	                	<h3 class="video-banner-title h1 text-white"><span>New Video</span><strong>Womens New Arrivals</strong></h3><!-- End .video-banner-title -->
-	                	<a href="https://youtu.be/ENhHgdE-OSM?si=L79_qF3IjpLrxEFH" class="btn-video btn-iframe"><i class="icon-play"></i></a>
+	                	<h3 class="video-banner-title h1 text-white"><span>New Video</span><strong>Support India for Re-election to ITU Council 2027-2030</strong></h3><!-- End .video-banner-title -->
+	                	<a href="https://www.youtube.com/watch?v=YM3Cih_O9Fk" class="btn-video btn-iframe"><i class="icon-play"></i></a>
 	                </div><!-- End .container -->
             	</div><!-- End .video-banner bg-image -->
 
             	<div class="container">
             		<hr class="mt-5 mb-4">
-            		<h2 class="title mb-3 text-center">Video Banner with Description</h2><!-- End .text-center -->
             	</div><!-- End .container -->
 
+				@foreach($PromotionalVideo as $video)
             	<div class="video-banner video-banner-poster text-center">
 	                <div class="container">
 	                	<div class="row align-items-center">
 	                		<div class="col-md-6 mb-3 mb-md-0">
-	                			<h3 class="video-banner-title h3"><span class="text-primary">New Video</span>Womens New Arrivals</h3><!-- End .video-banner-title -->
-	                			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper ...</p>
+	                			<h3 class="video-banner-title h3"><span class="text-primary">{{ $video->category }}</span>{{ $video->title }}</h3><!-- End .video-banner-title -->
+	                			<p>{{ $video->description }}</p>
 	                		</div><!-- End .col-md-6 -->
 
 	                		<div class="col-md-6">
 	                			<div class="video-poster">
-	                				<img src="assets/images/video/poster-1.jpg" alt="poster">
+	                				<img src="{{ asset('storage/'.$video->thumbnail) }}" alt="poster">
 
 	                				<div class="video-poster-content">
-	                					<a href="https://youtu.be/ENhHgdE-OSM?si=L79_qF3IjpLrxEFH" class="btn-video btn-iframe"><i class="icon-play"></i></a>
+	                					<a href="{{ $video->url}}" class="btn-video btn-iframe"><i class="icon-play"></i></a>
 	                				</div><!-- End .video-poster-content -->	
 	                			</div><!-- End .video-poster -->
 	                		</div><!-- End .col-md-6 -->
 	                	</div><!-- End .row -->
 	                </div><!-- End .container -->
             	</div><!-- End .video-banner -->
+				@endforeach
 
-            	<div class="container">
-            		<hr class="mt-5 mb-4">
-            		<h2 class="title mb-3 text-center">Video Banner with Background</h2><!-- End .text-center -->
-            	</div><!-- End .container -->
 
-            	<div class="video-banner bg-image text-center pt-8 pb-8" style="background-image: url(assets/images/video/bg-2.jpg)">
-	                <div class="container">
-	                	<div class="row">
-	                		<div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2">
-	                			<div class="video-poster">
-	                				<img src="assets/images/video/poster-2.jpg" alt="poster">
-
-	                				<div class="video-poster-content">
-	                					<h3 class="h4 video-poster-title text-white">Womens New Arrivals</h3><!-- End .video-poster-title -->
-	                					<a href="https://youtu.be/ENhHgdE-OSM?si=L79_qF3IjpLrxEFH" class="btn-video btn-iframe"><i class="icon-play"></i></a>
-	                				</div><!-- End .video-poster-content -->	
-	                			</div><!-- End .video-poster -->
-	                		</div><!-- End .col-sm-10 offset-sm-1 col-md-10 offset-md-2 -->
-	                	</div><!-- End .row -->
-	                </div><!-- End .container -->
-            	</div><!-- End .video-banner bg-image -->
-
-            	<div class="container">
-            		<hr class="mt-5 mb-4">
-            		<h2 class="title mb-3 text-center">Deal Video Banner</h2><!-- End .text-center -->
-            	</div><!-- End .container -->
-
-            	<div class="video-banner bg-light pt-5 pb-5">
-	                <div class="container align-items-center">
-	                	<div class="video-banner-box bg-white">
-		                	<div class="row align-items-center">
-		                		<div class="col-md-6 mb-3 mb-md-0">
-		                			<div class="video-box-content">
-		                				<h3 class="video-banner-title h1"><span class="text-primary">New Video</span><strong>Deal Banner</strong></h3><!-- End .video-banner-title -->
-	                					<p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.</p>
-	                					<a href="#" class="btn btn-outline-primary"><span>Click Here</span><i class="icon-long-arrow-right"></i></a>
-		                			</div><!-- End .video-box-content -->
-		                		</div><!-- End .col-md-6 -->
-		                		<div class="col-md-6">
-		                			<div class="video-poster">
-		                				<img src="assets/images/video/poster-3.jpg" alt="poster">
-
-		                				<div class="video-poster-content">
-		                					<a href="https://youtu.be/ENhHgdE-OSM?si=L79_qF3IjpLrxEFH" class="btn-video btn-iframe"><i class="icon-play"></i></a>
-		                				</div><!-- End .video-poster-content -->	
-		                			</div><!-- End .video-poster -->
-		                		</div><!-- End .col-md-6 -->
-		                	</div><!-- End .row -->
-	                	</div><!-- End .video-banner-box -->
-	                </div><!-- End .container -->
-            	</div><!-- End .video-banner bg-image -->
+            	
             </div><!-- End .page-content -->
 
         </main><!-- End .main -->

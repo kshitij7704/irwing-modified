@@ -36,6 +36,15 @@
     <link rel="stylesheet" href="{{asset('backend/assets/css/demo.css')}}" />
 
     <!-- Vendors CSS -->
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+    <!-- jQuery (required for toastr) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- Helpers -->
 
     <link rel="stylesheet" href="{{asset('backend/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
 
@@ -146,6 +155,47 @@
 
     <!-- Page JS -->
     <script src="{{asset('backend/assets/js/dashboards-analytics.js')}}"></script>
+
+    <script src="{{asset('backend/assets/js/dashboards-analytics.js')}}"></script>
+    <script src="{{asset('backend/assets/js/ui-toasts.js')}}"></script>
+    <script src="{{asset('backend/assets/vendor/libs/notyf/notyf.js')}}"></script>
+
+
+<script>
+    function showToastr(type, message) {
+        let posX = $('input[name="positionx"]:checked').val() || 'right';
+        let posY = $('input[name="positiony"]:checked').val() || 'top';
+        let positionClass = `toast-${posY}-${posX}`;
+
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: positionClass,
+            timeOut: 5000
+        };
+
+        if (type === 'success') {
+            toastr.success(message, 'Success');
+        } else {
+            toastr.error(message, 'Error');
+        }
+    }
+
+    @if(session('success'))
+        showToastr('success', "{{ session('success') }}");
+    @endif
+
+    @if(session('error'))
+        showToastr('error', "{{ session('error') }}");
+    @endif
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            showToastr('error', "{{ $error }}");
+        @endforeach
+    @endif
+</script>
+
 </body>
 
 </html>
