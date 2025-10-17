@@ -371,8 +371,8 @@
                 </a>
                 <div class="govt-title">
                     <h1>भारत सरकार GOVERNMENT OF INDIA</h1>
-                    <h2>DEPARTMENT OF TELECOMMUNICATIONS</h2>
-                    <h3>दूरसंचार विभाग MINISTRY OF COMMUNICATIONS</h3>
+                    <h2>IR Wing Portal</h2>
+                    <h3>Department of Telecommunications, Ministry of Communications</h3>
                 </div>
             </div>
             <div class="header-logos d-none d-md-flex">
@@ -412,13 +412,16 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            Acts <i class="bi bi-chevron-down"></i>
+                            Information <i class="bi bi-chevron-down"></i>
                         </a>
                         <div class="nav-dropdown">
-                            <a href="#">Telecom Act</a>
-                            <a href="#">Telegraph Act</a>
-                            <a href="#">Wireless Planning Act</a>
-                            <a href="#">IT Act</a>
+                            <a href="{{url('promotional-videos')}}">Promotional Videos</a>
+                            <a href="{{url('brouches')}}">Brochures</a>
+                            <a href="{{url('pressrelease')}}">Press Releases</a>
+                            <a href="{{url('social-media')}}">Social Media</a>
+                            <a href="{{url('orms')}}">IR Wing OMs</a>
+                            <a href="{{url('achivements')}}">Achievements</a>
+                            <a href="{{url('internation-forums')}}">International Forums</a>
                         </div>
                     </li>
                     <li class="nav-item">
