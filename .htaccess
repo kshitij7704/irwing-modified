@@ -1,8 +1,0 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_URI} !^/public/
-    RewriteRule ^(.*)$ public/$1 [L]
-    upload_max_filesize = 20M
-    post_max_size = 25M
-    max_file_uploads = 50
-</IfModule>

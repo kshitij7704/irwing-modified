@@ -18,71 +18,125 @@ class HomeController extends Controller
 {
     public function index()
     {
+        try {
+            $events = MeetingCalendar::select('title', 'date', 'color')->get();
+            $ministerMessages = MinisterMessage::all();
+            $Orm = MinisterMessage::latest(3);
+            $sliders = \App\Models\Slider::where('status', true)->get();
+        } catch (\Exception $e) {
+            // Handle database connection issues
+            $events = collect([]);
+            $ministerMessages = collect([]);
+            $Orm = collect([]);
+            $sliders = collect([]);
+        }
 
-        $events = MeetingCalendar::select('title', 'date', 'color')->get();
-        $ministerMessages = MinisterMessage::all();
-        $Orm = MinisterMessage::latest(3);
-
-        return view('pages.main', compact('events','ministerMessages'));
+        return view('pages.main', compact('events','ministerMessages','sliders'));
     }
 
     public function orms(Request $request)
     {
-        $orms = Orm::all(); // fetch all records
+        try {
+            $orms = Orm::all(); // fetch all records
+        } catch (\Exception $e) {
+            $orms = collect([]);
+        }
         return view('pages.orms', compact('orms'));
     }
     public function videos(Request $request)
     {
-        $PromotionalVideo = PromotionalVideo::all(); // fetch all records
+        try {
+            $PromotionalVideo = PromotionalVideo::all(); // fetch all records
+        } catch (\Exception $e) {
+            $PromotionalVideo = collect([]);
+        }
         return view('pages.videos', compact('PromotionalVideo'));
     }
     public function achivements(Request $request)
     {
-        $achievements = \App\Models\Achievement::latest()->get();
+        try {
+            $achievements = \App\Models\Achievement::latest()->get();
+        } catch (\Exception $e) {
+            $achievements = collect([]);
+        }
         return view('pages.achivements', compact('achievements'));
     }
 
     public function brouches(Request $request)
     {
+        try {
             $brochures = Brochure::latest()->paginate(10);
+        } catch (\Exception $e) {
+            $brochures = collect([]);
+        }
         return view('pages.brouches', compact('brochures'));
     }
     public function pressrelease(Request $request)
     {
-        $pressReleases = PressRelease::latest()->get(); // your model
-        $ministries = PressRelease::select('ministry')->distinct()->pluck('ministry');
-        $orms = Orm::all(); // fetch all records
+        try {
+            $pressReleases = PressRelease::latest()->get(); // your model
+            $ministries = PressRelease::select('ministry')->distinct()->pluck('ministry');
+            $orms = Orm::all(); // fetch all records
+        } catch (\Exception $e) {
+            $pressReleases = collect([]);
+            $ministries = collect([]);
+            $orms = collect([]);
+        }
         return view('pages.pressrelease', compact('orms','pressReleases','ministries'));
     }
 
     public function tweets(Request $request)
     {
-        $orms = Orm::all(); // fetch all records
+        try {
+            $orms = Orm::all(); // fetch all records
+        } catch (\Exception $e) {
+            $orms = collect([]);
+        }
         return view('pages.tweets', compact('orms'));
     }
     public function message(Request $request)
     {
-        $orms = Orm::all(); // fetch all records
+        try {
+            $orms = Orm::all(); // fetch all records
+        } catch (\Exception $e) {
+            $orms = collect([]);
+        }
         return view('pages.message', compact('orms'));
     }
     public function structure(Request $request)
     {
-        $orms = Orm::all(); // fetch all records
+        try {
+            $orms = Orm::all(); // fetch all records
+        } catch (\Exception $e) {
+            $orms = collect([]);
+        }
         return view('pages.structure', compact('orms'));
     }
     public function contact(Request $request)
     {
-        $orms = Orm::all(); // fetch all records
+        try {
+            $orms = Orm::all(); // fetch all records
+        } catch (\Exception $e) {
+            $orms = collect([]);
+        }
         return view('pages.contact', compact('orms'));
     }
     public function roleir(Request $request)
     {
-        $orms = Orm::all(); // fetch all records
+        try {
+            $orms = Orm::all(); // fetch all records
+        } catch (\Exception $e) {
+            $orms = collect([]);
+        }
         return view('pages.roleir', compact('orms'));
     }
     public function internationForums(Request $request)
     {
-        $InternationalForm = InternationalForm::all(); // fetch all records
+        try {
+            $InternationalForm = InternationalForm::all(); // fetch all records
+        } catch (\Exception $e) {
+            $InternationalForm = collect([]);
+        }
         return view('pages.internationForums', compact('InternationalForm'));
     }
 
