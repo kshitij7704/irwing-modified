@@ -56,6 +56,8 @@
     <link rel="stylesheet" href="{{asset('front/assets/css/skins/skin-demo-2.css')}}">
     <link rel="stylesheet" href="{{asset('front/assets/css/demos/demo-2.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- Government Theme CSS -->
+    <link rel="stylesheet" href="{{asset('css/government-theme.css')}}">
     <!-- Google tag (gtag.js) -->
 
 </head>
