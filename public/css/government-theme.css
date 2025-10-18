@@ -1,5 +1,23 @@
 /* Government Website Theme Override */
 
+/* Cool Color Palette CSS Variables */
+:root {
+    --primary-cool-blue: #4a90e2;
+    --primary-cool-blue-dark: #357abd;
+    --primary-cool-blue-light: #85c1e9;
+    --secondary-teal: #48c9b0;
+    --secondary-teal-dark: #3a9b8a;
+    --secondary-teal-light: #7ed4d8;
+    --accent-slate: #64748b;
+    --accent-slate-light: #94a3b8;
+    --background-cool: #f8fafc;
+    --text-primary: #2c3e50;
+    --text-secondary: #495057;
+    --shadow-cool: rgba(74, 144, 226, 0.15);
+    --gradient-primary: linear-gradient(135deg, var(--primary-cool-blue) 0%, var(--secondary-teal) 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--primary-cool-blue-light) 0%, var(--secondary-teal-light) 100%);
+}
+
 /* Base Typography - Increased Font Sizes */
 * {
     font-family: 'Arial', 'Helvetica', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -57,8 +75,8 @@ a:hover {
 }
 
 .header-2 .sticky-header {
-    background: #ff8c00 !important;
-    border-top: 3px solid #ff6b00;
+    background: #4a90e2 !important;
+    border-top: 3px solid #357abd;
 }
 
 /* Navigation Menu Styling */
@@ -114,7 +132,7 @@ a:hover {
 
 /* Main Content Styling - Enhanced */
 .main-banner {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4a90e2 0%, #48c9b0 100%);
     padding: 80px 0;
     color: white;
     position: relative;
@@ -226,7 +244,7 @@ body {
 .quick-link-item .icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4a90e2 0%, #48c9b0 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -253,7 +271,7 @@ body {
     left: 0;
     width: 80px;
     height: 5px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4a90e2 0%, #48c9b0 100%);
     border-radius: 3px;
 }
 
@@ -291,7 +309,7 @@ body {
 }
 
 .updates-header {
-    background: linear-gradient(135deg, #ff7b7b 0%, #667eea 100%);
+    background: linear-gradient(135deg, #5dade2 0%, #48c9b0 100%);
     color: white;
     padding: 20px 30px;
     font-weight: 600;
@@ -394,28 +412,28 @@ body {
     .banner-title {
         font-size: 2rem;
     }
-    
+
     .banner-subtitle {
         font-size: 1.1rem;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .govt-header-content h1 {
         font-size: 1.5rem !important;
     }
-    
+
     .govt-header-content h2 {
         font-size: 1.3rem !important;
     }
-    
+
     .govt-header-content h3,
     .govt-header-content h4 {
         font-size: 1rem !important;
     }
-    
+
     .header-2 .menu > li > a {
         padding: 12px 15px !important;
         font-size: 14px !important;
@@ -468,8 +486,6 @@ body {
     color: #bdc3c7 !important;
     font-size: 10px !important;
     margin: 0;
-    line-height: 1.3;
-}
     line-height: 1.6;
 }
 
@@ -936,27 +952,27 @@ tional Typography and Visibility Fixes */
     .main-content h1 {
         font-size: 2rem;
     }
-    
+
     .main-content h2 {
         font-size: 1.75rem;
     }
-    
+
     .main-content h3 {
         font-size: 1.5rem;
     }
-    
+
     .main-content h4 {
         font-size: 1.25rem;
     }
-    
+
     .main-content h5 {
         font-size: 1.1rem;
     }
-    
+
     .main-content h6 {
         font-size: 1rem;
     }
-    
+
     .main-content p,
     .main-content li {
         font-size: 0.95rem;
@@ -967,19 +983,19 @@ tional Typography and Visibility Fixes */
     .main-content h1 {
         font-size: 1.75rem;
     }
-    
+
     .main-content h2 {
         font-size: 1.5rem;
     }
-    
+
     .main-content h3 {
         font-size: 1.25rem;
     }
-    
+
     .main-content h4 {
         font-size: 1.1rem;
     }
-    
+
     .main-content p,
     .main-content li {
         font-size: 0.9rem;
@@ -992,16 +1008,16 @@ tional Typography and Visibility Fixes */
         color: #000000;
         background-color: #ffffff;
     }
-    
+
     .header-main {
         background: #000080 !important;
         color: #ffffff !important;
     }
-    
+
     .header-nav {
-        background: #ff6600 !important;
+        background: #4a90e2 !important;
     }
-    
+
     .footer-2 {
         background: #000000 !important;
         color: #ffffff !important;
@@ -1016,18 +1032,18 @@ tional Typography and Visibility Fixes */
     .mobile-footer {
         display: none !important;
     }
-    
+
     body {
         font-size: 12pt;
         color: #000000;
         background: #ffffff;
     }
-    
+
     h1, h2, h3, h4, h5, h6 {
         color: #000000;
         page-break-after: avoid;
     }
-    
+
     p, li {
         color: #000000;
     }
@@ -1435,35 +1451,35 @@ body {
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1.3rem;
     }
-    
+
     .section-title {
         font-size: 2.2rem;
     }
-    
+
     .main-content h1 {
         font-size: 2.2rem;
     }
-    
+
     .main-content h2 {
         font-size: 1.9rem;
     }
-    
+
     .main-content h3 {
         font-size: 1.6rem;
     }
-    
+
     .main-content p {
         font-size: 1.05rem;
     }
-    
+
     .quick-link-item {
         padding: 25px 15px;
     }
-    
+
     .quick-link-item .icon {
         width: 70px;
         height: 70px;
@@ -1475,41 +1491,41 @@ body {
     .hero-title {
         font-size: 2rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1.1rem;
     }
-    
+
     .section-title {
         font-size: 1.8rem;
     }
-    
+
     .main-content h1 {
         font-size: 1.8rem;
     }
-    
+
     .main-content h2 {
         font-size: 1.5rem;
     }
-    
+
     .main-content h3 {
         font-size: 1.3rem;
     }
-    
+
     .main-content p {
         font-size: 1rem;
     }
-    
+
     .quick-links {
         padding: 25px;
         margin-top: -30px;
     }
-    
+
     .minister-card,
     .announcement-card {
         padding: 25px;
     }
-    
+
     .updates-content {
         padding: 20px 25px;
     }
@@ -1620,7 +1636,7 @@ itional Footer Enhancements */
         margin: 0 auto;
         padding: 0 15px;
     }
-    
+
     .footer-main .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -1634,18 +1650,18 @@ itional Footer Enhancements */
         gap: 15px !important;
         padding: 0 15px;
     }
-    
+
     .footer-main .container {
         flex-direction: column !important;
         text-align: center !important;
         gap: 15px !important;
         padding: 0 15px;
     }
-    
+
     .footer-left {
         justify-content: center !important;
     }
-    
+
     .footer-right {
         justify-content: center !important;
     }
@@ -1655,28 +1671,28 @@ itional Footer Enhancements */
     .footer-links-bar .container {
         gap: 10px !important;
     }
-    
+
     .footer-links-bar a {
         font-size: 10px !important;
         padding: 2px 4px !important;
     }
-    
+
     .footer-logo {
         height: 30px !important;
     }
-    
+
     .footer-content h6 {
         font-size: 10px !important;
     }
-    
+
     .footer-content p {
         font-size: 9px !important;
     }
-    
+
     .compliance-badges img {
         height: 28px !important;
     }
-    
+
     .quality-badges img {
         height: 32px !important;
     }
@@ -1695,4 +1711,100 @@ itional Footer Enhancements */
 .government-footer .col-lg-2,
 .government-footer .col-lg-4 {
     padding: 0 !important;
+}
+
+/* Cool Theme Enhancements */
+.btn-primary {
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%) !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #357abd 0%, #2563eb 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3) !important;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(74, 144, 226, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+.card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 35px rgba(74, 144, 226, 0.15) !important;
+}
+
+/* Cool accent colors for links */
+a {
+    color: #4a90e2 !important;
+}
+
+a:hover {
+    color: #357abd !important;
+}
+
+/* Navbar links override - keep white */
+.header-nav a,
+.header-nav .nav-link {
+    color: white !important;
+}
+
+.header-nav a:hover,
+.header-nav .nav-link:hover,
+.header-nav .nav-link.active {
+    color: white !important;
+}
+
+/* Enhanced focus states */
+.form-control:focus {
+    border-color: #4a90e2 !important;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25) !important;
+}
+
+/* Cool background overlays */
+.hero-overlay {
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.8) 0%, rgba(72, 201, 176, 0.8) 100%) !important;
+}
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #4a90e2 0%, #48c9b0 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #357abd 0%, #3a9b8a 100%);
+}
+
+/* Ensure navbar text is white */
+.header-nav,
+.header-nav .nav-menu,
+.header-nav .nav-link,
+.header-nav a {
+    color: white !important;
+}
+
+.header-nav .nav-link:hover,
+.header-nav .nav-link.active {
+    color: white !important;
+}
+
+/* Force navbar links to stay white - highest priority */
+.header-nav .nav-menu .nav-item .nav-link,
+.header-nav .nav-menu .nav-item .nav-link:hover,
+.header-nav .nav-menu .nav-item .nav-link:focus,
+.header-nav .nav-menu .nav-item.active .nav-link {
+    color: white !important;
 }

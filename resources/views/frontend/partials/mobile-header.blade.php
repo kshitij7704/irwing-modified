@@ -1,3 +1,6 @@
+    <!-- Indian Flag Gradient Bar -->
+    <div style="width: 100%; height: 8px; background: linear-gradient(to right, #FF9933 0%, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%, #138808 100%); position: fixed; top: 0; left: 0; right: 0; z-index: 9999; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: block;"></div>
+
     <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
 
     <div class="mobile-menu-container mobile-menu-light">
@@ -75,7 +78,7 @@
                                     </button>
                                 </form>
                                 @else
-       
+
                                     <ul class="nav nav-pills-mobile nav-border-anim">
                                         <li class="nav-item">
                                             <a class="nav-link " id="mobile-menu-link"  href="#"
@@ -86,7 +89,7 @@
                                                 >Register</a>
                                         </li>
                                     </ul>
-                                
+
                                 @endauth
 
 
@@ -100,7 +103,7 @@
                         <ul class="mobile-cats-menu">
                             <li class="mobile-cats-lead"><a href="{{url('category/tshirts')}}">Tshirts</a></li>
 
-                           
+
                         </ul><!-- End .mobile-cats-menu -->
                     </nav><!-- End .mobile-cats-nav -->
                 </div><!-- .End .tab-pane -->

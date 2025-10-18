@@ -1,3 +1,6 @@
+<!-- Cool Gradient Bar -->
+<div style="width: 100%; height: 8px; background: linear-gradient(to right, #4a90e2 0%, #4a90e2 33%, #85c1e9 33%, #85c1e9 66%, #48c9b0 66%, #48c9b0 100%); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: relative; z-index: 10;"></div>
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
