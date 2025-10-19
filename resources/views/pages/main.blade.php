@@ -633,6 +633,208 @@
     .calendar-section {
         background: white;
         padding: 50px 0;
+        text-align: center;
+    }
+
+    .calendar-section .section-header {
+        text-align: left;
+        margin-bottom: 40px;
+    }
+
+    .calendar-section .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        text-align: left;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .calendar-content-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: start;
+    }
+
+    .calendar-left-column {
+        /* Calendar takes full left column */
+    }
+
+    .calendar-right-column {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .social-media-header {
+        background: #4a90e2;
+        color: white;
+        padding: 20px;
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-align: center;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .social-media-scroll-container {
+        height: 550px;
+        overflow: hidden;
+        position: relative;
+        background: white;
+        padding: 20px;
+    }
+
+    .social-media-scroll-content {
+        animation: continuousScroll 60s linear infinite;
+        position: relative;
+    }
+
+    .social-media-scroll-content:hover {
+        animation-play-state: paused;
+    }
+
+    .social-media-item {
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .social-media-item:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .social-simple-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .social-platform-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .social-text-content {
+        flex: 1;
+        padding-top: 5px;
+    }
+
+    .social-text-content .social-link {
+        color: #2c3e50;
+        text-decoration: none;
+        line-height: 1.5;
+        font-size: 1.1rem;
+        display: block;
+    }
+
+    .social-text-content .social-link:hover {
+        color: #4a90e2;
+        text-decoration: underline;
+    }
+
+    .social-card-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .social-card-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .social-card-info h5 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 3px;
+    }
+
+    .social-card-info p {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin: 0;
+    }
+
+    .social-card-content {
+        margin-bottom: 15px;
+    }
+
+    .social-card-content p {
+        font-size: 0.9rem;
+        color: #495057;
+        line-height: 1.5;
+        margin: 0 0 10px 0;
+    }
+
+    .social-card-stats {
+        display: flex;
+        justify-content: space-around;
+        margin: 15px 0;
+        padding: 10px 0;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+    }
+
+    .social-stat {
+        text-align: center;
+    }
+
+    .social-stat-number {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #2c3e50;
+        display: block;
+    }
+
+    .social-stat-label {
+        font-size: 0.7rem;
+        color: #6c757d;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .social-follow-btn {
+        background: #4a90e2;
+        color: white !important;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .social-follow-btn:hover {
+        background: #357abd;
+        transform: scale(1.02);
+        color: white;
     }
 
     .calendar-container {
@@ -640,14 +842,13 @@
         margin: 0 auto;
         background: white;
         border-radius: 15px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         overflow: hidden;
     }
 
     .calendar-header {
         background: #4a90e2;
         color: white;
-        padding: 20px;
+        padding: 13px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -722,6 +923,7 @@
     .calendar-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
+        width: 100%;
     }
 
     .calendar-day-header {
@@ -741,16 +943,20 @@
         grid-column: 1 / -1;
         display: grid;
         grid-template-columns: repeat(7, 1fr);
+        width: 100%;
     }
 
     .calendar-day {
-        min-height: 100px;
-        padding: 10px;
+        min-height: 120px;
+        padding: 8px;
         border-right: 1px solid #dee2e6;
         border-bottom: 1px solid #dee2e6;
         position: relative;
         background: white;
         transition: background 0.3s ease;
+        box-sizing: border-box;
+        width: 100%;
+        overflow: hidden;
     }
 
     .calendar-day:hover {
@@ -780,15 +986,18 @@
     .event-item {
         background: #4a90e2;
         color: white;
-        padding: 3px 6px;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        margin-bottom: 2px;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-size: 0.7rem;
+        margin-bottom: 1px;
         cursor: pointer;
         transition: all 0.3s ease;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        word-wrap: break-word;
+        white-space: normal;
+        line-height: 1.1;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .event-item:hover {
@@ -836,6 +1045,15 @@
         .event-item {
             font-size: 0.7rem;
             padding: 2px 4px;
+        }
+
+        .calendar-content-wrapper {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .social-media-scroll-container {
+            height: 400px;
         }
     }
 
@@ -950,6 +1168,28 @@
         color: white;
     }
 
+    /* Social Media Links */
+    .social-link {
+        color: #2c3e50;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+    }
+
+    .social-link:hover {
+        color: #4a90e2;
+        text-decoration: underline;
+    }
+
+    .video-link {
+        color: white !important;
+        text-decoration: none;
+    }
+
+    .video-link:hover {
+        text-decoration: underline;
+    }
+
     /* Responsive Design */
     @media (max-width: 1200px) {
         .services-grid {
@@ -997,6 +1237,25 @@
         .social-cards-grid {
             grid-template-columns: 1fr;
         }
+
+        /* Calendar responsive design */
+        .calendar-content-wrapper {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .calendar-left-column,
+        .calendar-right-column {
+            width: 100%;
+        }
+
+        .calendar-container {
+            max-width: 100%;
+        }
+
+        .social-media-scroll-container {
+            max-height: 400px;
+        }
     }
 
     @media (max-width: 768px) {
@@ -1023,6 +1282,29 @@
 
         .tab-button:last-child {
             border-bottom: none;
+        }
+
+        /* Calendar mobile adjustments */
+        .calendar-header {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .calendar-selectors {
+            order: 1;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .calendar-nav {
+            order: 2;
+            align-self: center;
+        }
+
+        .calendar-dropdown {
+            font-size: 0.9rem;
+            padding: 8px 12px;
         }
     }
 
@@ -1054,6 +1336,54 @@
         .service-tile {
             height: 140px;
             padding: 20px 15px;
+        }
+
+        /* Calendar mobile optimizations */
+        .calendar-section {
+            padding: 30px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+        }
+
+        .calendar-content-wrapper {
+            gap: 20px;
+        }
+
+        .calendar-grid {
+            font-size: 0.85rem;
+        }
+
+        .calendar-day-number {
+            font-size: 1rem;
+        }
+
+        .event-item {
+            font-size: 0.75rem;
+            padding: 2px 4px;
+        }
+
+        .social-media-header {
+            font-size: 1.1rem;
+        }
+
+        .social-media-scroll-container {
+            max-height: 350px;
+        }
+
+        .social-media-item {
+            padding: 15px;
+        }
+
+        .social-platform-icon {
+            width: 35px;
+            height: 35px;
+            font-size: 1.1rem;
+        }
+
+        .social-text-content .social-link {
+            font-size: 1rem;
         }
     }
 </style>
@@ -1404,122 +1734,129 @@
             <div class="section-header">
                 <h2 class="section-title">EVENTS CALENDAR</h2>
             </div>
-            <div class="calendar-container">
-                <div class="calendar-header">
-                    <button class="calendar-nav" id="prevMonth">&lt;</button>
-                    <div class="calendar-selectors">
-                        <select class="calendar-dropdown" id="monthSelect">
-                            <option value="0">January</option>
-                            <option value="1">February</option>
-                            <option value="2">March</option>
-                            <option value="3">April</option>
-                            <option value="4">May</option>
-                            <option value="5">June</option>
-                            <option value="6">July</option>
-                            <option value="7">August</option>
-                            <option value="8">September</option>
-                            <option value="9">October</option>
-                            <option value="10">November</option>
-                            <option value="11">December</option>
-                        </select>
-                        <select class="calendar-dropdown" id="yearSelect">
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                        </select>
+            <div class="calendar-content-wrapper">
+                <!-- Left Column - Calendar -->
+                <div class="calendar-left-column">
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button class="calendar-nav" id="prevMonth">&lt;</button>
+                            <div class="calendar-selectors">
+                                <select class="calendar-dropdown" id="monthSelect">
+                                    <option value="0">January</option>
+                                    <option value="1">February</option>
+                                    <option value="2">March</option>
+                                    <option value="3">April</option>
+                                    <option value="4">May</option>
+                                    <option value="5">June</option>
+                                    <option value="6">July</option>
+                                    <option value="7">August</option>
+                                    <option value="8">September</option>
+                                    <option value="9">October</option>
+                                    <option value="10">November</option>
+                                    <option value="11">December</option>
+                                </select>
+                                <select class="calendar-dropdown" id="yearSelect">
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                </select>
+                            </div>
+                            <button class="calendar-nav" id="nextMonth">&gt;</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-day-header">Sun</div>
+                            <div class="calendar-day-header">Mon</div>
+                            <div class="calendar-day-header">Tue</div>
+                            <div class="calendar-day-header">Wed</div>
+                            <div class="calendar-day-header">Thu</div>
+                            <div class="calendar-day-header">Fri</div>
+                            <div class="calendar-day-header">Sat</div>
+                            <div id="calendarDays" class="calendar-days"></div>
+                        </div>
                     </div>
-                    <button class="calendar-nav" id="nextMonth">&gt;</button>
                 </div>
-                <div class="calendar-grid">
-                    <div class="calendar-day-header">Sun</div>
-                    <div class="calendar-day-header">Mon</div>
-                    <div class="calendar-day-header">Tue</div>
-                    <div class="calendar-day-header">Wed</div>
-                    <div class="calendar-day-header">Thu</div>
-                    <div class="calendar-day-header">Fri</div>
-                    <div class="calendar-day-header">Sat</div>
-                    <div id="calendarDays" class="calendar-days"></div>
+
+                <!-- Right Column - Social Media Feed -->
+                <div class="calendar-right-column">
+                    <div class="social-media-header">Social Media Feed</div>
+                    <div class="social-media-scroll-container">
+                        <div class="social-media-scroll-content" id="socialScrollContent">
+                            <!-- Instagram Card -->
+                            <div class="social-media-item">
+                                <div class="social-simple-row">
+                                    <div class="social-platform-icon" style="background: #E4405F;">
+                                        <i class="bi bi-instagram"></i>
+                                    </div>
+                                    <div class="social-text-content">
+                                        <a href="https://www.instagram.com/department_of_telecom" target="_blank" class="social-link">DoT_India (Department of Telecommunications) • Department of Telecommunications, Ministry of Communications, Government of India</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Facebook Card -->
+                            <div class="social-media-item">
+                                <div class="social-simple-row">
+                                    <div class="social-platform-icon" style="background: #1877F2;">
+                                        <i class="bi bi-facebook"></i>
+                                    </div>
+                                    <div class="social-text-content">
+                                        <a href="https://www.facebook.com/DepartmentOfTelecommunications" target="_blank" class="social-link">Government of India, India Post, and Department of Telecommunications. The session will highlight key achievements, milestones, and citizen-centric initiatives driving India's journey towards inclusive development</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- YouTube Card -->
+                            <div class="social-media-item">
+                                <div class="social-simple-row">
+                                    <div class="social-platform-icon" style="background: #FF0000;">
+                                        <i class="bi bi-youtube"></i>
+                                    </div>
+                                    <div class="social-text-content">
+                                        <a href="https://www.youtube.com/watch?v=example" target="_blank" class="social-link">1 Year Achievement Video - Department of Telecommunications showcasing digital transformation initiatives and infrastructure development across India</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Duplicate for seamless scrolling -->
+                            <div class="social-media-item">
+                                <div class="social-simple-row">
+                                    <div class="social-platform-icon" style="background: #E4405F;">
+                                        <i class="bi bi-instagram"></i>
+                                    </div>
+                                    <div class="social-text-content">
+                                        <a href="https://www.instagram.com/department_of_telecom" target="_blank" class="social-link">DoT_India (Department of Telecommunications) • Department of Telecommunications, Ministry of Communications, Government of India</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="social-media-item">
+                                <div class="social-simple-row">
+                                    <div class="social-platform-icon" style="background: #1877F2;">
+                                        <i class="bi bi-facebook"></i>
+                                    </div>
+                                    <div class="social-text-content">
+                                        <a href="https://www.facebook.com/DepartmentOfTelecommunications" target="_blank" class="social-link">Government of India, India Post, and Department of Telecommunications. The session will highlight key achievements, milestones, and citizen-centric initiatives driving India's journey towards inclusive development</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="social-media-item">
+                                <div class="social-simple-row">
+                                    <div class="social-platform-icon" style="background: #FF0000;">
+                                        <i class="bi bi-youtube"></i>
+                                    </div>
+                                    <div class="social-text-content">
+                                        <a href="https://www.youtube.com/watch?v=example" target="_blank" class="social-link">1 Year Achievement Video - Department of Telecommunications showcasing digital transformation initiatives and infrastructure development across India</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Media Section -->
-    <section class="social-media-section">
-        <div class="container">
-            <div class="social-cards-grid">
-                <div class="social-media-card">
-                    <div class="social-card-header">
-                        <div class="social-card-logo" style="background: #E4405F;">
-                            <i class="bi bi-instagram"></i>
-                        </div>
-                        <div class="social-card-info">
-                            <h5>Instagram</h5>
-                            <p>@department_of_telecom</p>
-                        </div>
-                    </div>
-                    <div class="social-card-content">
-                        <div class="social-card-stats">
-                            <div class="social-stat">
-                                <span class="social-stat-number">391</span>
-                                <span class="social-stat-label">Posts</span>
-                            </div>
-                            <div class="social-stat">
-                                <span class="social-stat-number">2,815</span>
-                                <span class="social-stat-label">Followers</span>
-                            </div>
-                            <div class="social-stat">
-                                <span class="social-stat-number">16</span>
-                                <span class="social-stat-label">Following</span>
-                            </div>
-                        </div>
-                        <p>DoT_India (Department of Telecommunications) • Department of Telecommunications, Ministry of Communications, Government of India •</p>
-                    </div>
-                    <a href="#" class="social-follow-btn">Follow</a>
-                </div>
-
-                <div class="social-media-card">
-                    <div class="social-card-header">
-                        <div class="social-card-logo" style="background: #1877F2;">
-                            <i class="bi bi-facebook"></i>
-                        </div>
-                        <div class="social-card-info">
-                            <h5>Facebook</h5>
-                            <p>Department of Telecommunications</p>
-                        </div>
-                    </div>
-                    <div class="social-card-content">
-                        <p>Government of India, India Post, and Department of Telecommunications. The session will highlight key achievements, milestones, and citizen-centric initiatives driving India's journey towards inclus... See more</p>
-                        <div style="margin: 20px 0;">
-                            <div style="background: #f0f2f5; padding: 15px; border-radius: 10px;">
-                                <strong>Tiranga</strong><br>
-                                <small>Telecommunications will highlight key achievements, milestones, and citizen-centric initiatives driving India's journey towards inclusive development.</small>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="social-follow-btn">Like Page</a>
-                </div>
-
-                <div class="social-media-card">
-                    <div class="social-card-header">
-                        <div class="social-card-logo" style="background: #FF0000;">
-                            <i class="bi bi-youtube"></i>
-                        </div>
-                        <div class="social-card-info">
-                            <h5>YouTube</h5>
-                            <p>DoT India</p>
-                        </div>
-                    </div>
-                    <div class="social-card-content">
-                        <div style="background: #000; color: white; padding: 60px 20px; border-radius: 10px; text-align: center; margin: 20px 0;">
-                            <i class="bi bi-play-circle" style="font-size: 3rem;"></i>
-                            <p style="margin: 10px 0 0 0; color: white;">1 Year Achieveme...</p>
-                        </div>
-                    </div>
-                    <a href="#" class="social-follow-btn">Subscribe</a>
-                </div>
-            </div>
-        </div>
     </section>
 </main>
 
