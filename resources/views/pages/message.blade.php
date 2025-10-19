@@ -4,7 +4,7 @@
 
 <style>
     .minister-section {
-        max-width: 900px;
+        max-width            <h1 class="page-title">Messages from Hon'ble Ministers</h1> 900px;
         margin: 40px auto;
         padding: 30px;
         background-color: #f8f9fa;
@@ -103,28 +103,49 @@
 <main class="main">
     <div class="page-header text-center" style="background-image: url('front/assets/images/page-header-bg.jpg')">
         <div class="container">
-            <h1 class="page-title">Message from Hon’ble Minister of Communication</h1>
+            <h1 class="page-title">
+                @if($minister == 'moc')
+                    Message from Hon'ble Minister of Communication
+                @else
+                    Message from Hon'ble State Minister for Communications
+                @endif
+            </h1>
         </div>
     </div>
 
     <div class="page-content container">
         <!-- Minister Section -->
+        @if($minister == 'moc')
         <div class="minister-section">
             <div class="minister-image">
                 <img src="https://dot.gov.in/sites/default/files/styles/150_150/public/Mr%20Scindia3.jpg?itok=bRZ_YU_p" alt="Minister of Communication">
             </div>
             <div class="minister-content">
                 <div class="minister-name">Shri Jyotiraditya M Scindia</div>
-                <div class="minister-designation">Hon’ble Minister of Communications, Government of India</div>
+                <div class="minister-designation">Hon'ble Minister of Communications, Government of India</div>
                 <div class="minister-message">
                     <p>Welcome to the Department of Telecommunications. Our commitment is to ensure seamless digital connectivity for every citizen of India. Through innovative programs, improved infrastructure, and technology-driven policies, we aim to bridge the digital divide and empower all communities with access to modern communication services.</p>
-                    <p>The department has achieved significant milestones in expanding broadband networks, enhancing mobile connectivity, and promoting rural telecommunication accessibility. We remain dedicated to fostering innovation, transparency, and efficiency in our initiatives for the nation’s progress.</p>
+                    <p>The department has achieved significant milestones in expanding broadband networks, enhancing mobile connectivity, and promoting rural telecommunication accessibility. We remain dedicated to fostering innovation, transparency, and efficiency in our initiatives for the nation's progress.</p>
                     <p>I encourage everyone to explore our programs, initiatives, and achievements, and join us in building a digitally inclusive India.</p>
                 </div>
             </div>
         </div>
-
-        <!-- Cards / Tabs Section -->
+        @else
+        <div class="minister-section">
+            <div class="minister-image">
+                <img src="{{asset('images/p.png')}}" alt="Senior Minister of State for Communications">
+            </div>
+            <div class="minister-content">
+                <div class="minister-name">Dr. Pemmasani Chandra Sekhar</div>
+                <div class="minister-designation">Hon'ble Minister of State for Communications, Government of India</div>
+                <div class="minister-message">
+                    <p>As Senior Minister of State for Communications, I am committed to advancing India's telecommunications infrastructure and ensuring equitable access to digital services for all citizens. Our focus is on implementing cutting-edge technologies that enhance connectivity and drive digital transformation across the nation.</p>
+                    <p>Through strategic initiatives and collaborative efforts, we are working to strengthen the telecommunications sector, promote innovation, and create opportunities for sustainable growth. The Department continues to prioritize rural connectivity, cybersecurity, and the development of next-generation communication networks.</p>
+                    <p>I invite you to engage with our vision and contribute to building a robust and inclusive digital ecosystem for India's future.</p>
+                </div>
+            </div>
+        </div>
+        @endif        <!-- Cards / Tabs Section -->
         <div class="cards-section row mt-5">
             <div class="col-md-6">
                 <div class="card-tab">

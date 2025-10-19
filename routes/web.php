@@ -58,7 +58,7 @@ Route::PUT('/profiles/update', [App\Http\Controllers\ProfileController::class, '
  Route::get('orms', [HomeController::class, 'orms'])->name('orms');
  Route::get('achivements', [HomeController::class, 'achivements'])->name('achivements');
  Route::get('internation-forums', [HomeController::class, 'internationForums'])->name('internationForums');
- Route::get('message', [HomeController::class, 'message'])->name('message');
+ Route::get('message/{minister?}', [HomeController::class, 'message'])->name('message');
  Route::get('role-ir', [HomeController::class, 'roleir'])->name('role-ir');
  Route::get('structure', [HomeController::class, 'structure'])->name('structure');
  Route::get('contact-us', [HomeController::class, 'contact'])->name('contact-us');
@@ -69,7 +69,7 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
 
 // Route::middleware(['role:admin'])->group(function () {
     Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
-        // ROLE // 
+        // ROLE //
         Route::resource('roles', RoleController::class);
         Route::post('/switch-role', [RoleController::class, 'switchRole'])->name('switch.role')->middleware('auth');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -92,14 +92,14 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
         Route::get('/get-meeting-dates/{id}', [TourReportController::class, 'getMeetingDates']);
 
 
-        // ROLE // 
+        // ROLE //
         Route::resource('qrp', \App\Http\Controllers\QrpFormController::class);
         Route::get('/qrp-download/{id}', [\App\Http\Controllers\QrpFormController::class, 'downloadPdf'])->name('qrp.download');
         Route::put('/forms/{id}/status', [\App\Http\Controllers\QrpFormController::class, 'updateStatus'])->name('forms.updateStatus');
         Route::resource('qrp-generation', \App\Http\Controllers\QrpGenerationController::class);
         Route::get('qrp-generation-index/{id}', [\App\Http\Controllers\QrpGenerationController::class, 'qrpIndex'])->name('qrp.qrpIndex');
         Route::post('/qrp-generation/bulk-update-status', [\App\Http\Controllers\QrpGenerationController::class, 'bulkUpdateStatus'])->name('qrp-generation.bulk-update-status');
-        
+
 
 
         Route::get('/tour-tracker', [\App\Http\Controllers\TourTrackerController::class, 'index'])->name('tourTracker.index');
@@ -112,7 +112,7 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
     ->name('qrp-generation.update-expenditure');
 
         Route::get('qrp-generation/export/{id}/{format}', [\App\Http\Controllers\MasterSheetController::class, 'export'])->name('qrp-generation.export');
-        
+
 
 
 

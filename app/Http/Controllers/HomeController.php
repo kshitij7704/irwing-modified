@@ -94,14 +94,20 @@ class HomeController extends Controller
         }
         return view('pages.tweets', compact('orms'));
     }
-    public function message(Request $request)
+    public function message(Request $request, $minister = 'moc')
     {
         try {
             $orms = Orm::all(); // fetch all records
         } catch (\Exception $e) {
             $orms = collect([]);
         }
-        return view('pages.message', compact('orms'));
+
+        // Validate minister parameter
+        if (!in_array($minister, ['moc', 'smoc'])) {
+            abort(404);
+        }
+
+        return view('pages.message', compact('orms', 'minister'));
     }
     public function structure(Request $request)
     {

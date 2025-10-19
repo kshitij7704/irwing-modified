@@ -409,8 +409,8 @@
                         <div class="nav-dropdown">
                             {{-- <a href="{{ url('message') }}">Message from Hon'ble MoC</a> --}}
                             <a href="{{ url('role-ir') }}">Role of IR Wing</a>
-                            <a href="{{url('structure')}}">Organization Structure</a>
-                            {{-- <a href="{{url('contact-us')}}">Contact Information</a> --}}
+                            {{-- <a href="{{url('structure')}}">Organization Structure</a> --}}
+                            <a href="{{url('contact-us')}}">Contact Information</a>
                         </div>
                     </li>
 
@@ -423,7 +423,7 @@
 
 
                             <a href="{{url('orms')}}">IR Wing OMs</a>
-                            <a href="{{url('achivements')}}">Achievements</a>
+                            {{-- <a href="{{url('achivements')}}">Achievements</a> --}}
                             <a href="{{url('internation-forums')}}">International Forums</a>
                         </div>
                     </li>

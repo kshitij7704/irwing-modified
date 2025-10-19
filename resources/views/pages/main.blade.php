@@ -371,8 +371,8 @@
         width: 300px;
         background: white;
         padding: 30px 20px;
-        border-right: 1px solid #dee2e6;
-        margin-top:30px;
+        /* border-right: 1px solid #dee2e6; */
+        margin-top:0px;
         border-radius: 8px;
     }
 
@@ -385,6 +385,17 @@
         font-weight: 700;
         text-align: center;
         border-radius: 8px;
+    }
+
+    .card-title {
+        background: #4a90e2;
+        color: white;
+        padding: 15px 15px;
+        margin: -15px -15px 15px -15px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: center;
+        border-radius: 8px 8px 0 0;
     }
 
     .minister-card {
@@ -1121,9 +1132,8 @@
                 <br></br>
                 <!-- Left Sidebar - Ministers -->
                 <div class="ministers-sidebar">
-                    <div class="sidebar-title">Message from Hon'ble MoC</div>
-
-                    <div class="minister-card" onclick="window.location.href='/message'" style="cursor: pointer;">
+                    <div class="minister-card" onclick="window.location.href='/message/moc'" style="cursor: pointer;">
+                        <div class="card-title">Message from Hon'ble MoC</div>
                         <div class="minister-photo">
                             <img src="{{asset('images/j.png')}}" alt="Minister">
                         </div>
@@ -1139,7 +1149,8 @@
                         </div> --}}
                     </div>
 
-                    <div class="minister-card" onclick="window.location.href='/message'" style="cursor: pointer;">
+                    <div class="minister-card" onclick="window.location.href='/message/smoc'" style="cursor: pointer;">
+                        <div class="card-title">Message from Hon'ble SMoC</div>
                         <div class="minister-photo">
                             <img src="{{asset('images/p.png')}}" alt="Secretary">
                         </div>
