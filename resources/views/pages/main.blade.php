@@ -629,119 +629,214 @@
         justify-content: center;
     }
 
-    /* Service Tiles Grid */
-    .services-section {
+    /* Calendar Styles */
+    .calendar-section {
         background: white;
         padding: 50px 0;
     }
 
-    .section-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-
-    .section-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 15px;
-    }
-
-    .services-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-bottom: 40px;
-    }
-
-    .service-tile {
+    .calendar-container {
+        max-width: 800px;
+        margin: 0 auto;
         background: white;
         border-radius: 15px;
-        padding: 25px 20px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-        height: 160px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border-left: 5px solid;
-        position: relative;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         overflow: hidden;
     }
 
-    .service-tile::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0.1;
-        transition: opacity 0.3s ease;
+    .calendar-header {
+        background: #4a90e2;
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
     }
 
-    .service-tile:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    .calendar-nav {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
     }
 
-    .service-tile:hover::before {
-        opacity: 0.2;
+    .calendar-nav:hover {
+        background: rgba(255,255,255,0.3);
+        transform: scale(1.1);
     }
 
-    /* Color variations for tiles */
-    .service-tile.blue {
-        border-left-color: #3b82f6;
-        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    }
-    .service-tile.green {
-        border-left-color: #10b981;
-        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-    }
-    .service-tile.purple {
-        border-left-color: #8b5cf6;
-        background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
-    }
-    .service-tile.cool-blue {
-        border-left-color: #4a90e2;
-        background: linear-gradient(135deg, #e8f4fd 0%, #d1e9fb 100%);
-    }
-    .service-tile.red {
-        border-left-color: #ef4444;
-        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-    }
-    .service-tile.teal {
-        border-left-color: #14b8a6;
-        background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%);
-    }
-    .service-tile.indigo {
-        border-left-color: #6366f1;
-        background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-    }
-    .service-tile.pink {
-        border-left-color: #ec4899;
-        background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+    .calendar-selectors {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex: 1;
+        justify-content: center;
     }
 
-    .service-tile-title {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 8px;
+    .calendar-dropdown {
+        background: rgba(255,255,255,0.15);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 1.3rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+        backdrop-filter: blur(10px);
     }
 
-    .service-tile-number {
+    .calendar-dropdown:focus {
+        outline: none;
+        border-color: white;
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+        background: rgba(255,255,255,0.2);
+    }
+
+    .calendar-dropdown:hover {
+        background: rgba(255,255,255,0.2);
+        border-color: rgba(255,255,255,0.5);
+        transform: translateY(-1px);
+    }
+
+    .calendar-dropdown option {
+        background: #4a90e2;
+        color: white;
+        padding: 8px;
+    }
+
+    #calendarTitle {
         font-size: 1.8rem;
-        font-weight: 800;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .calendar-day-header {
+        background: #f8f9fa;
+        padding: 15px;
+        text-align: center;
+        font-weight: 600;
+        color: #2c3e50;
+        border-right: 1px solid #dee2e6;
+    }
+
+    .calendar-day-header:last-child {
+        border-right: none;
+    }
+
+    .calendar-days {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .calendar-day {
+        min-height: 100px;
+        padding: 10px;
+        border-right: 1px solid #dee2e6;
+        border-bottom: 1px solid #dee2e6;
+        position: relative;
+        background: white;
+        transition: background 0.3s ease;
+    }
+
+    .calendar-day:hover {
+        background: #f8f9fa;
+    }
+
+    .calendar-day.empty {
+        background: #f5f5f5;
+    }
+
+    .calendar-day-number {
+        font-size: 1.2rem;
+        font-weight: 600;
         color: #2c3e50;
         margin-bottom: 5px;
     }
 
-    .service-tile-subtitle {
-        font-size: 0.9rem;
-        color: #6c757d;
-        font-weight: 500;
+    .calendar-day.today {
+        background: #e8f4fd;
+    }
+
+    .calendar-day.today .calendar-day-number {
+        color: #4a90e2;
+        font-weight: 700;
+    }
+
+    .event-item {
+        background: #4a90e2;
+        color: white;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        margin-bottom: 2px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .event-item:hover {
+        background: #357abd;
+        transform: scale(1.02);
+    }
+
+    .event-item.multi-day {
+        background: linear-gradient(135deg, #4a90e2 0%, #48c9b0 100%);
+    }
+
+    /* Responsive Calendar */
+    @media (max-width: 768px) {
+        .calendar-container {
+            margin: 0 15px;
+        }
+
+        .calendar-header {
+            padding: 15px;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .calendar-selectors {
+            order: -1;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .calendar-dropdown {
+            min-width: 100px;
+            font-size: 0.9rem;
+            padding: 6px 10px;
+        }
+
+        .calendar-day {
+            min-height: 80px;
+            padding: 5px;
+        }
+
+        .calendar-day-number {
+            font-size: 1rem;
+        }
+
+        .event-item {
+            font-size: 0.7rem;
+            padding: 2px 4px;
+        }
     }
 
     /* Social Media Cards */
@@ -1303,77 +1398,47 @@
         </div>
     </section>
 
-    <!-- EVENTS CALENDAR - Event Tiles -->
-    <section class="services-section">
+    <!-- EVENTS CALENDAR -->
+    <section class="calendar-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">UPCOMING EVENTS & CONFERENCES</h2>
+                <h2 class="section-title">EVENTS CALENDAR</h2>
             </div>
-            <div class="services-grid">
-                <!-- Row 1 -->
-                <div class="service-tile blue">
-                    <div class="service-tile-title">5G India Summit</div>
-                    <div class="service-tile-number">Nov 15</div>
-                    <div class="service-tile-subtitle">National Conference on 5G Technology</div>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button class="calendar-nav" id="prevMonth">&lt;</button>
+                    <div class="calendar-selectors">
+                        <select class="calendar-dropdown" id="monthSelect">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                        <select class="calendar-dropdown" id="yearSelect">
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                        </select>
+                    </div>
+                    <button class="calendar-nav" id="nextMonth">&gt;</button>
                 </div>
-                <div class="service-tile green">
-                    <div class="service-tile-title">Digital India Week</div>
-                    <div class="service-tile-number">Nov 20-26</div>
-                    <div class="service-tile-subtitle">Celebrating Digital Transformation</div>
-                </div>
-                <div class="service-tile purple">
-                    <div class="service-tile-title">Telecom Policy Forum</div>
-                    <div class="service-tile-number">Dec 05</div>
-                    <div class="service-tile-subtitle">Policy Discussions & Reforms</div>
-                </div>
-                <div class="service-tile cool-blue">
-                    <div class="service-tile-title">Spectrum Auction</div>
-                    <div class="service-tile-number">Dec 12</div>
-                    <div class="service-tile-subtitle">5G Spectrum Allocation Event</div>
-                </div>
-
-                <!-- Row 2 -->
-                <div class="service-tile red">
-                    <div class="service-tile-title">Cybersecurity Summit</div>
-                    <div class="service-tile-number">Jan 08</div>
-                    <div class="service-tile-subtitle">National Telecom Security Conference</div>
-                </div>
-                <div class="service-tile teal">
-                    <div class="service-tile-title">Rural Connectivity</div>
-                    <div class="service-tile-number">Jan 15</div>
-                    <div class="service-tile-subtitle">BharatNet Phase III Launch</div>
-                </div>
-                <div class="service-tile indigo">
-                    <div class="service-tile-title">Innovation Awards</div>
-                    <div class="service-tile-number">Jan 26</div>
-                    <div class="service-tile-subtitle">Telecom Innovation Excellence</div>
-                </div>
-                <div class="service-tile pink">
-                    <div class="service-tile-title">Industry Meet</div>
-                    <div class="service-tile-number">Feb 02</div>
-                    <div class="service-tile-subtitle">Stakeholder Consultation Meeting</div>
-                </div>
-
-                <!-- Row 3 -->
-                <div class="service-tile blue">
-                    <div class="service-tile-title">World Telecom Day</div>
-                    <div class="service-tile-number">May 17</div>
-                    <div class="service-tile-subtitle">International Telecommunications Day</div>
-                </div>
-                <div class="service-tile green">
-                    <div class="service-tile-title">Startup Conclave</div>
-                    <div class="service-tile-number">Mar 10</div>
-                    <div class="service-tile-subtitle">Telecom Startup Ecosystem Meet</div>
-                </div>
-                <div class="service-tile purple">
-                    <div class="service-tile-title">AI in Telecom</div>
-                    <div class="service-tile-number">Mar 22</div>
-                    <div class="service-tile-subtitle">Artificial Intelligence Summit</div>
-                </div>
-                <div class="service-tile cool-blue">
-                    <div class="service-tile-title">Satellite Comm</div>
-                    <div class="service-tile-number">Apr 05</div>
-                    <div class="service-tile-subtitle">Satellite Communication Conference</div>
+                <div class="calendar-grid">
+                    <div class="calendar-day-header">Sun</div>
+                    <div class="calendar-day-header">Mon</div>
+                    <div class="calendar-day-header">Tue</div>
+                    <div class="calendar-day-header">Wed</div>
+                    <div class="calendar-day-header">Thu</div>
+                    <div class="calendar-day-header">Fri</div>
+                    <div class="calendar-day-header">Sat</div>
+                    <div id="calendarDays" class="calendar-days"></div>
                 </div>
             </div>
         </div>
@@ -1474,7 +1539,111 @@ function showTab(tabId) {
     // Add active class to clicked button
     event.target.classList.add('active');
 }
-</script>
+
+// Calendar functionality
+let currentDate = new Date(2025, 9, 19); // October 19, 2025
+
+const events = [
+    { title: "5G India Summit", date: new Date(2025, 10, 15), description: "National Conference on 5G Technology" },
+    { title: "Digital India Week", date: new Date(2025, 10, 20), endDate: new Date(2025, 10, 26), description: "Celebrating Digital Transformation" },
+    { title: "Telecom Policy Forum", date: new Date(2025, 11, 5), description: "Policy Discussions & Reforms" },
+    { title: "Spectrum Auction", date: new Date(2025, 11, 12), description: "5G Spectrum Allocation Event" },
+    { title: "Cybersecurity Summit", date: new Date(2026, 0, 8), description: "National Telecom Security Conference" },
+    { title: "Rural Connectivity", date: new Date(2026, 0, 15), description: "BharatNet Phase III Launch" },
+    { title: "Innovation Awards", date: new Date(2026, 0, 26), description: "Telecom Innovation Excellence" },
+    { title: "Industry Meet", date: new Date(2026, 1, 2), description: "Stakeholder Consultation Meeting" },
+    { title: "World Telecom Day", date: new Date(2026, 4, 17), description: "International Telecommunications Day" },
+    { title: "Startup Conclave", date: new Date(2026, 2, 10), description: "Telecom Startup Ecosystem Meet" },
+    { title: "AI in Telecom", date: new Date(2026, 2, 22), description: "Artificial Intelligence Summit" },
+    { title: "Satellite Comm", date: new Date(2026, 3, 5), description: "Satellite Communication Conference" }
+];
+
+function renderCalendar() {
+    const calendarDays = document.getElementById('calendarDays');
+    const monthSelect = document.getElementById('monthSelect');
+    const yearSelect = document.getElementById('yearSelect');
+
+    // Update dropdowns to match current date
+    monthSelect.value = currentDate.getMonth();
+    yearSelect.value = currentDate.getFullYear();
+
+    const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    const startDate = new Date(firstDay);
+    startDate.setDate(startDate.getDate() - firstDay.getDay());
+
+    const endDate = new Date(lastDay);
+    endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
+
+    calendarDays.innerHTML = '';
+
+    let currentDay = new Date(startDate);
+
+    while (currentDay <= endDate) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day';
+
+        if (currentDay.getMonth() !== currentDate.getMonth()) {
+            dayDiv.classList.add('empty');
+        } else {
+            const dayNumber = document.createElement('div');
+            dayNumber.className = 'calendar-day-number';
+            dayNumber.textContent = currentDay.getDate();
+
+            if (currentDay.toDateString() === new Date(2025, 9, 19).toDateString()) {
+                dayDiv.classList.add('today');
+            }
+
+            dayDiv.appendChild(dayNumber);
+
+            // Check for events on this day
+            const dayEvents = events.filter(event => {
+                if (event.endDate) {
+                    return currentDay >= event.date && currentDay <= event.endDate;
+                }
+                return currentDay.toDateString() === event.date.toDateString();
+            });
+
+            dayEvents.forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'event-item';
+                if (event.endDate) {
+                    eventDiv.classList.add('multi-day');
+                }
+                eventDiv.textContent = event.title;
+                eventDiv.title = event.description;
+                dayDiv.appendChild(eventDiv);
+            });
+        }
+
+        calendarDays.appendChild(dayDiv);
+        currentDay.setDate(currentDay.getDate() + 1);
+    }
+}
+
+document.getElementById('prevMonth').addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+});
+
+document.getElementById('nextMonth').addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+});
+
+// Dropdown change handlers
+document.getElementById('monthSelect').addEventListener('change', (e) => {
+    currentDate.setMonth(parseInt(e.target.value));
+    renderCalendar();
+});
+
+document.getElementById('yearSelect').addEventListener('change', (e) => {
+    currentDate.setFullYear(parseInt(e.target.value));
+    renderCalendar();
+});
+
+// Initialize calendar
+renderCalendar();
 </script>
 
 </div>
