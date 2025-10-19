@@ -62,7 +62,7 @@
                 @roleCan('submission.personal_performa.view')
                 <li class="menu-item">
                     <a href="{{ route('personal-performa.index') }}" class="menu-link">
-                        <div>Personal Performa and Justifications</div>
+                        <div>Personal Performa</div>
                     </a>
                 </li>
                 @endroleCan
@@ -101,7 +101,7 @@
             <ul class="menu-sub">
                 @roleCan('generation.personal_performa.view')
                 <li class="menu-item"><a href="{{ route('personal-performa-generation.index') }}" class="menu-link">
-                        <div>Personal Performa and Justifications</div>
+                        <div>Personal Performa</div>
                     </a></li>
                 @endroleCan
 
@@ -302,15 +302,6 @@
         </li>
         @endroleCan
 
-        {{-- Users --}}
-        @roleCan('users.view')
-        <li class="menu-item">
-            <a href="{{ route('users.index') }}" class="menu-link">
-                <i class="menu-icon icon-base ti tabler-user"></i>
-                <div data-i18n="Users">Users</div>
-            </a>
-        </li>
-        @endroleCan
 
         {{-- Roles & Permissions --}}
         @roleCanAny(['permissions.view', 'roles.view'])
@@ -413,7 +404,89 @@
             </ul>
         </li>
         @endroleCanAny
+        @roleCanAny(['permissions.view', 'roles.view'])
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon icon-base ti tabler-shield-lock"></i>
+                <div data-i18n="Backend Pages">Frontend Pages</div>
+            </a>
+            <ul class="menu-sub">
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('countries.index')}}" class="menu-link">
+                        <div data-i18n="Countries">Countries</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('brochures.index')}}" class="menu-link">
+                        <div data-i18n="Brochures">Brochures</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('promotional_videos.index')}}" class="menu-link">
+                        <div data-i18n="Promotional Videos">Promotional Videos</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('international_forms.index')}}" class="menu-link">
+                        <div data-i18n="International Forms">International Forms</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('meeting-calendars.index')}}" class="menu-link">
+                        <div data-i18n="Meeting Calendars">Meeting Calendars</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('sliders.index')}}" class="menu-link">
+                        <div data-i18n="Sliders">Sliders</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('minister-messages.index')}}" class="menu-link">
+                        <div data-i18n="Minister Messages">Minister Messages</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('press-releases.index')}}" class="menu-link">
+                        <div data-i18n="Press Releases">Press Releases</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('achievements.index')}}" class="menu-link">
+                        <div data-i18n="Achievements">Achievements</div>
+                    </a>
+                </li>
+                @endroleCan
+            </ul>
+        </li>
+        @endroleCanAny
 
+        {{-- Users --}}
+        @roleCan('users.view')
+        <li class="menu-item">
+            <a href="{{ route('users.index') }}" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-user"></i>
+                <div data-i18n="Users">Users</div>
+            </a>
+        </li>
+        @endroleCan
         <li class="menu-item">
             <a href="{{ route('profile.index') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-user"></i>
