@@ -20,6 +20,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
+                            <th>Type</th>
                             <th>Pdf</th>
                             <th>Date</th>
                             <th>Actions</th>
@@ -29,6 +30,7 @@
                         @forelse($orm as $performa)
                         <tr>
                             <td>{{ $performa->id }}</td>
+                            <td>{{ $performa->type }}</td>
                             <td>{{ $performa->title }}</td>
                             <td><a href="{{ asset($performa->file) }}" target="_blank">Download File</a></td>
                             <td>{{ $performa->date }}</td>

@@ -30,7 +30,16 @@
                         <label for="title" class="form-label">Title</label>
                         <input type="text" name="title" class="form-control" id="title"
                                value="{{ old('title', $orm->title) }}" required>
-                    </div>
+                    </div><div class="mb-3">
+    <label for="type" class="form-label">Type</label>
+    <select name="type" id="type" class="form-control" required>
+        <option value="" disabled {{ old('type', $orm->type) ? '' : 'selected' }}>Select Type</option>
+        <option value="Type1" {{ old('type', $orm->type) == 'Type1' ? 'selected' : '' }}>Type1</option>
+        <option value="Type2" {{ old('type', $orm->type) == 'Type2' ? 'selected' : '' }}>Type2</option>
+        <option value="Type3" {{ old('type', $orm->type) == 'Type3' ? 'selected' : '' }}>Type3</option>
+        <!-- Add more options as needed -->
+    </select>
+</div>
 
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
