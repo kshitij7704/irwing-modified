@@ -95,7 +95,7 @@
 <main class="main">
     <div class="page-header text-center" style="background-image: url('{{ asset('front/assets/images/page-header-bg.jpg') }}')">
         <div class="container">
-            <h1 class="page-title">Press Releases</h1>
+            <h1 class="page-title">All Releases</h1>
         </div>
     </div>
 
@@ -105,11 +105,14 @@
         <div class="filters-wrapper">
             <div class="row">
                 <div class="col-md-4">
-                    <label for="ministrySearch">Search Ministry</label>
-                    <input type="text" id="ministrySearch" class="form-control" placeholder="Type ministry name...">
+                    <label for="ministryFilter">Ministry</label>
+                    <select id="ministryFilter" class="form-control">
+                        <option value="">All Ministry</option>
+                        @foreach($ministries as $ministry)
+                            <option value="{{ $ministry }}">{{ $ministry }}</option>
+                        @endforeach
+                    </select>
                 </div>
-
-
                 <div class="col-md-4">
                     <label for="dateFilter">Date</label>
                     <input type="date" id="dateFilter" class="form-control">
@@ -151,54 +154,55 @@
     </div>
 </main>
 
-<script>const ministryInput = document.getElementById('ministrySearch');
-const dateInput = document.getElementById('dateFilter');
-const clearBtn = document.getElementById('clearFilters');
-const releaseCountEl = document.getElementById('releaseCount');
+<script>
+    const ministrySelect = document.getElementById('ministryFilter');
+    const dateInput = document.getElementById('dateFilter');
+    const clearBtn = document.getElementById('clearFilters');
+    const releaseCountEl = document.getElementById('releaseCount');
 
-ministryInput.addEventListener('input', filterPress);
-dateInput.addEventListener('change', filterPress);
-clearBtn.addEventListener('click', () => {
-    ministryInput.value = '';
-    dateInput.value = '';
-    filterPress();
-});
-
-function filterPress() {
-    let ministry = ministryInput.value.toLowerCase();
-    let date = dateInput.value;
-
-    let totalVisible = 0;
-
-    document.querySelectorAll('.ministry-block').forEach(block => {
-        let blockName = block.dataset.ministry.toLowerCase();
-        let blockMatch = ministry === '' || blockName.includes(ministry);
-
-        let items = block.querySelectorAll('.press-item');
-        let visibleCount = 0;
-
-        items.forEach(item => {
-            let itemMinistry = item.dataset.ministry.toLowerCase();
-            let itemDate = item.dataset.date;
-
-            let matchMinistry = ministry === '' || itemMinistry.includes(ministry);
-            let matchDate = date === '' || itemDate === date;
-
-            if (matchMinistry && matchDate) {
-                item.style.display = '';
-                visibleCount++;
-            } else {
-                item.style.display = 'none';
-            }
-        });
-
-        block.style.display = (blockMatch && visibleCount > 0) ? '' : 'none';
-        totalVisible += visibleCount;
+    ministrySelect.addEventListener('change', filterPress);
+    dateInput.addEventListener('change', filterPress);
+    clearBtn.addEventListener('click', () => {
+        ministrySelect.value = '';
+        dateInput.value = '';
+        filterPress();
     });
 
-    releaseCountEl.textContent = totalVisible;
-}
+    function filterPress() {
+        let ministry = ministrySelect.value.toLowerCase();
+        let date = dateInput.value;
 
+        let totalVisible = 0;
+
+        document.querySelectorAll('.ministry-block').forEach(block => {
+            let blockName = block.dataset.ministry.toLowerCase();
+            let blockMatch = ministry === '' || blockName === ministry;
+
+            let items = block.querySelectorAll('.press-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                let itemMinistry = item.dataset.ministry.toLowerCase();
+                let itemDate = item.dataset.date;
+
+                let matchMinistry = ministry === '' || itemMinistry === ministry;
+                let matchDate = date === '' || itemDate === date;
+
+                if (matchMinistry && matchDate) {
+                    item.style.display = '';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            block.style.display = (blockMatch && visibleCount > 0) ? '' : 'none';
+
+            totalVisible += visibleCount;
+        });
+
+        releaseCountEl.textContent = totalVisible;
+    }
 </script>
 
 @endsection

@@ -109,29 +109,6 @@
                 </div>
             </div>
 
-            {{-- Delete Account --}}
-            <div class="card">
-                <h5 class="card-header">Delete Account</h5>
-                <div class="card-body">
-                    <form method="POST" action="">
-                        @csrf
-                        @method('DELETE')
-                        <div class="alert alert-warning">
-                            <h5 class="alert-heading mb-1">Are you sure you want to delete your account?</h5>
-                            <p class="mb-0">Once you delete your account, there is no going back.</p>
-                        </div>
-                        <div class="form-check my-3">
-                            <input class="form-check-input" type="checkbox" id="confirmDelete"
-                                onclick="document.querySelector('.deactivate-account').disabled = !this.checked;">
-                            <label class="form-check-label" for="confirmDelete">I confirm my account
-                                deactivation</label>
-                        </div>
-                        <button type="submit" class="btn btn-danger deactivate-account" disabled>Deactivate
-                            Account</button>
-                    </form>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
