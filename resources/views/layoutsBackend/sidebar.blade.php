@@ -408,7 +408,7 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-shield-lock"></i>
-                <div data-i18n="Backend Pages">Frontend Pages</div>
+                <div data-i18n="Backend Pages">Backend Pages</div>
             </a>
             <ul class="menu-sub">
                 @roleCan('roles.view')
@@ -420,60 +420,54 @@
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('brochures.index')}}" class="menu-link">
-                        <div data-i18n="Brochures">Brochures</div>
+                    <a href="{{route('admin.units.index')}}" class="menu-link">
+                        <div data-i18n="Units">Units</div>
                     </a>
                 </li>
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('promotional_videos.index')}}" class="menu-link">
-                        <div data-i18n="Promotional Videos">Promotional Videos</div>
+                    <a href="{{route('admin.unit-offices.index')}}" class="menu-link">
+                        <div data-i18n="Unit Offices">Unit Offices</div>
                     </a>
                 </li>
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('international_forms.index')}}" class="menu-link">
-                        <div data-i18n="International Forms">International Forms</div>
+                    <a href="{{route('countries.index')}}" class="menu-link">
+                        <div data-i18n="Divisions">Divisions</div>
                     </a>
                 </li>
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('meeting-calendars.index')}}" class="menu-link">
-                        <div data-i18n="Meeting Calendars">Meeting Calendars</div>
+                    <a href="{{route('countries.index')}}" class="menu-link">
+                        <div data-i18n="Designations">Designations</div>
                     </a>
                 </li>
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('sliders.index')}}" class="menu-link">
-                        <div data-i18n="Sliders">Sliders</div>
+                    <a href="{{route('agencies.index')}}" class="menu-link">
+                        <div data-i18n="Agencies">Agencies</div>
                     </a>
                 </li>
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('minister-messages.index')}}" class="menu-link">
-                        <div data-i18n="Minister Messages">Minister Messages</div>
+                    <a href="{{route('countries.index')}}" class="menu-link">
+                        <div data-i18n="Itu Sectors">Itu Sectors</div>
                     </a>
                 </li>
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('press-releases.index')}}" class="menu-link">
-                        <div data-i18n="Press Releases">Press Releases</div>
+                    <a href="{{route('countries.index')}}" class="menu-link">
+                        <div data-i18n="Itu Sectors Groups">Itu Sectors Groups</div>
                     </a>
                 </li>
                 @endroleCan
-                @roleCan('roles.view')
-                <li class="menu-item">
-                    <a href="{{route('achievements.index')}}" class="menu-link">
-                        <div data-i18n="Achievements">Achievements</div>
-                    </a>
-                </li>
-                @endroleCan
+                
             </ul>
         </li>
         @endroleCanAny

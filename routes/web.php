@@ -21,6 +21,8 @@ use App\Http\Controllers\PressReleaseController;
 use App\Http\Controllers\TourReportController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\AgencyController;
+use App\Http\Controllers\Backend\UnitOfficeController;
 use Laravel\Fortify\Features;
 
 
@@ -138,6 +140,11 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
 
 
         Route::resource('countries', CountryController::class);
+        Route::resource('agencies', AgencyController::class);
+        Route::prefix('admin')->name('admin.')->group(function () {
+            Route::resource('units', \App\Http\Controllers\Backend\UnitController::class);
+            Route::resource('unit-offices', UnitOfficeController::class);
+        });
 
 
     });

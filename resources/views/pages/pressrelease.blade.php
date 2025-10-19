@@ -105,8 +105,8 @@
         <div class="filters-wrapper">
             <div class="row">
                 <div class="col-md-4">
-                    <label for="ministrySearch">Search Ministry</label>
-                    <input type="text" id="ministrySearch" class="form-control" placeholder="Type ministry name...">
+                    <label for="ministrySearch">Search </label>
+                    <input type="text" id="ministrySearch" class="form-control" placeholder="Type name...">
                 </div>
 
 
@@ -151,28 +151,28 @@
     </div>
 </main>
 
-<script>const ministryInput = document.getElementById('ministrySearch');
+<script>const searchInput = document.getElementById('ministrySearch');
 const dateInput = document.getElementById('dateFilter');
 const clearBtn = document.getElementById('clearFilters');
 const releaseCountEl = document.getElementById('releaseCount');
 
-ministryInput.addEventListener('input', filterPress);
+searchInput.addEventListener('input', filterPress);
 dateInput.addEventListener('change', filterPress);
 clearBtn.addEventListener('click', () => {
-    ministryInput.value = '';
+    searchInput.value = '';
     dateInput.value = '';
     filterPress();
 });
 
 function filterPress() {
-    let ministry = ministryInput.value.toLowerCase();
-    let date = dateInput.value;
+    const query = searchInput.value.toLowerCase().trim();
+    const selectedDate = dateInput.value;
 
     let totalVisible = 0;
 
     document.querySelectorAll('.ministry-block').forEach(block => {
         let blockName = block.dataset.ministry.toLowerCase();
-        let blockMatch = ministry === '' || blockName.includes(ministry);
+        let blockMatches = query === '' || blockName.includes(query);
 
         let items = block.querySelectorAll('.press-item');
         let visibleCount = 0;
@@ -181,10 +181,10 @@ function filterPress() {
             let itemMinistry = item.dataset.ministry.toLowerCase();
             let itemDate = item.dataset.date;
 
-            let matchMinistry = ministry === '' || itemMinistry.includes(ministry);
-            let matchDate = date === '' || itemDate === date;
+            let matchesText = query === '' || itemMinistry.includes(query);
+            let matchesDate = selectedDate === '' || itemDate === selectedDate;
 
-            if (matchMinistry && matchDate) {
+            if (matchesText && matchesDate) {
                 item.style.display = '';
                 visibleCount++;
             } else {
@@ -192,12 +192,13 @@ function filterPress() {
             }
         });
 
-        block.style.display = (blockMatch && visibleCount > 0) ? '' : 'none';
+        block.style.display = (blockMatches && visibleCount > 0) ? '' : 'none';
         totalVisible += visibleCount;
     });
 
     releaseCountEl.textContent = totalVisible;
 }
+
 
 </script>
 
