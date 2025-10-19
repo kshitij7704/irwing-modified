@@ -680,7 +680,7 @@
     }
 
     .social-media-scroll-container {
-        height: 550px;
+        height: 650px;
         overflow: hidden;
         position: relative;
         background: white;
