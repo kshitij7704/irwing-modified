@@ -1,4 +1,3 @@
-<!-- Indian Flag Gradient Bar -->
 <div style="width: 100%; height: 8px; background: linear-gradient(to right, #FF9933 0%, #FF9933 33%, #FFFFFF 33%, #FFFFFF 66%, #138808 66%, #138808 100%); box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: block;"></div>
 
 <header class="header government-header">
@@ -209,6 +208,71 @@
             padding-left: 24px;
         }
 
+        /* Sub-menu styles */
+        .nav-sub-item {
+            position: relative;
+        }
+
+        .nav-sub-link {
+            display: block;
+            padding: 10px 16px;
+            color: #333;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-sub-link:hover {
+            background: #4a90e2;
+            color: white;
+            padding-left: 24px;
+        }
+
+        .nav-sub-dropdown {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background: #4a90e2;
+            min-width: 250px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* ===== FIX APPLIED HERE ===== */
+        .nav-sub-item:hover > .nav-sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        /* ============================ */
+
+        .nav-sub-dropdown a {
+            display: block;
+            padding: 10px 16px;
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-sub-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-sub-dropdown a:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding-left: 24px;
+        }
+
         .mobile-menu-toggle {
             display: none;
             background: none;
@@ -295,6 +359,45 @@
                 color: white;
                 padding-left: 48px;
             }
+
+            /* Mobile sub-menu styles */
+            .nav-sub-item {
+                position: static;
+            }
+
+            .nav-sub-link {
+                color: white;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding-left: 40px;
+            }
+
+            .nav-sub-link:hover {
+                background: rgba(255,255,255,0.1);
+                color: white;
+                padding-left: 48px;
+            }
+
+            .nav-sub-dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(255,255,255,0.1);
+                margin: 0;
+            }
+
+            .nav-sub-dropdown a {
+                color: white;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding-left: 60px;
+            }
+
+            .nav-sub-dropdown a:hover {
+                background: rgba(255,255,255,0.1);
+                color: white;
+                padding-left: 68px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -341,7 +444,6 @@
         }
     </style>
 
-    <!-- Top Utility Bar -->
     <div class="header-top">
         <div class="container">
             <div class="utility-left">
@@ -364,13 +466,12 @@
         </div>
     </div>
 
-    <!-- Main Government Header -->
     <div class="header-main">
         <div class="container">
             <div class="govt-left">
                 <a href="{{url('/')}}">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
-                        alt="Government of India Emblem" class="govt-emblem">
+                         alt="Government of India Emblem" class="govt-emblem">
                 </a>
                 <div class="govt-title">
                     <h1>भारत सरकार GOVERNMENT OF INDIA</h1>
@@ -389,7 +490,6 @@
         </div>
     </div>
 
-    <!-- Navigation Menu -->
     <div class="header-nav">
         <div class="container">
             <nav class="main-nav">
@@ -424,7 +524,49 @@
 
                             <a href="{{url('orms')}}">IR Wing OMs</a>
                             {{-- <a href="{{url('achivements')}}">Achievements</a> --}}
-                            <a href="{{url('internation-forums')}}">International Forums</a>
+                            <div class="nav-sub-item">
+                                <a href="#" class="nav-sub-link">International Forums <i class="bi bi-chevron-right"></i></a>
+                                <div class="nav-sub-dropdown">
+                                                                        <div class="nav-sub-item">
+                                        <a href="#" class="nav-sub-link">ITU-T <i class="bi bi-chevron-right"></i></a>
+                                        <div class="nav-sub-dropdown">
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg21') }}">NWG 21</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg2') }}">NWG 2</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg3') }}">NWG 3</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg5') }}">NWG 5</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg9') }}">NWG 9</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg11') }}">NWG 11</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg12') }}">NWG 12</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg13') }}">NWG 13</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg15') }}">NWG 15</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg16') }}">NWG 16</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg17') }}">NWG 17</a>
+                                            <a href="{{ url('internation-forums?section=itu-t&sub=nwg20') }}">NWG 20</a>
+                                        </div>
+                                    </div>
+                                    <div class="nav-sub-item">
+                                        <a href="#" class="nav-sub-link">ITU-R <i class="bi bi-chevron-right"></i></a>
+                                        <div class="nav-sub-dropdown">
+                                            <a href="{{ url('internation-forums?section=itu-r&sub=npc-wrc') }}">NPC WRC</a>
+                                            <a href="{{ url('internation-forums?section=itu-r&sub=nsg1') }}">NSG 1</a>
+                                            <a href="{{ url('internation-forums?section=itu-r&sub=nsg2') }}">NSG 2</a>
+                                            <a href="{{ url('internation-forums?section=itu-r&sub=nsg3') }}">NSG 3</a>
+                                            <a href="{{ url('internation-forums?section=itu-r&sub=nsg4') }}">NSG 4</a>
+                                            <a href="{{ url('internation-forums?section=itu-r&sub=nsg5') }}">NSG 5</a>
+                                            <a href="{{ url('internation-forums?section=itu-r&sub=nsg6') }}">NSG 6</a>
+                                            <a href="{{ url('internation-forums?section=itu-r&sub=nsg7') }}">NSG 7</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="nav-sub-item">
+                                        <a href="#" class="nav-sub-link">ITU-D <i class="bi bi-chevron-right"></i></a>
+                                        <div class="nav-sub-dropdown">
+                                            <a href="{{ url('internation-forums?section=itu-d&sub=sg1') }}">Study Group 1</a>
+                                            <a href="{{ url('internation-forums?section=itu-d&sub=sg2') }}">Study Group 2</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </li>
                     <li class="nav-item">

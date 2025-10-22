@@ -143,7 +143,9 @@ class HomeController extends Controller
         } catch (\Exception $e) {
             $InternationalForm = collect([]);
         }
-        return view('pages.internationForums', compact('InternationalForm'));
+        $section = $request->get('section');
+        $sub = $request->get('sub');
+        return view('pages.internationForums', compact('InternationalForm', 'section', 'sub'));
     }
 
 }

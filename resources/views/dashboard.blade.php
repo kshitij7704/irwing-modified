@@ -2,6 +2,7 @@
 
 @section('content')
 <!-- $tourReport -->
+
 <div class="container-xxl flex-grow-1 container-p-y">
     {{-- Top Row of Summary Cards --}}
     <div class="row g-6 mb-6">
