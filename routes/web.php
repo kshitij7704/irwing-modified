@@ -25,6 +25,8 @@ use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\Backend\UnitOfficeController;
 use Laravel\Fortify\Features;
 
+Route::get('/tour-reports/importpview', [TourReportController::class, 'view']);
+Route::post('/tour-reports/import', [TourReportController::class, 'import'])->name('tour-reports.import');
 
 
 Route::get('/qrp/download-excel', [\App\Http\Controllers\QrpGenerationController::class, 'downloadExcel'])

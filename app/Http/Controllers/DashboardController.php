@@ -8,6 +8,7 @@ use App\Models\Profile;
 use App\Models\News;
 use App\Models\User;
 use App\Models\Blog;
+use App\Models\TourReport;
 use Auth;
 
 class DashboardController extends Controller
@@ -26,6 +27,8 @@ class DashboardController extends Controller
         // $news = News::count();
         // $users = User::count(); 
         // $blogs = Blog::count();
-        return view('dashboard');
+        
+        $tourReport = TourReport::with('user')->latest()->get();
+        return view('dashboard', compact('tourReport'));
     }
 }

@@ -20,6 +20,12 @@ class TourReportController extends Controller
         return view('tour_reports.index', compact('reports'));
 
     }
+    public function view()
+    {
+        $reports = TourReport::with('user')->latest()->get();
+        return view('tour_reports.view', compact('reports'));
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -190,5 +196,67 @@ public function store(Request $request)
         'purpose'      => $meeting->justification,
     ]);
 }
+
+public function import(Request $request)
+{
+    $request->validate([
+        'file' => 'required|mimes:csv,txt'
+    ]);
+
+    $file = fopen($request->file('file')->getRealPath(), 'r');
+    $header = fgetcsv($file);
+
+    $formatDate = function ($date) {
+        if (!$date) return null;
+        $date = trim($date);
+        $formats = ['d.m.Y', 'd/m/Y', 'Y-m-d', 'd-m-Y', 'm/d/Y'];
+        foreach ($formats as $format) {
+            $dt = \DateTime::createFromFormat($format, $date);
+            if ($dt) return $dt->format('Y-m-d');
+        }
+        $timestamp = strtotime($date);
+        return $timestamp ? date('Y-m-d', $timestamp) : null;
+    };
+
+    while (($row = fgetcsv($file)) !== false) {
+        // Convert all fields to UTF-8
+        $row = array_map(fn($value) => mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1'), $row);
+
+
+        TourReport::create([
+            'tour_id'          => $row[19] ?? null,
+            'year'             => $row[3] ?? null,
+            'staff_number'     => $row[7] ?? null,
+            'meeting_name'     => $row[4] ?? null,
+            'purpose'          => $row[20] ?? null,
+            'title'            => $row[8] ?? null,
+            'name'             => $row[1] ?? null,
+            'date_of_birth'    => $formatDate($row[9] ?? null),
+            'gender'           => $row[10] ?? null,
+            'designation'      => $row[2] ?? null,
+            'grade'            => $row[12] ?? null,
+            'level'            => $row[14] ?? null,
+            'equivalent_rank'  => $row[13] ?? null,
+            'country'          => $row[6] ?? null,
+            'city'             => $row[18] ?? null,
+            'from_date'        => $formatDate($row[16] ?? null),
+            'to_date'          => $formatDate($row[17] ?? null),
+            'cadre'            => $row[11] ?? null,
+            'sector'           => $row[22] ?? null,
+            'approval_status'  => $row[23] ?? null,
+            'vc_status'        => $row[24] ?? null,
+            'pc_status'        => $row[25] ?? null,
+            'scos_status'      => $row[26] ?? null,
+            'pmo_approval'     => $row[27] ?? null,
+            'tour_undertaken'  => $row[28] ?? null,
+            'office'           => $row[15] ?? null,
+        ]);
+    }
+
+    fclose($file);
+
+    return back()->with('success', 'CSV imported successfully with proper encoding and date formatting!');
+}
+
 
 }
