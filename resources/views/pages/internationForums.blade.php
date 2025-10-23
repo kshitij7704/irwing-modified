@@ -273,6 +273,16 @@
                 @endif
             @endif
         </div>
+
+        <div class="forum-content">
+                <!-- Overview Section -->
+                <div class="overview-section">
+                    <h3>Additional links</h3>
+                    <p><a href="#">link 1</a></p>
+                    <p><a href="#">link 1</a></p>
+                </div>
+        </div>
+
     </div>
 </div>
 

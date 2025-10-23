@@ -99,6 +99,7 @@
                     <thead>
                         <tr>
                             <th>S.No</th>
+                            <th>Type</th>
                             <th>Order / Circular Name</th>
                             <th>Date</th>
                         </tr>
@@ -107,6 +108,8 @@
                         @foreach($orms as $index => $orm)
                         <tr>
                             <td>{{ $index + 1 }}</td>
+                            <td>Ir wing Portal
+                            </td>
                             <td>
                                 <a href="{{ asset($orm->file) }}" target="_blank">
                                     {{ $orm->title }}

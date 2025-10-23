@@ -1592,152 +1592,126 @@
 
 <main class="main government-home" style="padding-top: 0;">
     <!-- Blue Banner Section - Split Layout -->
-    <section class="blue-banner-section">
-        <div class="container-fluid p-0">
-            <div class="banner-container">
-                <!-- Left side - Image -->
-                <div class="banner-image-side">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=face" alt="Prime Minister Meeting" id="mainBannerImage">
+   <section class="blue-banner-section">
+    <div class="container-fluid p-0">
+        <div class="banner-container">
+            <!-- Left side - Image -->
+            <div class="banner-image-side">
+                <img src="{{ $sliders->first() ? asset('storage/' . $sliders->first()->image) : asset('images/default.jpg') }}" 
+                     alt="Banner Image" id="mainBannerImage">
+            </div>
+
+            <!-- Right side - Content -->
+            <div class="banner-content-side">
+                <div class="banner-date">
+                    <i class="bi bi-calendar3"></i>
+                    <span id="bannerDate">{{ optional($sliders->first())->created_at ? $sliders->first()->created_at->format('F d, Y') : '' }}
+</span>
                 </div>
 
-                <!-- Right side - Content -->
-                <div class="banner-content-side">
-                    <div class="banner-date">
-                        <i class="bi bi-calendar3"></i>
-                        <span id="bannerDate">October 17, 2025</span>
+                <h1 class="banner-title-new" id="bannerTitle">
+                    {{ $sliders->first()->title ?? '' }}
+                </h1>
+
+                <div class="banner-navigation">
+                    <div class="nav-arrows">
+                        <button class="nav-arrow" onclick="previousSlide()">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button class="nav-arrow" onclick="togglePause()">
+                            <i class="bi bi-pause-fill" id="pauseIcon"></i>
+                        </button>
+                        <button class="nav-arrow" onclick="nextSlide()">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
                     </div>
+                    <a href="#updates" class="view-all-link">View All Updates</a>
+                </div>
 
-                    <h1 class="banner-title-new" id="bannerTitle">
-                        Prime Minister of Sri Lanka, H.E. Dr. Harini Amarasuriya called on Prime Minister Shri Narendra Modi in New Delhi
-                    </h1>
-
-                    <div class="banner-navigation">
-                        <div class="nav-arrows">
-                            <button class="nav-arrow" onclick="previousSlide()">
-                                <i class="bi bi-chevron-left"></i>
-                            </button>
-                            <button class="nav-arrow" onclick="togglePause()">
-                                <i class="bi bi-pause-fill" id="pauseIcon"></i>
-                            </button>
-                            <button class="nav-arrow" onclick="nextSlide()">
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
+                <div class="thumbnail-gallery">
+                    @foreach ($sliders as $index => $slider)
+                        <div class="thumbnail {{ $loop->first ? 'active' : '' }}" onclick="goToSlide({{ $index }})">
+                            <img src="{{ asset('storage/' . $slider->image) }}" alt="Thumbnail {{ $index + 1 }}">
                         </div>
-
-                        <a href="#updates" class="view-all-link">View All Updates</a>
-                    </div>
-
-                    <div class="thumbnail-gallery">
-                        <div class="thumbnail active" onclick="goToSlide(0)">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=76&fit=crop&crop=face" alt="Thumbnail 1">
-                        </div>
-                        <div class="thumbnail" onclick="goToSlide(1)">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=76&fit=crop" alt="Thumbnail 2">
-                        </div>
-                        <div class="thumbnail" onclick="goToSlide(2)">
-                            <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=100&h=76&fit=crop" alt="Thumbnail 3">
-                        </div>
-                        {{-- <div class="thumbnail" onclick="goToSlide(3)">
-                            <img src="https://images.unsplash.com/photo-1594736797933-d0601ba2fe65?w=100&h=76&fit=crop" alt="Thumbnail 4">
-                        </div> --}}
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <script>
-        let currentSlide = 0;
-        let isPaused = false;
-        let slideInterval;
+@php
+$slideData = $sliders->map(function($slider) {
+    return [
+        'image' => asset('storage/' . $slider->image),
+        'title' => $slider->title,
+        'date'  => $slider->created_at,
+    ];
+});
+@endphp
 
-        const slides = [
-            {
-                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=face",
-                date: "October 17, 2025",
-                title: "Prime Minister of Sri Lanka, H.E. Dr. Harini Amarasuriya called on Prime Minister Shri Narendra Modi in New Delhi"
-            },
-            {
-                image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=600&fit=crop",
-                date: "October 16, 2025",
-                title: "External Affairs Minister Dr. S. Jaishankar called on H.E. Mr. Geraldo Alckmin, Vice President of Brazil"
-            },
-            {
-                image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&h=600&fit=crop",
-                date: "October 15, 2025",
-                title: "India-Canada Diplomatic Relations: Important Updates on Trade and Security Cooperation"
-            },
-            // {
-            //     image: "https://images.unsplash.com/photo-1594736797933-d0601ba2fe65?w=800&h=600&fit=crop",
-            //     date: "October 14, 2025",
-            //     title: "International Conference on Digital Governance and Public Service Delivery"
-            // }
-        ];
+<script>
+    let currentSlide = 0;
+    let isPaused = false;
+    let slideInterval;
 
-        function updateSlide(index) {
-            const slide = slides[index];
-            document.getElementById('mainBannerImage').src = slide.image;
-            document.getElementById('bannerDate').textContent = slide.date;
-            document.getElementById('bannerTitle').textContent = slide.title;
+    const slides = @json($slideData);
 
-            // Update thumbnails
-            document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
-                thumb.classList.toggle('active', i === index);
-            });
-        }
+    function updateSlide(index) {
+        const slide = slides[index];
+        document.getElementById('mainBannerImage').src = slide.image;
+        document.getElementById('bannerDate').textContent = slide.date ?? '';
+        document.getElementById('bannerTitle').textContent = slide.title ?? '';
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateSlide(currentSlide);
-        }
+        document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+            thumb.classList.toggle('active', i === index);
+        });
+    }
 
-        function previousSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            updateSlide(currentSlide);
-        }
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlide(currentSlide);
+    }
 
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlide(currentSlide);
-        }
+    function previousSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlide(currentSlide);
+    }
 
-        function togglePause() {
-            const pauseIcon = document.getElementById('pauseIcon');
-            if (isPaused) {
-                isPaused = false;
-                pauseIcon.classList.remove('bi-play-fill');
-                pauseIcon.classList.add('bi-pause-fill');
-                startAutoSlide();
-            } else {
-                isPaused = true;
-                pauseIcon.classList.remove('bi-pause-fill');
-                pauseIcon.classList.add('bi-play-fill');
-                clearInterval(slideInterval);
-            }
-        }
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlide(currentSlide);
+    }
 
-        function startAutoSlide() {
-            slideInterval = setInterval(() => {
-                if (!isPaused) {
-                    nextSlide();
-                }
-            }, 4000);
-        }
-
-        // Initialize auto-slide
-        startAutoSlide();
-
-        // Pause on hover
-        document.querySelector('.blue-banner-section').addEventListener('mouseenter', () => {
+    function togglePause() {
+        const pauseIcon = document.getElementById('pauseIcon');
+        if (isPaused) {
+            isPaused = false;
+            pauseIcon.classList.remove('bi-play-fill');
+            pauseIcon.classList.add('bi-pause-fill');
+            startAutoSlide();
+        } else {
+            isPaused = true;
+            pauseIcon.classList.remove('bi-pause-fill');
+            pauseIcon.classList.add('bi-play-fill');
             clearInterval(slideInterval);
-        });
+        }
+    }
 
-        document.querySelector('.blue-banner-section').addEventListener('mouseleave', () => {
-            if (!isPaused) {
-                startAutoSlide();
-            }
-        });
-    </script>
+    function startAutoSlide() {
+        slideInterval = setInterval(() => {
+            if (!isPaused) nextSlide();
+        }, 4000);
+    }
+
+    startAutoSlide();
+
+    document.querySelector('.blue-banner-section').addEventListener('mouseenter', () => clearInterval(slideInterval));
+    document.querySelector('.blue-banner-section').addEventListener('mouseleave', () => {
+        if (!isPaused) startAutoSlide();
+    });
+</script>
+
 
     <!-- Cool Access Bar -->
     {{-- <section class="access-bar">
@@ -1759,7 +1733,7 @@
                 <br></br>
                 <!-- Left Sidebar - Ministers -->
                 <div class="ministers-sidebar">
-                    <div class="minister-card" onclick="window.location.href='/message/moc'" style="cursor: pointer;">
+                    <!-- <div class="minister-card" onclick="window.location.href='/message/moc'" style="cursor: pointer;">
                         <div class="card-title">Message from Hon'ble MoC</div>
                         <div class="minister-photo">
                             <img src="{{asset('images/j.png')}}" alt="Minister">
@@ -1769,11 +1743,6 @@
                         <div class="minister-message">
                             <p>Welcome to the Department of Telecommunications. Our commitment is to ensure seamless digital connectivity for every citizen of India. Through innovative programs, improved infrastructure, and technology-driven policies...</p>
                         </div>
-                        {{-- <div class="minister-social">
-                            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-                        </div> --}}
                     </div>
 
                     <div class="minister-card" onclick="window.location.href='/message/smoc'" style="cursor: pointer;">
@@ -1786,13 +1755,26 @@
                         <div class="minister-message">
                             <p>Innovation in telecommunications is key to bridging the digital divide. We are working tirelessly to ensure every citizen has access to quality communication services and emerging technologies.</p>
                         </div>
-                        {{-- <div class="minister-social">
-                            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-                        </div> --}}
                     </div>
-                </div>                <!-- Right Content Area -->
+                </div>      -->
+                
+
+    @foreach ($ministers as $minister)
+        <div class="minister-card" onclick="window.location.href='/message/{{ $minister->id }}'" style="cursor: pointer;">
+            <div class="card-title">{{ $minister->title }}</div>
+            <div class="minister-photo">
+                <img src="{{ asset('storage/' . $minister->photo) }}" alt="{{ $minister->minister_name }}">
+            </div>
+            <div class="minister-name">{{ $minister->postion }}</div>
+            <div class="minister-title">{{ $minister->minister_name }}</div>
+            <div class="minister-message">
+                <p>{{ Str::limit($minister->message, 180, '...') }}</p>
+            </div>
+        </div>
+    @endforeach
+</div>         
+                
+                <!-- Right Content Area -->
                 <div class="content-area">
                     <!-- Single Tab Header -->
                     <div class="content-tabs">

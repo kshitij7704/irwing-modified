@@ -401,6 +401,13 @@
                     </a>
                 </li>
                 @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('achievements.index')}}" class="menu-link">
+                        <div data-i18n="Social Media">Social Media</div>
+                    </a>
+                </li>
+                @endroleCan
             </ul>
         </li>
         @endroleCanAny

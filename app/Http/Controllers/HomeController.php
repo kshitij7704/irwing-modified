@@ -21,17 +21,18 @@ class HomeController extends Controller
         try {
             $events = MeetingCalendar::select('title', 'date', 'color')->get();
             $ministerMessages = MinisterMessage::all();
-            $Orm = MinisterMessage::latest(3);
+            
+        $ministers = MinisterMessage::all();
             $sliders = \App\Models\Slider::where('status', true)->get();
         } catch (\Exception $e) {
             // Handle database connection issues
             $events = collect([]);
             $ministerMessages = collect([]);
-            $Orm = collect([]);
+            $ministers = collect([]);
             $sliders = collect([]);
         }
 
-        return view('pages.main', compact('events','ministerMessages','sliders'));
+        return view('pages.main', compact('events','ministerMessages','sliders','ministers'));
     }
 
     public function orms(Request $request)
@@ -94,20 +95,11 @@ class HomeController extends Controller
         }
         return view('pages.tweets', compact('orms'));
     }
-    public function message(Request $request, $minister = 'moc')
+    public function message(Request $request, $id)
     {
-        try {
-            $orms = Orm::all(); // fetch all records
-        } catch (\Exception $e) {
-            $orms = collect([]);
-        }
 
-        // Validate minister parameter
-        if (!in_array($minister, ['moc', 'smoc'])) {
-            abort(404);
-        }
-
-        return view('pages.message', compact('orms', 'minister'));
+        $minister = MinisterMessage::find($id);
+        return view('pages.message', compact('minister'));
     }
     public function structure(Request $request)
     {

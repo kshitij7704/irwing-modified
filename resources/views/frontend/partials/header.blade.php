@@ -510,7 +510,7 @@
                             {{-- <a href="{{ url('message') }}">Message from Hon'ble MoC</a> --}}
                             <a href="{{ url('role-ir') }}">Role of IR Wing</a>
                             {{-- <a href="{{url('structure')}}">Organization Structure</a> --}}
-                            <a href="{{url('contact-us')}}">Contact Information</a>
+                            <a href="{{url('contact-us')}}">Contact Us</a>
                         </div>
                     </li>
 
@@ -580,12 +580,32 @@
                             <a href="{{url('brouches')}}">Brochures</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            International Forums <i class="bi bi-chevron-down"></i>
+                        </a>
+                        @php
+
+                        $internationalForm = App\Models\InternationalForm::get();
+                        @endphp
+                        <div class="nav-dropdown">
+                            @foreach($internationalForm as $form)
+                            <a href="{{ url('internation-forums?section=itu-r&sub=npc-wrc') }}">{{$form->title}}</a>
+                            @endforeach
+                        </div>
+                    </li>
                     {{-- <li class="nav-item">
                         <a href="#" class="nav-link">
                             Telecom Policies <i class="bi bi-chevron-down"></i>
                         </a>
+                        @php
+
+                        $internationalForm = App\Models\InternationalForm::get();
+                        @endphp
                         <div class="nav-dropdown">
-                            <a href="#">National Telecom Policy</a>
+                            @foreach($internationalForm as $form)
+                            <a href="#">{{$form->title}}</a>
+                            @endforeach
                             <a href="#">Broadband Policy</a>
                             <a href="#">Spectrum Policy</a>
                             <a href="#">Digital India</a>

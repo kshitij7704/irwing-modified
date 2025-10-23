@@ -115,22 +115,7 @@
 
     <div class="page-content container">
         <!-- Minister Section -->
-        @if($minister == 'moc')
-        <div class="minister-section">
-            <div class="minister-image">
-                <img src="https://dot.gov.in/sites/default/files/styles/150_150/public/Mr%20Scindia3.jpg?itok=bRZ_YU_p" alt="Minister of Communication">
-            </div>
-            <div class="minister-content">
-                <div class="minister-name">Shri Jyotiraditya M Scindia</div>
-                <div class="minister-designation">Hon'ble Minister of Communications, Government of India</div>
-                <div class="minister-message">
-                    <p>Welcome to the Department of Telecommunications. Our commitment is to ensure seamless digital connectivity for every citizen of India. Through innovative programs, improved infrastructure, and technology-driven policies, we aim to bridge the digital divide and empower all communities with access to modern communication services.</p>
-                    <p>The department has achieved significant milestones in expanding broadband networks, enhancing mobile connectivity, and promoting rural telecommunication accessibility. We remain dedicated to fostering innovation, transparency, and efficiency in our initiatives for the nation's progress.</p>
-                    <p>I encourage everyone to explore our programs, initiatives, and achievements, and join us in building a digitally inclusive India.</p>
-                </div>
-            </div>
-        </div>
-        @else
+        
         <div class="minister-section">
             <div class="minister-image">
                 <img src="{{asset('images/p.png')}}" alt="Senior Minister of State for Communications">
@@ -144,9 +129,8 @@
                     <p>I invite you to engage with our vision and contribute to building a robust and inclusive digital ecosystem for India's future.</p>
                 </div>
             </div>
-        </div>
-        @endif        <!-- Cards / Tabs Section -->
-        <div class="cards-section row mt-5">
+        </div>      <!-- Cards / Tabs Section -->
+        <!-- <div class="cards-section row mt-5">
             <div class="col-md-6">
                 <div class="card-tab">
                     <div class="card-body">
@@ -190,7 +174,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </main>
