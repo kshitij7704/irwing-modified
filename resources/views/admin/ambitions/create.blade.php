@@ -1,25 +1,20 @@
 @extends('layoutsBackend.app')
 
 @section('content')
-<div class="container">
-    <h1>Create International Form</h1>
+<div class="container mt-4">
+    <h2>Add Ambition</h2>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <form action="{{ route('international_forms.store') }}" method="POST">
+    <form action="{{ route('ambitions.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
-            <label>Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" name="image" class="form-control">
         </div>
 
         <div class="mb-3">
@@ -28,8 +23,11 @@
         </div>
 
         <div class="mb-3">
-            <label>URL</label>
-            <input type="url" name="url" class="form-control" value="{{ old('url') }}">
+            <label for="status" class="form-label">Status</label>
+            <select name="status" class="form-control">
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>

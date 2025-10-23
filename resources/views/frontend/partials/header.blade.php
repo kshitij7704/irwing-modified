@@ -524,7 +524,7 @@
 
                             <a href="{{url('orms')}}">IR Wing OMs</a>
                             {{-- <a href="{{url('achivements')}}">Achievements</a> --}}
-                            <div class="nav-sub-item">
+                            <!-- <div class="nav-sub-item">
                                 <a href="#" class="nav-sub-link">International Forums <i class="bi bi-chevron-right"></i></a>
                                 <div class="nav-sub-dropdown">
                                                                         <div class="nav-sub-item">
@@ -566,7 +566,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </li>
                     <li class="nav-item">
@@ -590,7 +590,7 @@
                         @endphp
                         <div class="nav-dropdown">
                             @foreach($internationalForm as $form)
-                            <a href="{{ url('internation-forums?section=itu-r&sub=npc-wrc') }}">{{$form->title}}</a>
+                            <a href="{{ url('internation-forums/'.$form->id) }}">{{$form->title}}</a>
                             @endforeach
                         </div>
                     </li>

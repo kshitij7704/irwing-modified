@@ -8,6 +8,7 @@ use App\Models\MeetingCalendar;
 use App\Models\MinisterMessage;
 use App\Models\Orm;
 use App\Models\Brochure;
+use App\Models\Ambition;
 use App\Models\InternationalForm;
 use App\Models\PromotionalVideo;
 use Illuminate\Http\Request;
@@ -22,8 +23,10 @@ class HomeController extends Controller
             $events = MeetingCalendar::select('title', 'date', 'color')->get();
             $ministerMessages = MinisterMessage::all();
             
-        $ministers = MinisterMessage::all();
+            $ministers = MinisterMessage::all();
             $sliders = \App\Models\Slider::where('status', true)->get();
+        $engagements = \App\Models\Engagement::where('status', 1)->get();
+        $ambition = Ambition::latest()->first();
         } catch (\Exception $e) {
             // Handle database connection issues
             $events = collect([]);
@@ -32,7 +35,7 @@ class HomeController extends Controller
             $sliders = collect([]);
         }
 
-        return view('pages.main', compact('events','ministerMessages','sliders','ministers'));
+        return view('pages.main', compact('events','ministerMessages','sliders','ministers','ambition','engagements'));
     }
 
     public function orms(Request $request)
@@ -128,10 +131,10 @@ class HomeController extends Controller
         }
         return view('pages.roleir', compact('orms'));
     }
-    public function internationForums(Request $request)
+    public function internationForums(Request $request, $id)
     {
         try {
-            $InternationalForm = InternationalForm::all(); // fetch all records
+            $InternationalForm = InternationalForm::find($id); // fetch all records
         } catch (\Exception $e) {
             $InternationalForm = collect([]);
         }

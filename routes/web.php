@@ -62,7 +62,7 @@ Route::PUT('/profiles/update', [App\Http\Controllers\ProfileController::class, '
  Route::get('social-media', [HomeController::class, 'tweets'])->name('tweets');
  Route::get('orms', [HomeController::class, 'orms'])->name('orms');
  Route::get('achivements', [HomeController::class, 'achivements'])->name('achivements');
- Route::get('internation-forums', [HomeController::class, 'internationForums'])->name('internationForums');
+ Route::get('internation-forums/{id}', [HomeController::class, 'internationForums'])->name('internationForums');
  Route::get('message/{id}', [HomeController::class, 'message'])->name('message');
  Route::get('role-ir', [HomeController::class, 'roleir'])->name('role-ir');
  Route::get('structure', [HomeController::class, 'structure'])->name('structure');
@@ -139,6 +139,10 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
         Route::resource('minister-messages', MinisterMessageController::class);
         Route::resource('press-releases', PressReleaseController::class);
         Route::resource('achievements', AchievementController::class);
+        Route::resource('engagements', App\Http\Controllers\EngagementController::class);
+
+        Route::resource('ambitions', App\Http\Controllers\AmbitionController::class);
+
 
 
         Route::resource('countries', CountryController::class);

@@ -19,8 +19,8 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
                             <th>Type</th>
+                            <th>Title</th>
                             <th>Pdf</th>
                             <th>Date</th>
                             <th>Actions</th>

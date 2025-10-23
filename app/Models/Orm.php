@@ -10,6 +10,7 @@ class Orm extends Model
     protected $fillable = [
         'title',
         'date',
+        'type',
         'file',
     ];
 }

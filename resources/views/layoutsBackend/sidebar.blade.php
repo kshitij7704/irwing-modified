@@ -408,6 +408,20 @@
                     </a>
                 </li>
                 @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('engagements.index')}}" class="menu-link">
+                        <div data-i18n="Engagements">Engagements</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('ambitions.index')}}" class="menu-link">
+                        <div data-i18n="Ambitions">Ambitions</div>
+                    </a>
+                </li>
+                @endroleCan
             </ul>
         </li>
         @endroleCanAny

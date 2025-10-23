@@ -207,81 +207,24 @@
         </div>
 
         <h1 class="forum-header">
-            @if($sub)
-                @if($sub == 'npc-wrc')
-                    NPC WRC
-                @elseif(str_starts_with($sub, 'nsg'))
-                    NSG {{ str_replace('nsg', '', $sub) }}
-                @elseif(str_starts_with($sub, 'nwg'))
-                    NWG {{ str_replace('nwg', '', $sub) }}
-                @elseif(str_starts_with($sub, 'sg'))
-                    Study Group {{ str_replace('sg', '', $sub) }}
-                @else
-                    {{ ucfirst(str_replace('-', ' ', $sub)) }}
-                @endif
-            @else
-                International Forums
-            @endif
+            {{$InternationalForm->title}}
         </h1>
 
         <div class="forum-content">
-            @if(!$section)
                 <!-- Overview Section -->
                 <div class="overview-section">
                     <h3>Welcome to International Forums</h3>
-                    <p>Select a section from the navigation menu above to view detailed information about ITU activities and working groups.</p>
+                    <p>{!! $InternationalForm->description !!}</p>
                 </div>
-            @elseif($section == 'itu-d')
-                @if($sub == 'sg1')
-                    @include('pages.forum-content.itu-d-sg1')
-                @elseif($sub == 'sg2')
-                    @include('pages.forum-content.itu-d-sg2')
-                @else
-                    <div class="content-section">
-                        <h4>ITU-D (Development Sector)</h4>
-                        <p>The ITU Development Sector (ITU-D) is responsible for assisting developing countries in harnessing the full potential of ICTs.</p>
-                    </div>
-                @endif
-            @elseif($section == 'itu-r')
-                @if($sub == 'npc-wrc')
-                    <div class="content-section">
-                        <h4>NPC WRC</h4>
-                        <p>Content for NPC WRC will be added here.</p>
-                    </div>
-                @elseif(str_starts_with($sub, 'nsg'))
-                    <div class="content-section">
-                        <h4>{{ strtoupper($sub) }}</h4>
-                        <p>Content for {{ strtoupper($sub) }} will be added here.</p>
-                    </div>
-                @else
-                    <div class="content-section">
-                        <h4>ITU-R (Radiocommunication Sector)</h4>
-                        <p>The ITU Radiocommunication Sector (ITU-R) is responsible for radio communication services and systems.</p>
-                    </div>
-                @endif
-            @elseif($section == 'itu-t')
-                @if(str_starts_with($sub, 'nwg'))
-                    <div class="content-section">
-                        <h4>{{ strtoupper($sub) }}</h4>
-                        <p>Content for {{ strtoupper($sub) }} will be added here.</p>
-                    </div>
-                @else
-                    <div class="content-section">
-                        <h4>ITU-T (Telecommunication Standardization Sector)</h4>
-                        <p>The ITU Telecommunication Standardization Sector (ITU-T) develops international standards for telecommunications.</p>
-                    </div>
-                @endif
-            @endif
         </div>
 
-        <div class="forum-content">
-                <!-- Overview Section -->
+        <!-- <div class="forum-content">
                 <div class="overview-section">
                     <h3>Additional links</h3>
                     <p><a href="#">link 1</a></p>
                     <p><a href="#">link 1</a></p>
                 </div>
-        </div>
+        </div> -->
 
     </div>
 </div>

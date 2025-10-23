@@ -1,65 +1,64 @@
 @extends('layoutsBackend.app')
 
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <div class="col-md-8 mx-auto">
-        <div class="card">
-            <h5 class="card-header">Edit Promotional Video</h5>
-            <div class="card-body">
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
+<div class="container">
+    <h1>Edit International Form</h1>
 
-                @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-              <form action="{{ route('promotional_videos.update', $promotionalVideo->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('international_forms.update', $internationalForm->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <div class="mb-3">
-            <label>Category</label>
-            <input type="text" name="category" class="form-control" value="{{ $promotionalVideo->category }}">
-        </div>
-        <div class="mb-3">
-            <label>Title *</label>
-            <input type="text" name="title" class="form-control" value="{{ $promotionalVideo->title }}" required>
-        </div>
-        <div class="mb-3">
-            <label>Description</label>
-            <textarea name="description" class="form-control">{{ $promotionalVideo->description }}</textarea>
-        </div>
-        <div class="mb-3">
-            <label>Upload Video (optional)</label>
-            <input type="file" name="path" class="form-control">
-            @if($promotionalVideo->path)
-                <small>Current: {{ $promotionalVideo->path }}</small>
-            @endif
-        </div>
-        <div class="mb-3">
-            <label>YouTube URL (optional)</label>
-            <input type="text" name="url" class="form-control" value="{{ $promotionalVideo->url }}">
-        </div>
-        <div class="mb-3">
-            <label>Thumbnail (Image)</label>
-            <input type="file" name="thumbnail" class="form-control">
-            @if($promotionalVideo->thumbnail)
-                <img src="{{ asset('storage/'.$promotionalVideo->thumbnail) }}" width="80">
-            @endif
-        </div>
-        <button class="btn btn-success">Update</button>
-    </form>
 
-            </div>
+        <div class="mb-3">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" value="{{ old('title', $internationalForm->title) }}" required>
         </div>
-    </div>
+
+      
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" class="form-control text-editor"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label>URL</label>
+            <input type="url" name="url" class="form-control" value="{{ old('url', $internationalForm->url) }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
 </div>
 @endsection
+@push('scripts')
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Summernote -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('.text-editor').summernote({
+        height: 300,
+        placeholder: 'Write description here...',
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['fontsize', 'color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview']]
+        ]
+    });
+});
+</script>
+@endpush
