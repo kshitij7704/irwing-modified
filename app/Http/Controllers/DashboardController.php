@@ -22,13 +22,21 @@ class DashboardController extends Controller
         // return redirect()->route('profile.complete')->with('success', 'Please Complete profile.');
 
         // }
-        
-        // $pages = Page::count(); 
+
+        // $pages = Page::count();
         // $news = News::count();
-        // $users = User::count(); 
+        // $users = User::count();
         // $blogs = Blog::count();
-        
+
         $tourReport = TourReport::with('user')->latest()->get();
-        return view('dashboard', compact('tourReport'));
+
+        // Distinct list of officer names for the filter dropdown
+        $officers = TourReport::select('name')
+            ->whereNotNull('name')
+            ->distinct()
+            ->orderBy('name')
+            ->pluck('name');
+
+        return view('dashboard', compact('tourReport', 'officers'));
     }
 }
