@@ -31,7 +31,7 @@ class EngagementController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('engagements', 'public');
+            $data['image'] = $request->file('image')->store('storage/engagements', 'public');
         }
 
         Engagement::create($data);
