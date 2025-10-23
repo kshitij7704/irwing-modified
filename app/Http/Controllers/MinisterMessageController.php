@@ -20,9 +20,10 @@ class MinisterMessageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'postion' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'message' => 'required|string',
+            'minister_name' => 'required|string',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -32,9 +33,10 @@ class MinisterMessageController extends Controller
         }
 
         MinisterMessage::create([
-            'name' => $request->name,
+            'postion' => $request->postion,
             'title' => $request->title,
             'message' => $request->message,
+            'minister_name' => $request->minister_name,
             'photo' => $path,
         ]);
 
@@ -49,9 +51,10 @@ class MinisterMessageController extends Controller
     public function update(Request $request, MinisterMessage $ministerMessage)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'postion' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'message' => 'required|string',
+            'minister_name' => 'required|string',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -61,9 +64,10 @@ class MinisterMessageController extends Controller
         }
 
         $ministerMessage->update([
-            'name' => $request->name,
+            'postion' => $request->postion,
             'title' => $request->title,
             'message' => $request->message,
+            'minister_name' => $request->minister_name,
             'photo' => $path,
         ]);
 

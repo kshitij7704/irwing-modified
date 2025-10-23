@@ -63,7 +63,7 @@ Route::PUT('/profiles/update', [App\Http\Controllers\ProfileController::class, '
  Route::get('orms', [HomeController::class, 'orms'])->name('orms');
  Route::get('achivements', [HomeController::class, 'achivements'])->name('achivements');
  Route::get('internation-forums', [HomeController::class, 'internationForums'])->name('internationForums');
- Route::get('message/{minister?}', [HomeController::class, 'message'])->name('message');
+ Route::get('message/{id}', [HomeController::class, 'message'])->name('message');
  Route::get('role-ir', [HomeController::class, 'roleir'])->name('role-ir');
  Route::get('structure', [HomeController::class, 'structure'])->name('structure');
  Route::get('contact-us', [HomeController::class, 'contact'])->name('contact-us');
@@ -146,6 +146,7 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
         Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('units', \App\Http\Controllers\Backend\UnitController::class);
             Route::resource('unit-offices', UnitOfficeController::class);
+            Route::resource('social_media', App\Http\Controllers\Admin\SocialMediaController::class);
         });
 
 

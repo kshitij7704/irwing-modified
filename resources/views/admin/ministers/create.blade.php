@@ -25,16 +25,23 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label for="name" class="form-label">Minister Name</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                   id="name" name="name" value="{{ old('name') }}">
+                            <label for="name" class="form-label">Title Message</label>
+                            <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                   id="name" name="title" >
                             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="title" class="form-label">Minister Title</label>
+                            <label for="name" class="form-label">Minister Position</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                   id="name" name="postion" >
+                            @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Minister Name</label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                   id="title" name="title" value="{{ old('title') }}">
+                                   id="title" name="minister_name" >
                             @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
