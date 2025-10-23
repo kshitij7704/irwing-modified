@@ -1386,6 +1386,208 @@
             font-size: 1rem;
         }
     }
+    /* --- NEW CSS for Priority Areas Section --- */
+    .priority-areas-section {
+        padding: 50px 0;
+        background: #f8f9fa; /* Light background to separate sections */
+    }
+
+    .priority-areas-header {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    .engagement-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    .engagement-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .engagement-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-image-wrapper {
+        height: 150px;
+        background: #e9ecef; /* Placeholder color */
+        overflow: hidden;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .card-image {
+        /* Ensures the image covers the container without distortion */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.85; /* Dims the image slightly to match the provided image */
+    }
+
+    .card-content {
+        padding: 20px;
+        min-height: 110px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-content h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .card-content p {
+        font-size: 1.2rem;
+        color: #495057;
+        line-height: 1.5;
+    }
+
+    /* Responsive adjustments for the new section */
+    @media (max-width: 991px) {
+        .engagement-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .engagement-grid {
+            grid-template-columns: 1fr;
+        }
+        .priority-areas-header {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            padding-left: 15px;
+        }
+        .priority-areas-section {
+            padding: 30px 0;
+        }
+    }
+    /* --- NEW CSS for India's Ambitions in ITU Section --- */
+    .itu-ambitions-section {
+        padding: 50px 0;
+        background: #ffffff; /* White background */
+    }
+
+    .itu-section-header {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        padding-left: 15px; /* Adjust padding to match container if needed */
+    }
+
+    .itu-card {
+        padding: 30px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        background: #fff;
+    }
+
+    .itu-content-wrapper {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+    }
+
+    .itu-image-container {
+        flex-shrink: 0;
+        width: 250px;
+        height: 180px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .itu-collaboration-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
+    }
+
+    .itu-text-content {
+        flex-grow: 1;
+        font-size: 1.3rem;
+        color: #495057;
+    }
+
+    .itu-text-content p {
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+        line-height: 1.6;
+    }
+
+    .itu-text-content ul {
+        list-style: none;
+        font-size: 1.3rem;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .itu-text-content li {
+        font-size: 1.3rem;
+        position: relative;
+        padding-left: 1.5em;
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+
+    .itu-text-content li::before {
+        content: '\2022'; /* Bullet point character */
+        color: #4a90e2; /* Blue color for bullet */
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+        font-size: 1.2em;
+    }
+
+    .itu-more-link {
+        color: #4a90e2;
+        text-decoration: none;
+        font-weight: 600;
+        display: block;
+        text-align: right;
+    }
+
+    .itu-more-link:hover {
+        text-decoration: underline;
+        color: #357abd;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .itu-content-wrapper {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .itu-image-container {
+            width: 100%;
+            height: 200px;
+        }
+
+        .itu-section-header {
+            font-size: 2rem;
+            padding-left: 0;
+        }
+
+        .itu-card {
+            padding: 20px;
+        }
+    }
 </style>
 
 <main class="main government-home" style="padding-top: 0;">
@@ -1851,6 +2053,68 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="priority-areas-section">
+        <div class="container">
+            <h1 class="priority-areas-header">Priority Areas for Engagements</h1>
+            <div class="engagement-grid">
+
+                <div class="engagement-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://media.istockphoto.com/id/1455319441/photo/planet-earth-at-night-global-meteor.webp?a=1&b=1&s=612x612&w=0&k=20&c=Xe2cKlKk-hlsxa7UgBSrvpwU_4_ow_RXGZ0zPwsKCmk=" alt="Disaster Early Warning" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3>Disaster Early Warning Solutions</h3>
+                        <p>India offers expertise in early warning systems, providing solutions to global partners for disaster preparedness.</p>
+                    </div>
+                </div>
+
+                <div class="engagement-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1631718631303-7840218c1c19?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c3VibWFyaW5lJTIwY2FibGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Submarine Cable Repairs" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3>Submarine Cable Repairs</h3>
+                        <p>Seeking international collaborations to enhance capabilities in submarine cable maintenance and repairs.</p>
+                    </div>
+                </div>
+
+                <div class="engagement-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://plus.unsplash.com/premium_photo-1688700437364-c689f27093ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8T3BlbiUyMHJhZGlvJTIwYWNjZXNzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" alt="Open RAN" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3>Open RAN</h3>
+                        <p>Partnering globally for joint research and development in Open Radio Access Network technologies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="itu-ambitions-section">
+        <div class="container">
+            <h1 class="itu-section-header">India's Ambitions in ITU</h1>
+
+            <div class="itu-card">
+                <div class="itu-content-wrapper">
+                    <div class="itu-image-container">
+                        <img src="data:image/jpeg;base64,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" alt="ITU Collaboration" class="itu-collaboration-image">
+                    </div>
+
+                    <div class="itu-text-content">
+                        <p>India is committed to a leadership role in the International Telecommunication Union (ITU) with the following objectives:</p>
+                        <ul>
+                            <li>Re-election as Member of ITU Council in 2026.</li>
+                            <li>Hosting the ITU Plenipotentiary Conference in 2030.</li>
+                            <li>Nomination of Ms. Revathi as Director BR ITU.</li>
+                            <li>Increasing contributions to ITU standards and initiatives.</li>
+                            <li>Securing leadership positions in ITU study groups and sectors.</li>
+                        </ul>
+                        <a href="#" class="itu-more-link">More...</a>
                     </div>
                 </div>
             </div>
