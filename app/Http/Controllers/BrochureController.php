@@ -25,8 +25,14 @@ class BrochureController extends Controller
             'published_at' => 'required|date',
             'file' => 'required|mimes:pdf|max:5120', // 5MB max
         ]);
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('storage/brochures'), $fileName);
 
-        $filePath = $request->file('file')->store('brochures', 'public');
+            $filePath = 'brochures/' . $fileName; // save relative path in DB
+        }
+
 
         Brochure::create([
             'title' => $request->title,
@@ -54,15 +60,21 @@ class BrochureController extends Controller
             'title' => $request->title,
             'published_at' => $request->published_at,
         ];
-
         if ($request->hasFile('file')) {
-            // delete old file
-            if ($brochure->file_path && Storage::disk('public')->exists($brochure->file_path)) {
-                Storage::disk('public')->delete($brochure->file_path);
+            // Delete old file if exists
+            if (!empty($brochure->file_path) && file_exists(public_path('storage/'.$brochure->file_path))) {
+                unlink(public_path('storage/'.$brochure->file_path));
             }
 
-            $data['file_path'] = $request->file('file')->store('brochures', 'public');
+            // Upload new file directly to public/brochures
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('storage/brochures'), $fileName);
+
+            // Save relative path in database
+            $data['file_path'] = 'brochures/' . $fileName;
         }
+
 
         $brochure->update($data);
 

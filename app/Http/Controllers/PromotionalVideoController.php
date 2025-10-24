@@ -28,14 +28,22 @@ class PromotionalVideoController extends Controller
         ]);
 
         $data = $request->except(['thumbnail', 'path']);
+if ($request->hasFile('thumbnail')) {
+    // upload thumbnail to public/thumbnails
+    $thumbnail = $request->file('thumbnail');
+    $thumbnailName = time() . '_' . $thumbnail->getClientOriginalName();
+    $thumbnail->move(public_path('storage/thumbnails'), $thumbnailName);
+    $data['thumbnail'] = 'thumbnails/' . $thumbnailName;
+}
 
-        if ($request->hasFile('thumbnail')) {
-            $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
-        }
+if ($request->hasFile('path')) {
+    // upload video to public/videos
+    $video = $request->file('path');
+    $videoName = time() . '_' . $video->getClientOriginalName();
+    $video->move(public_path('storage/videos'), $videoName);
+    $data['path'] = 'videos/' . $videoName;
+}
 
-        if ($request->hasFile('path')) {
-            $data['path'] = $request->file('path')->store('videos', 'public');
-        }
 
         PromotionalVideo::create($data);
 
@@ -63,13 +71,30 @@ class PromotionalVideoController extends Controller
 
         $data = $request->except(['thumbnail', 'path']);
 
-        if ($request->hasFile('thumbnail')) {
-            $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
+     if ($request->hasFile('thumbnail')) {
+        // delete old thumbnail if exists
+        if ($model->thumbnail && file_exists(public_path('storage/'.$model->thumbnail))) {
+            unlink(public_path('storage/'.$model->thumbnail));
         }
 
-        if ($request->hasFile('path')) {
-            $data['path'] = $request->file('path')->store('videos', 'public');
+        $thumbnail = $request->file('thumbnail');
+        $thumbnailName = time() . '_' . $thumbnail->getClientOriginalName();
+        $thumbnail->move(public_path('storage/thumbnails'), $thumbnailName);
+        $data['thumbnail'] = 'thumbnails/' . $thumbnailName;
+    }
+
+    if ($request->hasFile('path')) {
+        // delete old video if exists
+        if ($model->path && file_exists(public_path('storage/'.$model->path))) {
+            unlink(public_path('storage/'.$model->path));
         }
+
+        $video = $request->file('path');
+        $videoName = time() . '_' . $video->getClientOriginalName();
+        $video->move(public_path('storage/videos'), $videoName);
+        $data['path'] = 'videos/' . $videoName;
+    }
+
 
         $promotionalVideo->update($data);
 

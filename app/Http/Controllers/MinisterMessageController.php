@@ -26,10 +26,12 @@ class MinisterMessageController extends Controller
             'minister_name' => 'required|string',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
         $path = null;
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('minister_photos', 'public');
+            $photo = $request->file('photo');
+            $photoName = time() . '_' . $photo->getClientOriginalName();
+            $photo->move(public_path('storage/minister_photos'), $photoName);
+            $path = 'minister_photos/' . $photoName;
         }
 
         MinisterMessage::create([
@@ -59,8 +61,18 @@ class MinisterMessageController extends Controller
         ]);
 
         $path = $ministerMessage->photo;
+
         if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('minister_photos', 'public');
+            // Delete old file if it exists
+            if ($path && file_exists(public_path('storage/'.$path))) {
+                unlink(public_path('storage/'.$path));
+            }
+
+            // Store new file in public/minister_photos
+            $photo = $request->file('photo');
+            $photoName = time() . '_' . $photo->getClientOriginalName();
+            $photo->move(public_path('storage/minister_photos'), $photoName);
+            $path = 'minister_photos/' . $photoName;
         }
 
         $ministerMessage->update([

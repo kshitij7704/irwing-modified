@@ -29,9 +29,11 @@ class EngagementController extends Controller
         ]);
 
         $data = $request->all();
-
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('storage/engagements', 'public');
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/engagements'), $imageName);
+            $data['image'] = 'engagements/' . $imageName; // Save path in DB
         }
 
         Engagement::create($data);
@@ -54,13 +56,21 @@ class EngagementController extends Controller
         ]);
 
         $data = $request->all();
-
         if ($request->hasFile('image')) {
-            if ($engagement->image) {
-                Storage::disk('public')->delete($engagement->image);
+            // Delete old image if exists
+            if ($engagement->image && file_exists(public_path('storage/'.$engagement->image))) {
+                unlink(public_path('storage/'.$engagement->image));
             }
-            $data['image'] = $request->file('image')->store('engagements', 'public');
+
+            // Upload new image
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/engagements'), $imageName);
+
+            // Save relative path in DB
+            $data['image'] = 'engagements/' . $imageName;
         }
+
 
         $engagement->update($data);
 

@@ -25,8 +25,12 @@ class SliderController extends Controller
             'title' => 'nullable|string|max:255',
             'link'  => 'nullable|url'
         ]);
-
-        $path = $request->file('image')->store('sliders', 'public');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('storage/sliders'), $imageName);
+            $path = 'sliders/' . $imageName;
+        }
 
         Slider::create([
             'title' => $request->title,
@@ -50,12 +54,20 @@ class SliderController extends Controller
             'title' => 'nullable|string|max:255',
             'link'  => 'nullable|url'
         ]);
-
         if ($request->hasFile('image')) {
-            Storage::disk('public')->delete($slider->image);
-            $path = $request->file('image')->store('sliders', 'public');
-            $slider->image = $path;
+            // Delete old file if exists
+            if ($slider->image && file_exists(public_path($slider->image))) {
+                unlink(public_path($slider->image));
+            }
+
+            // Move new file to public/sliders
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('sliders'), $imageName);
+
+            $slider->image = 'sliders/' . $imageName;
         }
+
 
         $slider->title = $request->title;
         $slider->link = $request->link;

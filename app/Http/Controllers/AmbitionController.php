@@ -27,10 +27,13 @@ class AmbitionController extends Controller
         ]);
 
         $data = $request->only('title', 'description', 'status');
-
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('ambitions', 'public');
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/ambitions'), $imageName);
+            $data['image'] = 'ambitions/' . $imageName; // store relative path
         }
+
 
         Ambition::create($data);
 
@@ -51,9 +54,18 @@ class AmbitionController extends Controller
         ]);
 
         $data = $request->only('title', 'description', 'status');
-
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('ambitions', 'public');
+            // delete old image if exists
+            if (!empty($ambition->image) && file_exists(public_path('storage/'.$ambition->image))) {
+                unlink(public_path('storage/'.$ambition->image));
+            }
+
+            // upload new image
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/ambitions'), $imageName);
+
+            $data['image'] = 'ambitions/' . $imageName; // save relative path
         }
 
         $ambition->update($data);

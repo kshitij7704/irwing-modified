@@ -29,10 +29,12 @@ class SocialMediaController extends Controller
 
         $data = $request->all();
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('social_media', 'public');
+       if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('storage/social_media'), $imageName);
+            $data['image'] = 'social_media/' . $imageName;
         }
-
         $data['status'] = $request->has('status') ? 1 : 0;
 
         SocialMedia::create($data);
@@ -55,11 +57,18 @@ class SocialMediaController extends Controller
         ]);
 
         $data = $request->all();
-
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('social_media', 'public');
-        }
+            // Delete old image if it exists
+            if (!empty($social_media->image) && file_exists(public_path('storage/'.$social_media->image))) {
+                unlink(public_path('storage/'.$social_media->image));
+            }
 
+            // Store new image
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('storage/social_media'), $imageName);
+            $social_media->image = 'social_media/' . $imageName;
+        }
         $data['status'] = $request->has('status') ? 1 : 0;
 
         $social_media->update($data);
