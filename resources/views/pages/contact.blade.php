@@ -127,7 +127,33 @@
                     @csrf
                     <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
+                    
                     <input type="text" name="subject" placeholder="Subject" required>
+
+                    <!-- Department (Select) -->
+                    <div class="mb-3">
+                        <label for="department" class="form-label">Department</label>
+                        <select id="department" name="department" class="form-select" required>
+                            <option value="" disabled selected>Select Department</option>
+                            <option value="policy">Policy & Regulations</option>
+                            <option value="projects">Projects & Initiatives</option>
+                            <option value="support">Support & Queries</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Inquiry Type (Select) -->
+                    <div class="mb-3">
+                        <label for="inquiry_type" class="form-label">Type of Inquiry</label>
+                        <select id="inquiry_type" name="inquiry_type" class="form-select" required>
+                            <option value="" disabled selected>Select Inquiry Type</option>
+                            <option value="general">General</option>
+                            <option value="complaint">Complaint</option>
+                            <option value="suggestion">Suggestion</option>
+                            <option value="feedback">Feedback</option>
+                        </select>
+                    </div>
+
                     <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
                     <button type="submit">Submit</button>
                 </form>
@@ -136,9 +162,9 @@
             <!-- Contact Info Card -->
             <div class="card contact-info">
                 <h3>Contact Information</h3>
-                <p><strong>Address:</strong> Department of Telecommunications, Sanchar Bhawan, New Delhi, India</p>
-                <p><strong>Phone:</strong> +91-11-2323 2323</p>
-                <p><strong>Email:</strong> info@dot.gov.in</p>
+                <p><strong>Address:</strong> {{ $settings->address }}</p>
+                <p><strong>Phone:</strong> {{ $settings->contact_phone }}</p>
+                <p><strong>Email:</strong> {{ $settings->contact_email }}</p>
                 <p><strong>Working Hours:</strong> Mon - Fri, 9:30 AM - 6:00 PM</p>
 
                 <div class="map-container">

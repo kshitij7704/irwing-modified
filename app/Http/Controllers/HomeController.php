@@ -10,6 +10,8 @@ use App\Models\Orm;
 use App\Models\Brochure;
 use App\Models\Ambition;
 use App\Models\InternationalForm;
+use App\Models\SiteSetting;
+use App\Models\SocialMedia;
 use App\Models\PromotionalVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,13 +22,22 @@ class HomeController extends Controller
     public function index()
     {
         try {
+
+
+            $instagram = SocialMedia::where('platform','instagram')->latest()->first();
+            $facebook =  SocialMedia::where('platform','facebook')->latest()->first();
+            $twitter =  SocialMedia::where('platform','twitter')->latest()->first();
+            $youtube =  SocialMedia::where('platform','youtube')->latest()->first();
+            $linkedin =  SocialMedia::where('platform','linkedin')->latest()->first();
+
+
             $events = MeetingCalendar::select('title', 'date', 'color')->get();
             $ministerMessages = MinisterMessage::all();
             
             $ministers = MinisterMessage::all();
             $sliders = \App\Models\Slider::where('status', true)->get();
-        $engagements = \App\Models\Engagement::where('status', 1)->get();
-        $ambition = Ambition::latest()->first();
+            $engagements = \App\Models\Engagement::where('status', 1)->get();
+            $ambition = Ambition::latest()->first();
         } catch (\Exception $e) {
             // Handle database connection issues
             $events = collect([]);
@@ -35,7 +46,8 @@ class HomeController extends Controller
             $sliders = collect([]);
         }
 
-        return view('pages.main', compact('events','ministerMessages','sliders','ministers','ambition','engagements'));
+        return view('pages.main', compact('events','ministerMessages','sliders','ministers','ambition',
+            'engagements','instagram','facebook','twitter','youtube','linkedin'));
     }
 
     public function orms(Request $request)
@@ -92,11 +104,18 @@ class HomeController extends Controller
     public function tweets(Request $request)
     {
         try {
+
+
+            $instagram = SocialMedia::where('platform','instagram')->latest()->get();
+            $facebook =  SocialMedia::where('platform','facebook')->latest()->get();
+            $twitter =  SocialMedia::where('platform','twitter')->latest()->get();
+            $youtube =  SocialMedia::where('platform','youtube')->latest()->get();
+            $linkedin =  SocialMedia::where('platform','linkedin')->latest()->get();
             $orms = Orm::all(); // fetch all records
         } catch (\Exception $e) {
             $orms = collect([]);
         }
-        return view('pages.tweets', compact('orms'));
+        return view('pages.tweets', compact('orms','instagram','facebook','twitter','youtube','linkedin'));
     }
     public function message(Request $request, $id)
     {
@@ -117,10 +136,12 @@ class HomeController extends Controller
     {
         try {
             $orms = Orm::all(); // fetch all records
+
+        $settings = SiteSetting::first();
         } catch (\Exception $e) {
             $orms = collect([]);
         }
-        return view('pages.contact', compact('orms'));
+        return view('pages.contact', compact('orms','settings'));
     }
     public function roleir(Request $request)
     {

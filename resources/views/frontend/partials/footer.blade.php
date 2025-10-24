@@ -248,6 +248,10 @@
         }
     </style>
 
+@php 
+
+        $settings = App\Models\SiteSetting::first();
+@endphp
     <!-- Footer Links Bar -->
     <div class="footer-links-bar">
         <div class="container">
@@ -274,9 +278,10 @@
                     <h6>Contact Information</h6>
                     <div class="contact-details">
                         <p><strong>Department of Telecommunications</strong></p>
-                        <p>Sanchar Bhawan, 20, Ashoka Road</p>
-                        <p>New Delhi - 110001, India</p>
-                        <p><strong>Email:</strong> <a href="mailto:irwing@dot.gov.in" style="display: inline;">irwing@dot.gov.in</a></p>
+                        <p>{{ $settings->address ?? '' }}</p>
+                        <p><strong>Email:</strong> 
+                        
+                        <a href="mailto:{{ $settings->contact_email }}" style="display: inline;">{{ $settings->contact_email ?? '' }}</a></p>
                     </div>
                 </div>
             </div>

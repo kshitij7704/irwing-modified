@@ -34,12 +34,12 @@
                     <td>{{ $ambition->status ? 'Active' : 'Inactive' }}</td>
                     <td>
                         <a href="{{ route('ambitions.edit', $ambition->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('ambitions.destroy', $ambition->id) }}" method="POST" class="d-inline">
+                        <!-- <form action="{{ route('ambitions.destroy', $ambition->id) }}" method="POST" class="d-inline">
                             @csrf @method('DELETE')
                             <button onclick="return confirm('Delete this item?')" class="btn btn-danger btn-sm">
                                 Delete
                             </button>
-                        </form>
+                        </form> -->
                     </td>
                 </tr>
             @endforeach

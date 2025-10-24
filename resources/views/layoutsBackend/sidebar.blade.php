@@ -403,7 +403,7 @@
                 @endroleCan -->
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('achievements.index')}}" class="menu-link">
+                    <a href="{{route('admin.social_media.index')}}" class="menu-link">
                         <div data-i18n="Social Media">Social Media</div>
                     </a>
                 </li>
@@ -419,6 +419,13 @@
                 <li class="menu-item">
                     <a href="{{route('ambitions.index')}}" class="menu-link">
                         <div data-i18n="Ambitions">Ambitions</div>
+                    </a>
+                </li>
+                @endroleCan 
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('admin.site_settings.index')}}" class="menu-link">
+                        <div data-i18n="Site Settings">Site Settings</div>
                     </a>
                 </li>
                 @endroleCan
@@ -470,7 +477,7 @@
                 @roleCan('roles.view')
                 <li class="menu-item">
                     <a href="{{route('agencies.index')}}" class="menu-link">
-                        <div data-i18n="Agencies">Agencies</div>
+                        <div data-i18n="Organizations">Organizations</div>
                     </a>
                 </li>
                 @endroleCan

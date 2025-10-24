@@ -4,8 +4,8 @@
 <div class="container-xxl">
     <div class="card">
         <h5 class="card-header d-flex justify-content-between align-items-center">
-            <span>Agencies</span>
-            <a href="{{ route('agencies.create') }}" class="btn btn-primary">+ Add Agency</a>
+            <span>Organizations</span>
+            <a href="{{ route('agencies.create') }}" class="btn btn-primary">+ Add Organizations</a>
         </h5>
 
         <div class="card-body">

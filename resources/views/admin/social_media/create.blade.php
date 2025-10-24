@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layoutsBackend.app')
 
 @section('content')
 <div class="container">
@@ -7,7 +7,20 @@
         @csrf
         <div class="mb-3">
             <label>Platform</label>
-            <input type="text" name="platform" class="form-control" required>
+            <select name="platform" class="form-control" required>
+                @php
+                    $platforms = ['instagram', 'facebook', 'twitter', 'youtube', 'linkedin'];
+                @endphp
+
+                    <option value="" selected desabled>
+                        Select a platform
+                    </option>
+                @foreach($platforms as $platform)
+                    <option value="{{ $platform }}">
+                        {{ ucfirst($platform) }}
+                    </option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label>Title</label>

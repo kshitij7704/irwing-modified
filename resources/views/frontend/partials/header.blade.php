@@ -443,13 +443,23 @@
             }
         }
     </style>
+@php 
+
+        $settings = App\Models\SiteSetting::first();
+@endphp
 
     <div class="header-top">
         <div class="container">
             <div class="utility-left">
                 <a href="#"><i class="bi bi-search"></i></a>
-                <a href="#"><i class="bi bi-telephone"></i></a>
-                <a href="#"><i class="bi bi-envelope"></i></a>
+                @if($settings && $settings->contact_phone)
+                    <a href="tel:{{ $settings->contact_phone }}"><i class="bi bi-telephone"></i></a>
+                @endif
+
+                <!-- Email link -->
+                @if($settings && $settings->contact_email)
+                    <a href="mailto:{{ $settings->contact_email }}"><i class="bi bi-envelope"></i></a>
+                @endif
             </div>
             <div class="utility-right">
                 <a href="#">Language</a>

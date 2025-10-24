@@ -2048,10 +2048,8 @@
                                             <i class="bi bi-instagram"></i>
                                         </div>
                                         <div class="social-text-content">
-                                            <a href="https://www.instagram.com/department_of_telecom" target="_blank"
-                                                class="social-link">DoT_India (Department of Telecommunications) •
-                                                Department of Telecommunications, Ministry of Communications, Government
-                                                of India</a>
+                                            <a href="{{$instagram->url}}" target="_blank"
+                                                class="social-link">{{$instagram->description}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -2063,11 +2061,8 @@
                                             <i class="bi bi-facebook"></i>
                                         </div>
                                         <div class="social-text-content">
-                                            <a href="https://www.facebook.com/DepartmentOfTelecommunications"
-                                                target="_blank" class="social-link">Government of India, India Post, and
-                                                Department of Telecommunications. The session will highlight key
-                                                achievements, milestones, and citizen-centric initiatives driving
-                                                India's journey towards inclusive development</a>
+                                            <a href="{{$facebook->url}}"
+                                                target="_blank" class="social-link">{{$facebook->description}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -2079,10 +2074,8 @@
                                             <i class="bi bi-youtube"></i>
                                         </div>
                                         <div class="social-text-content">
-                                            <a href="https://www.youtube.com/watch?v=example" target="_blank"
-                                                class="social-link">1 Year Achievement Video - Department of
-                                                Telecommunications showcasing digital transformation initiatives and
-                                                infrastructure development across India</a>
+                                            <a href="{{$youtube->url}}" target="_blank"
+                                                class="social-link">{{$youtube->description}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -2090,14 +2083,12 @@
                                 <!-- Duplicate for seamless scrolling -->
                                 <div class="social-media-item">
                                     <div class="social-simple-row">
-                                        <div class="social-platform-icon" style="background: #E4405F;">
-                                            <i class="bi bi-instagram"></i>
+                                        <div class="social-platform-icon" style="background: #4048e4ff;">
+                                            <i class="bi bi-twitter"></i>
                                         </div>
                                         <div class="social-text-content">
-                                            <a href="https://www.instagram.com/department_of_telecom" target="_blank"
-                                                class="social-link">DoT_India (Department of Telecommunications) •
-                                                Department of Telecommunications, Ministry of Communications, Government
-                                                of India</a>
+                                            <a href="{{$twitter->url}}" target="_blank"
+                                                class="social-link">{{$twitter->description}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -2105,31 +2096,15 @@
                                 <div class="social-media-item">
                                     <div class="social-simple-row">
                                         <div class="social-platform-icon" style="background: #1877F2;">
-                                            <i class="bi bi-facebook"></i>
+                                            <i class="bi bi-linkediin"></i>
                                         </div>
                                         <div class="social-text-content">
-                                            <a href="https://www.facebook.com/DepartmentOfTelecommunications"
-                                                target="_blank" class="social-link">Government of India, India Post, and
-                                                Department of Telecommunications. The session will highlight key
-                                                achievements, milestones, and citizen-centric initiatives driving
-                                                India's journey towards inclusive development</a>
+                                            <a href="{{$linkedin->url}}"
+                                                target="_blank" class="social-link">{{$linkedin->description}}</a>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="social-media-item">
-                                    <div class="social-simple-row">
-                                        <div class="social-platform-icon" style="background: #FF0000;">
-                                            <i class="bi bi-youtube"></i>
-                                        </div>
-                                        <div class="social-text-content">
-                                            <a href="https://www.youtube.com/watch?v=example" target="_blank"
-                                                class="social-link">1 Year Achievement Video - Department of
-                                                Telecommunications showcasing digital transformation initiatives and
-                                                infrastructure development across India</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
