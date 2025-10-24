@@ -146,8 +146,9 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
 
 
         Route::resource('countries', CountryController::class);
-            Route::resource('site_settings', App\Http\Controllers\Admin\SiteSettingController::class);
+        Route::resource('site_settings', App\Http\Controllers\Admin\SiteSettingController::class);
         Route::resource('agencies', AgencyController::class);
+        Route::resource('designations', App\Http\Controllers\DesignationController::class);
         Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('units', \App\Http\Controllers\Backend\UnitController::class);
             Route::resource('unit-offices', UnitOfficeController::class);

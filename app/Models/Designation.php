@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Designation extends Model
 {
     //
-    protected $fillable = ['name', 'division_id'];
+    protected $fillable = ['name', 'division_id','status'];
 
     public function division(): BelongsTo
     {

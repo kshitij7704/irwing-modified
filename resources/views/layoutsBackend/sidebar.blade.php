@@ -469,7 +469,7 @@
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('countries.index')}}" class="menu-link">
+                    <a href="{{route('designations.index')}}" class="menu-link">
                         <div data-i18n="Designations">Designations</div>
                     </a>
                 </li>
