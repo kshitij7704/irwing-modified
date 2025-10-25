@@ -84,7 +84,7 @@
     <div class="page-content ir-section">
 
         <div class="ir-header">
-            <p>{{$roleir->title}}</p>
+            <h4>{{$roleir->title}}</h4>
         </div>
 
         <!-- Tabs -->
@@ -97,7 +97,7 @@
             <div class="tab-pane fade show active" id="overview" role="tabpanel">
                 <div class="tab-card">
                     <h3>Overview</h3>
-                    <p>{{$roleir->description}}</p>
+                    <p>{!! $roleir->description !!}</p>
                 </div>
             </div>
 
