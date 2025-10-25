@@ -34,6 +34,7 @@
     <label for="type" class="form-label">Type</label>
     <select name="type" id="type" class="form-control" required>
         <option value="" disabled {{ old('type', $orm->type) ? '' : 'selected' }}>Select Type</option>
+        <option value="Ir wing Portal" {{ old('type', $orm->type) == 'Ir wing Portal' ? 'selected' : '' }}>Ir wing Portal</option>
         <option value="Type1" {{ old('type', $orm->type) == 'Type1' ? 'selected' : '' }}>Type1</option>
         <option value="Type2" {{ old('type', $orm->type) == 'Type2' ? 'selected' : '' }}>Type2</option>
         <option value="Type3" {{ old('type', $orm->type) == 'Type3' ? 'selected' : '' }}>Type3</option>

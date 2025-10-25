@@ -372,7 +372,6 @@
                         <div data-i18n="International Forms">International Forms</div>
                     </a>
                 </li>
-                
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
