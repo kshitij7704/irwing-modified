@@ -347,6 +347,13 @@
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
+                    <a href="{{route('admin.circulars.index')}}" class="menu-link">
+                        <div data-i18n="Circulars">Circulars</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
                     <a href="{{route('brochures.index')}}" class="menu-link">
                         <div data-i18n="Brochures">Brochures</div>
                     </a>
@@ -365,6 +372,7 @@
                         <div data-i18n="International Forms">International Forms</div>
                     </a>
                 </li>
+                
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
@@ -391,6 +399,13 @@
                 <li class="menu-item">
                     <a href="{{route('press-releases.index')}}" class="menu-link">
                         <div data-i18n="Press Releases">Press Releases</div>
+                    </a>
+                </li>
+                @endroleCan
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('admin.ir_roles.index')}}" class="menu-link">
+                        <div data-i18n="Roles of IR">Roles of IR</div>
                     </a>
                 </li>
                 @endroleCan
@@ -456,13 +471,13 @@
                 @roleCan('roles.view')
                 <li class="menu-item">
                     <a href="{{route('admin.unit-offices.index')}}" class="menu-link">
-                        <div data-i18n="Unit Offices">Unit Offices</div>
+                        <div data-i18n="unit-offices">Unit Offices</div>
                     </a>
                 </li>
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('countries.index')}}" class="menu-link">
+                    <a href="{{route('admin.divisions.index')}}" class="menu-link">
                         <div data-i18n="Divisions">Divisions</div>
                     </a>
                 </li>
@@ -483,14 +498,14 @@
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('countries.index')}}" class="menu-link">
+                    <a href="{{route('admin.itu-sectors.index')}}" class="menu-link">
                         <div data-i18n="Itu Sectors">Itu Sectors</div>
                     </a>
                 </li>
                 @endroleCan
                 @roleCan('roles.view')
                 <li class="menu-item">
-                    <a href="{{route('countries.index')}}" class="menu-link">
+                    <a href="{{route('admin.itu-sector-groups.index')}}" class="menu-link">
                         <div data-i18n="Itu Sectors Groups">Itu Sectors Groups</div>
                     </a>
                 </li>

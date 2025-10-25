@@ -84,26 +84,12 @@
     <div class="page-content ir-section">
 
         <div class="ir-header">
-            <p>The Industrial Relations (IR) Wing plays a crucial role in ensuring harmonious communication between management and employees in the telecom sector. Below are its key functions and responsibilities.</p>
+            <p>{{$roleir->title}}</p>
         </div>
 
         <!-- Tabs -->
         <ul class="nav nav-tabs mb-3" id="irTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">Overview</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="functions-tab" data-bs-toggle="tab" data-bs-target="#functions" type="button" role="tab">Functions</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="responsibilities-tab" data-bs-toggle="tab" data-bs-target="#responsibilities" type="button" role="tab">Responsibilities</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="achievements-tab" data-bs-toggle="tab" data-bs-target="#achievements" type="button" role="tab">Achievements</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab">Contact</button>
-            </li>
+            
         </ul>
 
         <div class="tab-content" id="irTabsContent">
@@ -111,7 +97,7 @@
             <div class="tab-pane fade show active" id="overview" role="tabpanel">
                 <div class="tab-card">
                     <h3>Overview</h3>
-                    <p>The IR Wing ensures smooth relations between telecom management and workforce, resolving disputes, implementing labor policies, and supporting employee welfare programs across the department.</p>
+                    <p>{{$roleir->description}}</p>
                 </div>
             </div>
 

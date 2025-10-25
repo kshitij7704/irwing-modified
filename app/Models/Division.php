@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Division extends Model
 {
-    //
     protected $fillable = ['name', 'unit_office_id'];
 
     public function unitOffice(): BelongsTo

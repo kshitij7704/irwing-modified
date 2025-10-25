@@ -22,7 +22,6 @@ use App\Http\Controllers\TourReportController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\AgencyController;
-use App\Http\Controllers\Backend\UnitOfficeController;
 use Laravel\Fortify\Features;
 
 Route::get('/tour-reports/importpview', [TourReportController::class, 'view']);
@@ -63,6 +62,7 @@ Route::PUT('/profiles/update', [App\Http\Controllers\ProfileController::class, '
  Route::get('orms', [HomeController::class, 'orms'])->name('orms');
  Route::get('achivements', [HomeController::class, 'achivements'])->name('achivements');
  Route::get('internation-forums/{id}', [HomeController::class, 'internationForums'])->name('internationForums');
+ Route::get('slider-page/{id}', [HomeController::class, 'sliderPage'])->name('sliderPage');
  Route::get('message/{id}', [HomeController::class, 'message'])->name('message');
  Route::get('role-ir', [HomeController::class, 'roleir'])->name('role-ir');
  Route::get('structure', [HomeController::class, 'structure'])->name('structure');
@@ -73,7 +73,12 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
 ////  BACKEND ////
 
 // Route::middleware(['role:admin'])->group(function () {
-    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'check.profile', // 👈 added here
+])->group(function () {
         // ROLE //
         Route::resource('roles', RoleController::class);
         Route::post('/switch-role', [RoleController::class, 'switchRole'])->name('switch.role')->middleware('auth');
@@ -81,7 +86,7 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
         Route::resource('permissions', \App\Http\Controllers\Admin\PermissionController::class)->except(['create', 'show']);
-        Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['create', 'show']);
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
 
 
         Route::get('/tour-reports', [TourReportController::class, 'index'])
@@ -151,9 +156,16 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
         Route::resource('designations', App\Http\Controllers\DesignationController::class);
         Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('units', \App\Http\Controllers\Backend\UnitController::class);
-            Route::resource('unit-offices', UnitOfficeController::class);
+            Route::resource('unit-offices', App\Http\Controllers\Admin\UnitOfficeController::class);
+            Route::resource('divisions', App\Http\Controllers\Admin\DivisionController::class);
+
+
             Route::resource('social_media', App\Http\Controllers\Admin\SocialMediaController::class);
             Route::resource('site_settings', App\Http\Controllers\Admin\SiteSettingController::class);
+            Route::resource('itu-sectors', App\Http\Controllers\Admin\ITUSectorController::class);
+            Route::resource('itu-sector-groups', App\Http\Controllers\Admin\ITUSectorGroupController::class);
+            Route::resource('circulars', App\Http\Controllers\Admin\CircularController::class);
+            Route::resource('ir_roles', App\Http\Controllers\Admin\IrRoleController::class);
         });
 
 

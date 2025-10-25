@@ -11,6 +11,8 @@ class MinisterMessage extends Model
     protected $fillable = [
         'name',
         'title',
+        'postion',
+        'minister_name',
         'photo',
         'message',
     ];

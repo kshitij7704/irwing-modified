@@ -19,7 +19,7 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Ministry</th>
+                <th>Type</th>
                 <th>Date</th>
                 <th>PDF</th>
                 <th>Action</th>
@@ -29,7 +29,7 @@
         @foreach($pressReleases as $pr)
             <tr>
                 <td>{{ $pr->title }}</td>
-                <td>{{ $pr->ministry }}</td>
+                <td>{{ $pr->type }}</td>
                 <td>{{ $pr->date }}</td>
                 <td>
                     @if($pr->pdf)

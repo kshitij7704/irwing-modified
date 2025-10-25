@@ -8,11 +8,13 @@ use App\Models\MeetingCalendar;
 use App\Models\MinisterMessage;
 use App\Models\Orm;
 use App\Models\Brochure;
+use App\Models\IrRole;
 use App\Models\Ambition;
 use App\Models\InternationalForm;
 use App\Models\SiteSetting;
 use App\Models\SocialMedia;
 use App\Models\PromotionalVideo;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -36,6 +38,7 @@ class HomeController extends Controller
             
             $ministers = MinisterMessage::all();
             $sliders = \App\Models\Slider::where('status', true)->get();
+            $circulars = \App\Models\Circular::get();
             $engagements = \App\Models\Engagement::where('status', 1)->get();
             $ambition = Ambition::latest()->first();
         } catch (\Exception $e) {
@@ -47,7 +50,7 @@ class HomeController extends Controller
         }
 
         return view('pages.main', compact('events','ministerMessages','sliders','ministers','ambition',
-            'engagements','instagram','facebook','twitter','youtube','linkedin'));
+            'engagements','instagram','facebook','twitter','youtube','linkedin','circulars'));
     }
 
     public function orms(Request $request)
@@ -147,10 +150,12 @@ class HomeController extends Controller
     {
         try {
             $orms = Orm::all(); // fetch all records
+
+        $roleir = IrRole::first();
         } catch (\Exception $e) {
             $orms = collect([]);
         }
-        return view('pages.roleir', compact('orms'));
+        return view('pages.roleir', compact('roleir'));
     }
     public function internationForums(Request $request, $id)
     {
@@ -162,6 +167,18 @@ class HomeController extends Controller
         $section = $request->get('section');
         $sub = $request->get('sub');
         return view('pages.internationForums', compact('InternationalForm', 'section', 'sub'));
+    }
+    public function sliderPage(Request $request, $id)
+    {
+        try {
+            $Slider = Slider::find($id); // fetch all records
+
+        } catch (\Exception $e) {
+            $InternationalForm = collect([]);
+        }
+        $section = $request->get('section');
+        $sub = $request->get('sub');
+        return view('pages.sliderpage', compact('Slider', 'section', 'sub'));
     }
 
 }

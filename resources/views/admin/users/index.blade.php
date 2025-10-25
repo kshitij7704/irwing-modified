@@ -19,11 +19,7 @@
         <h5 class="card-header d-flex justify-content-between align-items-center">
             <span>Users</span>
             @can("users.create")
-            <button class="btn add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0"
-                data-bs-toggle="offcanvas" data-bs-target='#offcanvasAddUser'>
-                <i class="icon-base ti tabler-plus icon-xs me-0 me-sm-2"></i>
-                <span class="d-none d-sm-inline-block">Add New Record</span>
-            </button>
+    <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add New User</a>
             @endcan
         </h5>
         @can("users.view")
@@ -44,9 +40,7 @@
         </div>
         @endcan
         <!-- Offcanvas to add new user -->
-        @can("users.create")
-            @include('admin.users.addModal')
-        @endcan
+       
        
     </div>
 </div>

@@ -1620,127 +1620,145 @@
     <main class="main government-home" style="padding-top: 0;">
         <!-- Blue Banner Section - Split Layout -->
         <section class="blue-banner-section">
-            <div class="container-fluid p-0">
-                <div class="banner-container">
-                    <!-- Left side - Image -->
-                    <div class="banner-image-side">
-                        <img src="{{ $sliders->first() ? asset('storage/' . $sliders->first()->image) : asset('images/default.jpg') }}"
-                            alt="Banner Image" id="mainBannerImage">
+    <div class="container-fluid p-0">
+        <div class="banner-container">
+            <!-- Left side - Image -->
+            <div class="banner-image-side" onclick="goToSlideUrl(currentSlide)" style="cursor:pointer;">
+                <img src="{{ $sliders->first() ? asset('storage/' . $sliders->first()->image) : asset('images/default.jpg') }}"
+                     alt="Banner Image" id="mainBannerImage">
+            </div>
+
+            <!-- Right side - Content -->
+            <div class="banner-content-side">
+                <div class="banner-date">
+                    <i class="bi bi-calendar3"></i>
+                    <span id="bannerDate">
+                        {{ optional($sliders->first())->created_at ? $sliders->first()->created_at->format('F d, Y') : '' }}
+                    </span>
+                </div>
+
+                <h1 class="banner-title-new" id="bannerTitle" onclick="goToSlideUrl(currentSlide)" style="cursor:pointer;">
+                    {{ $sliders->first()->title ?? '' }}
+                </h1>
+
+                <div class="banner-navigation">
+                    <div class="nav-arrows">
+                        <button class="nav-arrow" onclick="previousSlide()">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button class="nav-arrow" onclick="togglePause()">
+                            <i class="bi bi-pause-fill" id="pauseIcon"></i>
+                        </button>
+                        <button class="nav-arrow" onclick="nextSlide()">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
                     </div>
-
-                    <!-- Right side - Content -->
-                    <div class="banner-content-side">
-                        <div class="banner-date">
-                            <i class="bi bi-calendar3"></i>
-                            <span
-                                id="bannerDate">{{ optional($sliders->first())->created_at ? $sliders->first()->created_at->format('F d, Y') : '' }}
-                            </span>
-                        </div>
-
-                        <h1 class="banner-title-new" id="bannerTitle">
-                            {{ $sliders->first()->title ?? '' }}
-                        </h1>
-
-                        <div class="banner-navigation">
-                            <div class="nav-arrows">
-                                <button class="nav-arrow" onclick="previousSlide()">
-                                    <i class="bi bi-chevron-left"></i>
-                                </button>
-                                <button class="nav-arrow" onclick="togglePause()">
-                                    <i class="bi bi-pause-fill" id="pauseIcon"></i>
-                                </button>
-                                <button class="nav-arrow" onclick="nextSlide()">
-                                    <i class="bi bi-chevron-right"></i>
-                                </button>
-                            </div>
-                            <a href="#updates" class="view-all-link">View All Updates</a>
-                        </div>
-
-                        <div class="thumbnail-gallery">
-                            @foreach ($sliders as $index => $slider)
-                            <div class="thumbnail {{ $loop->first ? 'active' : '' }}" onclick="goToSlide({{ $index }})">
-                                <img src="{{ asset('storage/' . $slider->image) }}" alt="Thumbnail {{ $index + 1 }}">
-                            </div>
-                            @endforeach
-                        </div>
+                    <div class="view-all-link" onclick="window.location.href='#updates'" style="cursor:pointer;">
+                        View All Updates
                     </div>
                 </div>
-            </div>
-        </section>
 
-        @php
-        $slideData = $sliders->map(function($slider) {
-        return [
+                <div class="thumbnail-gallery">
+                    @foreach ($sliders as $index => $slider)
+                    <div class="thumbnail {{ $loop->first ? 'active' : '' }}" onclick="goToSlide({{ $index }})" style="cursor:pointer;">
+                        <img src="{{ asset('storage/' . $slider->image) }}" alt="Thumbnail {{ $index + 1 }}">
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@php
+$slideData = $sliders->map(function($slider) {
+    return [
         'image' => asset('storage/' . $slider->image),
         'title' => $slider->title,
-        'date' => $slider->created_at,
-        ];
-        });
-        @endphp
+        'date'  => $slider->created_at,
+        'url' => $slider->url ?: url('slider-page/'.$slider->id),
+    ];
+});
+@endphp
 
-        <script>
-            let currentSlide = 0;
-            let isPaused = false;
-            let slideInterval;
+<script>
+let currentSlide = 0;
+let isPaused = false;
+let slideInterval;
 
-            const slides = @json($slideData);
+const slides = @json($slideData);
 
-            function updateSlide(index) {
-                const slide = slides[index];
-                document.getElementById('mainBannerImage').src = slide.image;
-                document.getElementById('bannerDate').textContent = slide.date ? ? '';
-                document.getElementById('bannerTitle').textContent = slide.title ? ? '';
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
 
-                document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
-                    thumb.classList.toggle('active', i === index);
-                });
-            }
+function updateSlide(index) {
+    const slide = slides[index];
+    document.getElementById('mainBannerImage').src = slide.image;
+    document.getElementById('bannerDate').textContent = slide.date ? formatDate(slide.date) : '';
+    document.getElementById('bannerTitle').textContent = slide.title ?? '';
 
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                updateSlide(currentSlide);
-            }
+    document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+    });
+}
 
-            function previousSlide() {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                updateSlide(currentSlide);
-            }
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlide(currentSlide);
+}
 
-            function goToSlide(index) {
-                currentSlide = index;
-                updateSlide(currentSlide);
-            }
+function previousSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSlide(currentSlide);
+}
 
-            function togglePause() {
-                const pauseIcon = document.getElementById('pauseIcon');
-                if (isPaused) {
-                    isPaused = false;
-                    pauseIcon.classList.remove('bi-play-fill');
-                    pauseIcon.classList.add('bi-pause-fill');
-                    startAutoSlide();
-                } else {
-                    isPaused = true;
-                    pauseIcon.classList.remove('bi-pause-fill');
-                    pauseIcon.classList.add('bi-play-fill');
-                    clearInterval(slideInterval);
-                }
-            }
+function goToSlide(index) {
+    currentSlide = index;
+    updateSlide(currentSlide);
+}
 
-            function startAutoSlide() {
-                slideInterval = setInterval(() => {
-                    if (!isPaused) nextSlide();
-                }, 4000);
-            }
+function goToSlideUrl(index) {
+    const slide = slides[index];
+    if (slide.url) {
+        window.location.href = slide.url;
+    }
+}
 
-            startAutoSlide();
+function togglePause() {
+    const pauseIcon = document.getElementById('pauseIcon');
+    if (isPaused) {
+        isPaused = false;
+        pauseIcon.classList.remove('bi-play-fill');
+        pauseIcon.classList.add('bi-pause-fill');
+        startAutoSlide();
+    } else {
+        isPaused = true;
+        pauseIcon.classList.remove('bi-pause-fill');
+        pauseIcon.classList.add('bi-play-fill');
+        clearInterval(slideInterval);
+    }
+}
 
-            document.querySelector('.blue-banner-section').addEventListener('mouseenter', () => clearInterval(
-                slideInterval));
-            document.querySelector('.blue-banner-section').addEventListener('mouseleave', () => {
-                if (!isPaused) startAutoSlide();
-            });
+function startAutoSlide() {
+    clearInterval(slideInterval); // clear any existing interval
+    slideInterval = setInterval(() => {
+        if (!isPaused) nextSlide();
+    }, 4000);
+}
 
-        </script>
+// Initialize first slide
+updateSlide(currentSlide);
+startAutoSlide();
+
+// Pause on hover
+document.querySelector('.blue-banner-section').addEventListener('mouseenter', () => clearInterval(slideInterval));
+document.querySelector('.blue-banner-section').addEventListener('mouseleave', () => {
+    if (!isPaused) startAutoSlide();
+});
+</script>
 
 
         <!-- Cool Access Bar -->
@@ -1819,164 +1837,13 @@
                                 <div class="updates-scroll-container">
                                     <div class="updates-scroll-content" id="scrollContent">
                                         <!-- First set of items -->
+                                        @foreach($circulars as $circular)
                                         <div class="update-item">
-                                            <div class="update-date">WP No. 20117 of 2025 in Hon'ble High Court of
-                                                Madras - DoT instructions dated 16.10.2025 to ISPs</div>
-                                            <div class="update-text">Guidelines and instructions for Internet Service
-                                                Providers regarding compliance with court orders</div>
+                                            <a href="{{$circular->url}}" target="_blank"><div class="update-date">{{$circular->title}}</div></a>
+                                            <div class="update-text">{{$circular->description}}</div>
                                         </div>
-                                        <div class="update-item">
-                                            <div class="update-date">CS Comm No 977 of 2025 in Hon'ble High Court of
-                                                Delhi - Additional list DoT instructions dated 16.10.2025 to ISPs</div>
-                                            <div class="update-text">Additional compliance requirements for
-                                                telecommunications service providers</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Guidelines for Use, Retention, and Disposal of
-                                                Wireless Equipment under WOL (Experimental) Demo Licenses</div>
-                                            <div class="update-text">New guidelines for experimental wireless equipment
-                                                usage and disposal procedures</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Addendum/modification in guidelines regarding
-                                                Telecom Technology development Fund issued on dated 01.10.2022</div>
-                                            <div class="update-text">Updated guidelines for technology development fund
-                                                allocation and utilization</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Honourable Union Minister Shri Jyotiraditya M
-                                                Scindia will chair the Joint Media Briefing on 17th October 2025</div>
-                                            <div class="update-text">Press briefing announcement for upcoming
-                                                telecommunications policy updates</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Strategy Paper for ITU Engagement & Outreach
-                                                Initiative</div>
-                                            <div class="update-text">Comprehensive strategy for International
-                                                Telecommunication Union engagement</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Action Plan to Showcase Indigenous Telecom/ICT
-                                                Technologies</div>
-                                            <div class="update-text">Framework for promoting Indian telecommunications
-                                                technologies globally</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Prioritization of ITU-T Study Group Questions and
-                                                Guidelines</div>
-                                            <div class="update-text">Guidelines for participation in ITU-T study groups
-                                                and question prioritization</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Tender for 5G Infrastructure Development</div>
-                                            <div class="update-text">National tender for 5G network infrastructure
-                                                across major cities</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Rural Connectivity Enhancement Project</div>
-                                            <div class="update-text">Tender for expanding telecommunications
-                                                infrastructure in rural areas</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Recruitment for Technical Officers</div>
-                                            <div class="update-text">Open positions for technical officers in various
-                                                telecommunications divisions</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">International Relations Specialist Positions</div>
-                                            <div class="update-text">Vacancies for specialists in international
-                                                telecommunications cooperation</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Annual Telecommunications Report 2024-25</div>
-                                            <div class="update-text">Comprehensive report on India's telecommunications
-                                                sector performance</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">5G Deployment Statistics</div>
-                                            <div class="update-text">Latest statistics on 5G network deployment across
-                                                India</div>
-                                        </div>
+                                        @endforeach
 
-                                        <!-- Duplicate set for seamless looping -->
-                                        <div class="update-item">
-                                            <div class="update-date">WP No. 20117 of 2025 in Hon'ble High Court of
-                                                Madras - DoT instructions dated 16.10.2025 to ISPs</div>
-                                            <div class="update-text">Guidelines and instructions for Internet Service
-                                                Providers regarding compliance with court orders</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">CS Comm No 977 of 2025 in Hon'ble High Court of
-                                                Delhi - Additional list DoT instructions dated 16.10.2025 to ISPs</div>
-                                            <div class="update-text">Additional compliance requirements for
-                                                telecommunications service providers</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Guidelines for Use, Retention, and Disposal of
-                                                Wireless Equipment under WOL (Experimental) Demo Licenses</div>
-                                            <div class="update-text">New guidelines for experimental wireless equipment
-                                                usage and disposal procedures</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Addendum/modification in guidelines regarding
-                                                Telecom Technology development Fund issued on dated 01.10.2022</div>
-                                            <div class="update-text">Updated guidelines for technology development fund
-                                                allocation and utilization</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Honourable Union Minister Shri Jyotiraditya M
-                                                Scindia will chair the Joint Media Briefing on 17th October 2025</div>
-                                            <div class="update-text">Press briefing announcement for upcoming
-                                                telecommunications policy updates</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Strategy Paper for ITU Engagement & Outreach
-                                                Initiative</div>
-                                            <div class="update-text">Comprehensive strategy for International
-                                                Telecommunication Union engagement</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Action Plan to Showcase Indigenous Telecom/ICT
-                                                Technologies</div>
-                                            <div class="update-text">Framework for promoting Indian telecommunications
-                                                technologies globally</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Prioritization of ITU-T Study Group Questions and
-                                                Guidelines</div>
-                                            <div class="update-text">Guidelines for participation in ITU-T study groups
-                                                and question prioritization</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Tender for 5G Infrastructure Development</div>
-                                            <div class="update-text">National tender for 5G network infrastructure
-                                                across major cities</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Rural Connectivity Enhancement Project</div>
-                                            <div class="update-text">Tender for expanding telecommunications
-                                                infrastructure in rural areas</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Recruitment for Technical Officers</div>
-                                            <div class="update-text">Open positions for technical officers in various
-                                                telecommunications divisions</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">International Relations Specialist Positions</div>
-                                            <div class="update-text">Vacancies for specialists in international
-                                                telecommunications cooperation</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">Annual Telecommunications Report 2024-25</div>
-                                            <div class="update-text">Comprehensive report on India's telecommunications
-                                                sector performance</div>
-                                        </div>
-                                        <div class="update-item">
-                                            <div class="update-date">5G Deployment Statistics</div>
-                                            <div class="update-text">Latest statistics on 5G network deployment across
-                                                India</div>
-                                        </div>
                                     </div>
                                 </div>
 

@@ -34,8 +34,10 @@ class SliderController extends Controller
 
         Slider::create([
             'title' => $request->title,
+            'description' => $request->description,
             'image' => $path,
             'link'  => $request->link,
+            'date'  => $request->date,
             'status'=> true,
         ]);
 
@@ -71,6 +73,8 @@ class SliderController extends Controller
 
         $slider->title = $request->title;
         $slider->link = $request->link;
+        $slider->date = $request->date;
+        $slider->description = $request->description;
         $slider->save();
 
         return redirect()->route('sliders.index')->with('success', 'Slider updated successfully');

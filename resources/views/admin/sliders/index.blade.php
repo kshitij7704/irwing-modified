@@ -22,6 +22,7 @@
                             <th>Image</th>
                             <th>Title</th>
                             <th>Link</th>
+                            <th>Date</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -32,6 +33,7 @@
                             <td><img src="{{ asset('storage/' . $slider->image) }}" width="100"></td>
                             <td>{{ $slider->title }}</td>
                             <td>{{ $slider->link }}</td>
+                            <td>{{ $slider->date }}</td>
                             <td>{{ $slider->status ? 'Active' : 'Inactive' }}</td>
                             <td>
                                 <a href="{{ route('sliders.edit', $slider->id) }}"

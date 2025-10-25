@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -76,6 +77,15 @@ class UserController extends Controller
     }
 
 
+    public function create()
+    {
+        $roles = Role::all();
+    $profiles = Profile::whereNull('user_id')
+                        ->get(['id', 'staff_no', 'officer_name'])
+                        ->toArray();
+        return view('admin.users.create', compact('roles', 'profiles'));
+    }
+
 public function store(Request $request)
 {
     $validated = $request->validate([
@@ -94,6 +104,8 @@ public function store(Request $request)
         'password' => Hash::make('password123'),
         'status'   => 1,
     ]);
+    $profile =  Profile::find($request->profile_id);
+    $profile->update(['user_id' => $user->id]);
 
     // ✅ Fetch role names from IDs
     $roleNames = Role::whereIn('id', $validated['roles'])->pluck('name')->toArray();
