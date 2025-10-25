@@ -42,6 +42,7 @@ class HomeController extends Controller
             $engagements = \App\Models\Engagement::where('status', 1)->get();
             $ambition = Ambition::latest()->first();
         } catch (\Exception $e) {
+            dd($e);
             // Handle database connection issues
             $events = collect([]);
             $ministerMessages = collect([]);
