@@ -58,14 +58,14 @@ class SliderController extends Controller
         ]);
         if ($request->hasFile('image')) {
             // Delete old file if exists
-            if ($slider->image && file_exists(public_path($slider->image))) {
-                unlink(public_path($slider->image));
+            if ($slider->image && file_exists(public_path('storage/'.$slider->image))) {
+                unlink(public_path('storage/'.$slider->image));
             }
 
             // Move new file to public/sliders
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('sliders'), $imageName);
+            $image->move(public_path('storage/sliders'), $imageName);
 
             $slider->image = 'sliders/' . $imageName;
         }
