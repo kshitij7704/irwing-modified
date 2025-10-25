@@ -49,6 +49,7 @@ class HomeController extends Controller
             $sliders = collect([]);
         }
 
+
         return view('pages.main', compact('events','ministerMessages','sliders','ministers','ambition',
             'engagements','instagram','facebook','twitter','youtube','linkedin','circulars'));
     }
