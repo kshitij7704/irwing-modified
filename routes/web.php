@@ -73,12 +73,7 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
 ////  BACKEND ////
 
 // Route::middleware(['role:admin'])->group(function () {
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-    'check.profile', // 👈 added here
-])->group(function () {
+    Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
         // ROLE //
         Route::resource('roles', RoleController::class);
         Route::post('/switch-role', [RoleController::class, 'switchRole'])->name('switch.role')->middleware('auth');
