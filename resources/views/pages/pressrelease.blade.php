@@ -3,42 +3,26 @@
 @section('content')
 
 <style>
-    /* Page header */
     .page-header {
         padding: 50px 0;
         color: #fff;
         background-size: cover;
         background-position: center;
     }
-    .page-title {
-        font-weight: 700;
-    }
+    .page-title { font-weight: 700; }
 
-    /* Filters */
     .filters-wrapper {
-        background-color: #ffffff;
+        background-color: #fff;
         border: 1px solid #e1e1e1;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         margin-bottom: 1.5rem;
     }
-    .filters-wrapper label {
-        font-weight: 600;
-        margin-bottom: 4px;
-        display: block;
-    }
-    .filters-wrapper .form-control,
-    .filters-wrapper .btn {
-        padding: 8px 12px;
-        border-radius: 6px;
-    }
-    .filters-wrapper .btn {
-        width: 100%;
-        margin-top: 28px;
-    }
+    .filters-wrapper label { font-weight: 600; margin-bottom: 4px; display: block; }
+    .filters-wrapper .form-control, .filters-wrapper .btn { padding: 8px 12px; border-radius: 6px; }
+    .filters-wrapper .btn { width: 100%; margin-top: 28px; }
 
-    /* Count badge */
     .release-count {
         font-weight: 600;
         margin-bottom: 1.5rem;
@@ -54,42 +38,12 @@
         margin-left: 5px;
     }
 
-    /* Ministry blocks */
-    .ministry-block {
-        margin-bottom: 2rem;
-    }
-    .ministry-title {
-        font-weight: 700;
-        margin-bottom: 0.75rem;
-        color: #0d6efd;
-        border-left: 4px solid #0d6efd;
-        padding-left: 10px;
-    }
-    .press-list {
-        list-style: none;
-        padding-left: 0;
-    }
-    .press-list li {
-        padding: 12px 15px;
-        border-bottom: 1px solid #e9ecef;
-        transition: background 0.2s ease;
-    }
-    .press-list li:hover {
-        background: #f8f9fa;
-    }
-    .press-link {
-        font-weight: 500;
-        color: #0d6efd;
-        text-decoration: none;
-    }
-    .press-link:hover {
-        text-decoration: underline;
-    }
-    .press-date {
-        color: #6c757d;
-        display: block;
-        margin-top: 3px;
-    }
+    .press-list { list-style: none; padding-left: 0; }
+    .press-list li { padding: 12px 15px; border-bottom: 1px solid #e9ecef; transition: background 0.2s ease; }
+    .press-list li:hover { background: #f8f9fa; }
+    .press-link { font-weight: 500; color: #0d6efd; text-decoration: none; }
+    .press-link:hover { text-decoration: underline; }
+    .press-date { color: #6c757d; display: block; margin-top: 3px; }
 </style>
 
 <main class="main">
@@ -105,11 +59,9 @@
         <div class="filters-wrapper">
             <div class="row">
                 <div class="col-md-4">
-                    <label for="ministrySearch">Search </label>
-                    <input type="text" id="ministrySearch" class="form-control" placeholder="Type name...">
+                    <label for="titleSearch">Search by Title</label>
+                    <input type="text" id="titleSearch" class="form-control" placeholder="Type title...">
                 </div>
-
-
                 <div class="col-md-4">
                     <label for="dateFilter">Date</label>
                     <input type="date" id="dateFilter" class="form-control">
@@ -122,84 +74,79 @@
 
         {{-- Total count --}}
         <div class="release-count">
-            Total Press Releases: <span id="releaseCount">{{ $pressReleases->count() }}</span>
+            Total Press Releases: <span id="releaseCount">{{ count($pressReleases) }}</span>
         </div>
 
-        {{-- Group by ministry --}}
-        <div id="pressList">
-            @foreach($pressReleases->groupBy('ministry') as $ministryName => $releases)
-                <div class="ministry-block" data-ministry="{{ $ministryName }}">
-                    <div class="ministry-title">{{ $ministryName }}</div>
-                    <ul class="press-list">
-                        @foreach($releases as $press)
-                            <li class="press-item" data-ministry="{{ $press->ministry }}" data-date="{{ $press->date }}">
-                                <a href="{{ $press->url }}" 
-                                   class="press-link" 
-                                   target="_blank">
-                                    {{ $press->title }}
-                                </a>
-                                <span class="press-date">
-                                    {{ \Carbon\Carbon::parse($press->date)->format('F d, Y') }}
-                                </span>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endforeach
-            <a href="https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1" class="btn btn-primary">View All</a>
-        </div>
+        {{-- Press list --}}
+        <ul class="press-list" id="pressList">
+            @forelse($pressReleases as $press)
+                @php
+                    // Handle both object and array formats
+                    if(is_object($press)){
+                        $title = $press->title;
+                        $date = $press->date;
+                        $url = $press->Url ?? url('press-release/'.$press->id);
+                    } elseif(is_array($press)){
+                        $title = $press['title'] ?? '';
+                        $date = $press['date'] ?? '';
+                        $url = $press['Url'] ?? url('press-release/'.$press['id'] ?? '');
+                    } else {
+                        continue;
+                    }
+                @endphp
+                <li class="press-item" data-title="{{ strtolower($title) }}" data-date="{{ $date }}">
+                    <a href="{{ $url }}" class="press-link" target="_blank">{{ $title }}</a>
+                    <span class="press-date">{{ \Carbon\Carbon::parse($date)->format('F d, Y') }}</span>
+                </li>
+            @empty
+                <li>No press releases found.</li>
+            @endforelse
+        </ul>
+
+        <a href="https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1" class="btn btn-primary">View All</a>
     </div>
 </main>
 
-<script>const searchInput = document.getElementById('ministrySearch');
+<script>
+const titleInput = document.getElementById('titleSearch');
 const dateInput = document.getElementById('dateFilter');
 const clearBtn = document.getElementById('clearFilters');
 const releaseCountEl = document.getElementById('releaseCount');
 
-searchInput.addEventListener('input', filterPress);
+titleInput.addEventListener('input', filterPress);
 dateInput.addEventListener('change', filterPress);
 clearBtn.addEventListener('click', () => {
-    searchInput.value = '';
+    titleInput.value = '';
     dateInput.value = '';
     filterPress();
 });
 
 function filterPress() {
-    const query = searchInput.value.toLowerCase().trim();
+    const query = titleInput.value.toLowerCase().trim();
     const selectedDate = dateInput.value;
 
     let totalVisible = 0;
 
-    document.querySelectorAll('.ministry-block').forEach(block => {
-        let blockName = block.dataset.ministry.toLowerCase();
-        let blockMatches = query === '' || blockName.includes(query);
+    document.querySelectorAll('.press-item').forEach(item => {
+        const itemTitle = item.dataset.title || '';
+        const itemDate = item.dataset.date || '';
 
-        let items = block.querySelectorAll('.press-item');
-        let visibleCount = 0;
+        const matchesTitle = query === '' || itemTitle.includes(query);
+        const matchesDate = selectedDate === '' || itemDate === selectedDate;
 
-        items.forEach(item => {
-            let itemMinistry = item.dataset.ministry.toLowerCase();
-            let itemDate = item.dataset.date;
-
-            let matchesText = query === '' || itemMinistry.includes(query);
-            let matchesDate = selectedDate === '' || itemDate === selectedDate;
-
-            if (matchesText && matchesDate) {
-                item.style.display = '';
-                visibleCount++;
-            } else {
-                item.style.display = 'none';
-            }
-        });
-
-        block.style.display = (blockMatches && visibleCount > 0) ? '' : 'none';
-        totalVisible += visibleCount;
+        if (matchesTitle && matchesDate) {
+            item.style.display = '';
+            totalVisible++;
+        } else {
+            item.style.display = 'none';
+        }
     });
 
     releaseCountEl.textContent = totalVisible;
 }
 
-
+// initial count
+filterPress();
 </script>
 
 @endsection

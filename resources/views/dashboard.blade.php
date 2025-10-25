@@ -4,8 +4,9 @@
 
                             @php
                             $activeRole = session('active_role') ?? auth()->user()->getRoleNames()->first();
+                           
                             @endphp
-                            @if($activeRole== 'Admin')
+                            @if($activeRole== 'admin')
 <div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Header --}}

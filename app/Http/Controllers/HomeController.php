@@ -96,14 +96,13 @@ class HomeController extends Controller
     {
         try {
             $pressReleases = PressRelease::latest()->get(); // your model
-            $ministries = PressRelease::select('ministry')->distinct()->pluck('ministry');
             $orms = Orm::all(); // fetch all records
         } catch (\Exception $e) {
             $pressReleases = collect([]);
             $ministries = collect([]);
             $orms = collect([]);
         }
-        return view('pages.pressrelease', compact('orms','pressReleases','ministries'));
+        return view('pages.pressrelease', compact('orms','pressReleases'));
     }
 
     public function tweets(Request $request)
