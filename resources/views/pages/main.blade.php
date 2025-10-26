@@ -1633,7 +1633,8 @@
                 <div class="banner-date">
                     <i class="bi bi-calendar3"></i>
                     <span id="bannerDate">
-                        {{ optional($sliders->first())->created_at ? $sliders->first()->created_at->format('F d, Y') : '' }}
+                        {{ $sliders->first() && $sliders->first()->date ? \Carbon\Carbon::parse($sliders->first()->date)->format('F d, Y') : '' }}
+
                     </span>
                 </div>
 
@@ -1675,7 +1676,7 @@ $slideData = $sliders->map(function($slider) {
     return [
         'image' => asset('storage/' . $slider->image),
         'title' => $slider->title,
-        'date'  => $slider->created_at,
+        'date'  => $slider->date,
         'url' => $slider->url ?: url('slider-page/'.$slider->id),
     ];
 });
