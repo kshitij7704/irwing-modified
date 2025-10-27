@@ -21,7 +21,8 @@ class MeetingCalendarController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'date'  => 'required|date',
+            'from_date'  => 'required|date',
+            'to_date'  => 'required|date',
             'color' => 'nullable|string|max:20'
         ]);
 
@@ -40,7 +41,8 @@ class MeetingCalendarController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'date'  => 'required|date',
+            'from_date'  => 'required|date',
+            'to_date'  => 'required|date',
             'color' => 'nullable|string|max:20'
         ]);
 

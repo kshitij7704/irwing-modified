@@ -438,6 +438,34 @@
                 @endroleCan 
                 @roleCan('roles.view')
                 <li class="menu-item">
+                    <a href="{{route('faqs.index')}}" class="menu-link">
+                        <div data-i18n="Faq's">Faq's</div>
+                    </a>
+                </li>
+                @endroleCan 
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('admin.privacy_policies.index')}}" class="menu-link">
+                        <div data-i18n="Privacy Policies">Privacy Policies</div>
+                    </a>
+                </li>
+                @endroleCan 
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('admin.terms_of_use.index')}}" class="menu-link">
+                        <div data-i18n="Terms of Use">Terms of Use</div>
+                    </a>
+                </li>
+                @endroleCan 
+                @roleCan('roles.view')
+                <li class="menu-item">
+                    <a href="{{route('admin.accessibility_statements.index')}}" class="menu-link">
+                        <div data-i18n="Accessibility Statement">Accessibility Statement</div>
+                    </a>
+                </li>
+                @endroleCan 
+                @roleCan('roles.view')
+                <li class="menu-item">
                     <a href="{{route('admin.site_settings.index')}}" class="menu-link">
                         <div data-i18n="Site Settings">Site Settings</div>
                     </a>

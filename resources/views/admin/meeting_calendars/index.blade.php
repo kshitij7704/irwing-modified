@@ -19,7 +19,8 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Date</th>
+                <th>From Date</th>
+                <th>To Date</th>
                 <th>Color</th>
                 <th>Actions</th>
             </tr>
@@ -28,7 +29,8 @@
             @foreach($events as $event)
             <tr>
                 <td>{{ $event->title }}</td>
-                <td>{{ $event->date }}</td>
+                <td>{{ $event->from_date }}</td>
+                <td>{{ $event->to_date }}</td>
                 <td><span style="background:{{ $event->color ?? '#6366f1' }}; padding:5px 15px; color:#fff; border-radius:5px;">{{ $event->color ?? 'default' }}</span></td>
                 <td>
                     <a href="{{ route('meeting-calendars.edit', $event->id) }}" class="btn btn-sm btn-warning">Edit</a>

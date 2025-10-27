@@ -28,8 +28,12 @@
             <input type="text" name="title" value="{{ $meetingCalendar->title }}" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label>Date</label>
-            <input type="date" name="date" value="{{ $meetingCalendar->date }}" class="form-control" required>
+            <label>From Date</label>
+            <input type="date" name="from_date" value="{{ $meetingCalendar->from_date }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>To Date</label>
+            <input type="date" name="to_date" value="{{ $meetingCalendar->to_date }}" class="form-control" required>
         </div>
         <div class="mb-3">
             <label>Color</label>

@@ -2,7 +2,34 @@
 @section('content')
 <div class="main-content">
 
-    <style>
+    <style>.event-item {
+    position: relative;
+    color: #fff;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 12px;
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.tooltip-box-global {
+    display: none;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    line-height: 1.4;
+    z-index: 10000;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: opacity 0.1s ease-in-out;
+}
+
         /* Government Website Design - Matching Reference */
         * {
             box-sizing: border-box;
@@ -2026,178 +2053,136 @@ document.querySelector('.blue-banner-section').addEventListener('mouseleave', ()
 
         </section>
     </main>
+<script>
+    let currentDate = new Date();
 
-    <script>
-        function showTab(tabId) {
-            // Hide all tab panes
-            const tabPanes = document.querySelectorAll('.tab-pane');
-            tabPanes.forEach(pane => pane.classList.remove('active'));
+    // Laravel events passed from backend
+    const events = @json($events);
 
-            // Remove active class from all buttons
-            const tabButtons = document.querySelectorAll('.tab-button');
-            tabButtons.forEach(button => button.classList.remove('active'));
+    // Format events for JS
+    const formattedEvents = events.map(event => ({
+        title: event.title,
+        date: new Date(event.from_date),
+        endDate: event.to_date ? new Date(event.to_date) : null,
+        color: event.color || '#007bff'
+    }));
 
-            // Show selected tab pane
-            document.getElementById(tabId).classList.add('active');
+    function formatDate(date) {
+        const d = new Date(date);
+        return d.toLocaleDateString('en-IN', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+    }
 
-            // Add active class to clicked button
-            event.target.classList.add('active');
-        }
+    // Create global tooltip
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip-box-global';
+    document.body.appendChild(tooltip);
 
-        // Calendar functionality
-        let currentDate = new Date(2025, 9, 19); // October 19, 2025
+    function showTooltip(e, content) {
+        tooltip.innerHTML = content;
+        tooltip.style.display = 'block';
+        tooltip.style.left = e.pageX + 15 + 'px';
+        tooltip.style.top = e.pageY + 15 + 'px';
+    }
 
-        const events = [{
-                title: "5G India Summit",
-                date: new Date(2025, 10, 15),
-                description: "National Conference on 5G Technology"
-            },
-            {
-                title: "Digital India Week",
-                date: new Date(2025, 10, 20),
-                endDate: new Date(2025, 10, 26),
-                description: "Celebrating Digital Transformation"
-            },
-            {
-                title: "Telecom Policy Forum",
-                date: new Date(2025, 11, 5),
-                description: "Policy Discussions & Reforms"
-            },
-            {
-                title: "Spectrum Auction",
-                date: new Date(2025, 11, 12),
-                description: "5G Spectrum Allocation Event"
-            },
-            {
-                title: "Cybersecurity Summit",
-                date: new Date(2026, 0, 8),
-                description: "National Telecom Security Conference"
-            },
-            {
-                title: "Rural Connectivity",
-                date: new Date(2026, 0, 15),
-                description: "BharatNet Phase III Launch"
-            },
-            {
-                title: "Innovation Awards",
-                date: new Date(2026, 0, 26),
-                description: "Telecom Innovation Excellence"
-            },
-            {
-                title: "Industry Meet",
-                date: new Date(2026, 1, 2),
-                description: "Stakeholder Consultation Meeting"
-            },
-            {
-                title: "World Telecom Day",
-                date: new Date(2026, 4, 17),
-                description: "International Telecommunications Day"
-            },
-            {
-                title: "Startup Conclave",
-                date: new Date(2026, 2, 10),
-                description: "Telecom Startup Ecosystem Meet"
-            },
-            {
-                title: "AI in Telecom",
-                date: new Date(2026, 2, 22),
-                description: "Artificial Intelligence Summit"
-            },
-            {
-                title: "Satellite Comm",
-                date: new Date(2026, 3, 5),
-                description: "Satellite Communication Conference"
-            }
-        ];
+    function hideTooltip() {
+        tooltip.style.display = 'none';
+    }
 
-        function renderCalendar() {
-            const calendarDays = document.getElementById('calendarDays');
-            const monthSelect = document.getElementById('monthSelect');
-            const yearSelect = document.getElementById('yearSelect');
+    function renderCalendar() {
+        const calendarDays = document.getElementById('calendarDays');
+        const monthSelect = document.getElementById('monthSelect');
+        const yearSelect = document.getElementById('yearSelect');
 
-            // Update dropdowns to match current date
-            monthSelect.value = currentDate.getMonth();
-            yearSelect.value = currentDate.getFullYear();
+        monthSelect.value = currentDate.getMonth();
+        yearSelect.value = currentDate.getFullYear();
 
-            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-            const startDate = new Date(firstDay);
-            startDate.setDate(startDate.getDate() - firstDay.getDay());
+        const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        const startDate = new Date(firstDay);
+        startDate.setDate(startDate.getDate() - firstDay.getDay());
 
-            const endDate = new Date(lastDay);
-            endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
+        const endDate = new Date(lastDay);
+        endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
 
-            calendarDays.innerHTML = '';
+        calendarDays.innerHTML = '';
+        let currentDay = new Date(startDate);
 
-            let currentDay = new Date(startDate);
+        while (currentDay <= endDate) {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day';
 
-            while (currentDay <= endDate) {
-                const dayDiv = document.createElement('div');
-                dayDiv.className = 'calendar-day';
+            if (currentDay.getMonth() !== currentDate.getMonth()) {
+                dayDiv.classList.add('empty');
+            } else {
+                const dayNumber = document.createElement('div');
+                dayNumber.className = 'calendar-day-number';
+                dayNumber.textContent = currentDay.getDate();
+                dayDiv.appendChild(dayNumber);
 
-                if (currentDay.getMonth() !== currentDate.getMonth()) {
-                    dayDiv.classList.add('empty');
-                } else {
-                    const dayNumber = document.createElement('div');
-                    dayNumber.className = 'calendar-day-number';
-                    dayNumber.textContent = currentDay.getDate();
-
-                    if (currentDay.toDateString() === new Date(2025, 9, 19).toDateString()) {
-                        dayDiv.classList.add('today');
+                // Filter matching events
+                const dayEvents = formattedEvents.filter(event => {
+                    if (event.endDate) {
+                        return currentDay >= event.date && currentDay <= event.endDate;
                     }
+                    return currentDay.toDateString() === event.date.toDateString();
+                });
 
-                    dayDiv.appendChild(dayNumber);
+                dayEvents.forEach(event => {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.className = 'event-item';
+                    eventDiv.textContent = event.title;
+                    eventDiv.style.backgroundColor = event.color;
 
-                    // Check for events on this day
-                    const dayEvents = events.filter(event => {
-                        if (event.endDate) {
-                            return currentDay >= event.date && currentDay <= event.endDate;
-                        }
-                        return currentDay.toDateString() === event.date.toDateString();
+                    // Tooltip content
+                    const tooltipContent = `
+                        <strong>${event.title}</strong><br>
+                        ${formatDate(event.date)} - ${event.endDate ? formatDate(event.endDate) : formatDate(event.date)}
+                    `;
+
+                    // Hover & mousemove handlers
+                    eventDiv.addEventListener('mouseenter', e => showTooltip(e, tooltipContent));
+                    eventDiv.addEventListener('mousemove', e => {
+                        tooltip.style.left = e.pageX + 15 + 'px';
+                        tooltip.style.top = e.pageY + 15 + 'px';
                     });
+                    eventDiv.addEventListener('mouseleave', hideTooltip);
 
-                    dayEvents.forEach(event => {
-                        const eventDiv = document.createElement('div');
-                        eventDiv.className = 'event-item';
-                        if (event.endDate) {
-                            eventDiv.classList.add('multi-day');
-                        }
-                        eventDiv.textContent = event.title;
-                        eventDiv.title = event.description;
-                        dayDiv.appendChild(eventDiv);
-                    });
-                }
-
-                calendarDays.appendChild(dayDiv);
-                currentDay.setDate(currentDay.getDate() + 1);
+                    dayDiv.appendChild(eventDiv);
+                });
             }
+
+            calendarDays.appendChild(dayDiv);
+            currentDay.setDate(currentDay.getDate() + 1);
         }
+    }
 
-        document.getElementById('prevMonth').addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            renderCalendar();
-        });
-
-        document.getElementById('nextMonth').addEventListener('click', () => {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            renderCalendar();
-        });
-
-        // Dropdown change handlers
-        document.getElementById('monthSelect').addEventListener('change', (e) => {
-            currentDate.setMonth(parseInt(e.target.value));
-            renderCalendar();
-        });
-
-        document.getElementById('yearSelect').addEventListener('change', (e) => {
-            currentDate.setFullYear(parseInt(e.target.value));
-            renderCalendar();
-        });
-
-        // Initialize calendar
+    document.getElementById('prevMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
         renderCalendar();
+    });
 
-    </script>
+    document.getElementById('nextMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+    });
+
+    document.getElementById('monthSelect').addEventListener('change', (e) => {
+        currentDate.setMonth(parseInt(e.target.value));
+        renderCalendar();
+    });
+
+    document.getElementById('yearSelect').addEventListener('change', (e) => {
+        currentDate.setFullYear(parseInt(e.target.value));
+        renderCalendar();
+    });
+
+    renderCalendar();
+</script>
+
 
 </div>
 @endsection

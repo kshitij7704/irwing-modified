@@ -28,8 +28,12 @@
             <input type="text" name="title" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label>Date</label>
-            <input type="date" name="date" class="form-control" required>
+            <label>From Date</label>
+            <input type="date" name="from_date" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>To Date</label>
+            <input type="date" name="to_date" class="form-control" required>
         </div>
         <div class="mb-3">
             <label>Color</label>

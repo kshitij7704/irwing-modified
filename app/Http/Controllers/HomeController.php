@@ -10,6 +10,10 @@ use App\Models\Orm;
 use App\Models\Brochure;
 use App\Models\IrRole;
 use App\Models\Ambition;
+use App\Models\Faq;
+use App\Models\AccessibilityStatement;
+use App\Models\PrivacyPolicy;
+use App\Models\TermsOfUse;
 use App\Models\InternationalForm;
 use App\Models\SiteSetting;
 use App\Models\SocialMedia;
@@ -33,7 +37,9 @@ class HomeController extends Controller
             $linkedin =  SocialMedia::where('platform','linkedin')->latest()->first();
 
 
-            $events = MeetingCalendar::select('title', 'date', 'color')->get();
+            $events = MeetingCalendar::select('title', 'from_date','to_date', 'color')->get();
+
+            
             $ministerMessages = MinisterMessage::all();
             
             $ministers = MinisterMessage::all();
@@ -180,6 +186,29 @@ class HomeController extends Controller
         $section = $request->get('section');
         $sub = $request->get('sub');
         return view('pages.sliderpage', compact('Slider', 'section', 'sub'));
+    }
+
+
+
+    public function faq(Request $request)
+    {
+        $faqs = FAQ::orderBy('updated_at', 'desc')->get(); 
+        return view('pages.faq', compact('faqs'));
+    }
+    public function privacyPolicy(Request $request)
+    {
+        $policies = PrivacyPolicy::orderBy('updated_at', 'desc')->get();
+        return view('pages.privacyPolicy', compact('policies'));
+    }
+    public function termsOfUse(Request $request)
+    {
+        $terms = TermsOfUse::orderBy('updated_at', 'desc')->get();
+        return view('pages.termsOfUse', compact('terms'));
+    }
+    public function accessibility(Request $request)
+    {
+        $accessibilities = AccessibilityStatement::orderBy('updated_at', 'desc')->get();
+        return view('pages.accessibility', compact('accessibilities'));
     }
 
 }

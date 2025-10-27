@@ -1,39 +1,33 @@
 @extends('layoutsBackend.app')
 
 @section('content')
-<div class="container">
-    <h1>Create International Form</h1>
+<div class="container-xxl">
+    <h4>Edit Privacy Policy</h4>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    
-    <form action="{{ route('international_forms.store') }}" method="POST">
+    <form action="{{ route('admin.privacy_policies.update', $privacy_policy->id) }}" method="POST">
         @csrf
+        @method('PUT')
 
         <div class="mb-3">
             <label>Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
+            <input type="text" name="title" value="{{ $privacy_policy->title }}" class="form-control" required>
         </div>
 
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="description" class="form-control text-editor"></textarea>
+            <label for="description" class="form-label">Content</label>
+            <textarea name="content" class="form-control text-editor">{!! $privacy_policy->content !!}</textarea>
         </div>
 
         <div class="mb-3">
-            <label>URL</label>
-            <input type="url" name="url" class="form-control" value="{{ old('url') }}">
+            <label>Status</label>
+            <select name="status" class="form-select">
+                <option value="1" {{ $privacy_policy->status ? 'selected' : '' }}>Active</option>
+                <option value="0" {{ !$privacy_policy->status ? 'selected' : '' }}>Inactive</option>
+            </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-success">Update</button>
+        <a href="{{ route('admin.privacy_policies.index') }}" class="btn btn-secondary">Back</a>
     </form>
 </div>
 @endsection
@@ -62,5 +56,3 @@ $(document).ready(function() {
 });
 </script>
 @endpush
-
- 

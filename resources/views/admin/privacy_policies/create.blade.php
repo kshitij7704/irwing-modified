@@ -1,39 +1,32 @@
 @extends('layoutsBackend.app')
 
 @section('content')
-<div class="container">
-    <h1>Create International Form</h1>
+<div class="container-xxl">
+    <h4>Add Privacy Policy</h4>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    
-    <form action="{{ route('international_forms.store') }}" method="POST">
+    <form action="{{ route('admin.privacy_policies.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
             <label>Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
+            <input type="text" name="title" class="form-control" required>
         </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Content</label>
+            <textarea name="content" class="form-control text-editor"></textarea>
+        </div>
+
 
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="description" class="form-control text-editor"></textarea>
+            <label>Status</label>
+            <select name="status" class="form-select">
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+            </select>
         </div>
 
-        <div class="mb-3">
-            <label>URL</label>
-            <input type="url" name="url" class="form-control" value="{{ old('url') }}">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-success">Save</button>
+        <a href="{{ route('admin.privacy_policies.index') }}" class="btn btn-secondary">Back</a>
     </form>
 </div>
 @endsection
@@ -50,7 +43,7 @@
 $(document).ready(function() {
     $('.text-editor').summernote({
         height: 300,
-        placeholder: 'Write description here...',
+        placeholder: 'Write Content here...',
         toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['font', ['fontsize', 'color']],

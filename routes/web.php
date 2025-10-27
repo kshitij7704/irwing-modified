@@ -22,10 +22,17 @@ use App\Http\Controllers\TourReportController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\AgencyController;
+use App\Http\Controllers\ITUContributionController;
 use Laravel\Fortify\Features;
 
 Route::get('/tour-reports/importpview', [TourReportController::class, 'view']);
 Route::post('/tour-reports/import', [TourReportController::class, 'import'])->name('tour-reports.import');
+
+
+
+Route::get('itu', [ITUContributionController::class, 'index'])->name('itu.index');
+Route::get('itu/upload', [ITUContributionController::class, 'uploadForm'])->name('itu.uploadForm');
+Route::post('itu/upload', [ITUContributionController::class, 'upload'])->name('itu.upload');
 
 
 Route::get('/qrp/download-excel', [\App\Http\Controllers\QrpGenerationController::class, 'downloadExcel'])
@@ -67,7 +74,15 @@ Route::PUT('/profiles/update', [App\Http\Controllers\ProfileController::class, '
  Route::get('role-ir', [HomeController::class, 'roleir'])->name('role-ir');
  Route::get('structure', [HomeController::class, 'structure'])->name('structure');
  Route::get('contact-us', [HomeController::class, 'contact'])->name('contact-us');
+
+ Route::get('faq', [HomeController::class, 'faq'])->name('faq');
+ Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacyPolicy');
+ Route::get('terms-of-use', [HomeController::class, 'termsOfUse'])->name('termsOfUse');
+ Route::get('accessibility', [HomeController::class, 'accessibility'])->name('accessibility');
+
+
 Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact.submit');
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
 
 ////  BACKEND ////
@@ -78,6 +93,7 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
         Route::resource('roles', RoleController::class);
         Route::post('/switch-role', [RoleController::class, 'switchRole'])->name('switch.role')->middleware('auth');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard2', [DashboardController::class, 'index2'])->name('dashboard2');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
         Route::resource('permissions', \App\Http\Controllers\Admin\PermissionController::class)->except(['create', 'show']);
@@ -148,11 +164,15 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
         Route::resource('countries', CountryController::class);
         Route::resource('site_settings', App\Http\Controllers\Admin\SiteSettingController::class);
         Route::resource('agencies', AgencyController::class);
+            Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class);
         Route::resource('designations', App\Http\Controllers\DesignationController::class);
         Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('units', \App\Http\Controllers\Backend\UnitController::class);
             Route::resource('unit-offices', App\Http\Controllers\Admin\UnitOfficeController::class);
             Route::resource('divisions', App\Http\Controllers\Admin\DivisionController::class);
+            Route::resource('privacy_policies', App\Http\Controllers\Admin\PrivacyPolicyController::class);
+            Route::resource('terms_of_use', App\Http\Controllers\Admin\TermsOfUseController::class);
+            Route::resource('accessibility_statements', App\Http\Controllers\Admin\AccessibilityStatementController::class);
 
 
             Route::resource('social_media', App\Http\Controllers\Admin\SocialMediaController::class);

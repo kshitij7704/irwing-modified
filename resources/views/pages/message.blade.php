@@ -104,11 +104,7 @@
     <div class="page-header text-center" style="background-image: url('front/assets/images/page-header-bg.jpg')">
         <div class="container">
             <h1 class="page-title">
-                @if($minister == 'moc')
-                    Message from Hon'ble Minister of Communication
-                @else
-                    Message from Hon'ble State Minister for Communications
-                @endif
+                {{ $minister->title }}
             </h1>
         </div>
     </div>
@@ -118,15 +114,13 @@
         
         <div class="minister-section">
             <div class="minister-image">
-                <img src="{{asset('images/p.png')}}" alt="Senior Minister of State for Communications">
+                <img src="{{ asset('storage/' . $minister->photo) }}" alt="Senior Minister of State for Communications">
             </div>
             <div class="minister-content">
-                <div class="minister-name">Dr. Pemmasani Chandra Sekhar</div>
-                <div class="minister-designation">Hon'ble Minister of State for Communications, Government of India</div>
+                <div class="minister-name">{{$minister->minister_name}}</div>
+                <div class="minister-designation">{{$minister->postion}}</div>
                 <div class="minister-message">
-                    <p>As Senior Minister of State for Communications, I am committed to advancing India's telecommunications infrastructure and ensuring equitable access to digital services for all citizens. Our focus is on implementing cutting-edge technologies that enhance connectivity and drive digital transformation across the nation.</p>
-                    <p>Through strategic initiatives and collaborative efforts, we are working to strengthen the telecommunications sector, promote innovation, and create opportunities for sustainable growth. The Department continues to prioritize rural connectivity, cybersecurity, and the development of next-generation communication networks.</p>
-                    <p>I invite you to engage with our vision and contribute to building a robust and inclusive digital ecosystem for India's future.</p>
+                    <p>{{$minister->message}}</p>
                 </div>
             </div>
         </div>      <!-- Cards / Tabs Section -->

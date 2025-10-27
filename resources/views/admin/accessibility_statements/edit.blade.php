@@ -1,43 +1,36 @@
 @extends('layoutsBackend.app')
 
 @section('content')
-<div class="container">
-    <h1>Create International Form</h1>
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="mb-4">Edit Accessibility Statement</h4>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    
-    <form action="{{ route('international_forms.store') }}" method="POST">
+    <form action="{{ route('admin.accessibility_statements.update', $statement->id) }}" method="POST">
         @csrf
+        @method('PUT')
 
         <div class="mb-3">
-            <label>Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
+            <label class="form-label">Title</label>
+            <input type="text" name="title" value="{{ old('title', $statement->title) }}" class="form-control" required>
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" class="form-control text-editor"></textarea>
+            <textarea name="description" class="form-control text-editor">{{ old('description', $statement->description) }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label>URL</label>
-            <input type="url" name="url" class="form-control" value="{{ old('url') }}">
+            <label class="form-label">Status</label>
+            <select name="status" class="form-select">
+                <option value="Active" {{ $statement->status == 'Active' ? 'selected' : '' }}>Active</option>
+                <option value="Inactive" {{ $statement->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+            </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('admin.accessibility_statements.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection
-
 @push('scripts')
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -63,4 +56,3 @@ $(document).ready(function() {
 </script>
 @endpush
 
- 
