@@ -131,19 +131,21 @@
     </div>
 
     {{-- Officer Details Table --}}
-    <div class="row g-4 mb-4">
+<div class="row g-4 mb-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-header"><h5 class="card-title">Officer details</h5></div>
+                {{-- Removed 'text-nowrap' in the previous step, which is correct for responsiveness --}}
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-                    <table class="table">
+                    <table class="table table-hover"> {{-- Added table-hover for better UX --}}
                         <thead class="sticky-top bg-white">
                             <tr>
-                                <th>Name of the Officer</th>
-                                <th>Purpose</th>
-                                <th>Country</th>
-                                <th>Meeting</th>
-                                <th>Equivalent Level</th>
+                                {{-- Apply width styles to distribute space more evenly --}}
+                                <th style="width: 20%;">Name of the Officer</th>
+                                <th style="width: 30%;">Purpose</th>
+                                <th style="width: 15%;">Country</th>
+                                <th style="width: 25%;">Meeting</th>
+                                <th style="width: 10%;">Equivalent Level</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0"></tbody>
