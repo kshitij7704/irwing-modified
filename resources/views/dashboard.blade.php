@@ -4,60 +4,60 @@
 
                             @php
                             $activeRole = session('active_role') ?? auth()->user()->getRoleNames()->first();
-                           
+
                             @endphp
                             @if($activeRole== 'admin')
 <div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Header --}}
     <div class="row g-6 mb-4">
-        <div class="col-12 d-flex align-items-center justify-content-between">
+        <div class="col-12">
             <h4 class="mb-0">Dashboard</h4>
-            <div class="d-flex gap-2 align-items-center">
-                <label class="mb-0 me-2">Filter by Officer:</label>
-                <select id="officerFilter" class="form-select d-inline-block" style="width: 240px;">
-                    <option value="">All officers</option>
-                    @if(isset($officers))
-                        @foreach($officers as $officer)
-                            @if(!empty($officer))
-                                <option value="{{ $officer }}">{{ $officer }}</option>
-                            @endif
-                        @endforeach
-                    @endif
-                </select>
-            </div>
         </div>
     </div>
 
     {{-- FILTER ROW --}}
-    <div class="row mb-4">
-        <div class="col-md-2 mb-2">
+    <div class="d-flex flex-wrap gap-2 mb-4">
+        <div class="mb-2" style="min-width: 200px;">
+            {{-- <label class="form-label">Filter by Officer:</label> --}}
+            <select id="officerFilter" class="form-select">
+                <option value="">All officers</option>
+                @if(isset($officers))
+                    @foreach($officers as $officer)
+                        @if(!empty($officer))
+                            <option value="{{ $officer }}">{{ $officer }}</option>
+                        @endif
+                    @endforeach
+                @endif
+            </select>
+        </div>
+        <div class="mb-2" style="min-width: 120px;">
             <select id="filterMonth" class="form-select filter-select">
                 <option value="">All Months</option>
             </select>
         </div>
-        <div class="col-md-2 mb-2">
+        <div class="mb-2" style="min-width: 120px;">
             <select id="filterMeeting" class="form-select filter-select">
                 <option value="">All Purposes</option>
             </select>
         </div>
-        <div class="col-md-2 mb-2">
+        <div class="mb-2" style="min-width: 120px;">
             <select id="filterCountry" class="form-select filter-select">
                 <option value="">All Countries</option>
             </select>
         </div>
-        <div class="col-md-2 mb-2">
+        <div class="mb-2" style="min-width: 120px;">
             <select id="filterCadre" class="form-select filter-select">
                 <option value="">All Cadres</option>
             </select>
         </div>
-        <div class="col-md-2 mb-2">
+        <div class="mb-2" style="min-width: 120px;">
             <select id="filterGender" class="form-select filter-select">
                 <option value="">All Genders</option>
             </select>
         </div>
-        <div class="col-md-2 mb-2">
-            <button id="clearFilters" class="btn btn-outline-secondary w-100">Clear</button>
+        <div class="mb-2 ms-auto">
+            <button id="clearFilters" class="btn btn-outline-secondary">Clear</button>
         </div>
     </div>
 
