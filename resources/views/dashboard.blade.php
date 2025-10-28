@@ -2,6 +2,55 @@
 
 @section('content')
 
+    {{-- Readability: force high-contrast, black text and muted backgrounds for dashboard elements --}}
+    <style>
+    /* Dashboard readability improvements */
+    .container-xxl, .card, .table, .form-select, .btn, .card-title, h4 {
+        color: #000 !important;
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+    .card {
+        background: #ffffff !important;
+        border: 1px solid #e6e9ee !important;
+        box-shadow: 0 1px 3px rgba(16,24,40,0.05);
+    }
+    .card-header, .card-title {
+        background: #f5f7fa;
+        color: #000 !important;
+        font-weight: 600;
+        border-bottom: 1px solid #e6e9ee;
+    }
+    .table thead th {
+        background: #f8fafc !important;
+        color: #000 !important;
+        border-bottom: 2px solid #e9eef3 !important;
+    }
+    .table tbody tr td {
+        color: #000 !important;
+    }
+    .table-hover tbody tr:hover {
+        background: #fbfdff;
+    }
+    .form-select {
+        background: #fff;
+        color: #000 !important;
+        border: 1px solid #ced4da;
+    }
+    .btn, .btn-outline-secondary {
+        color: #000 !important;
+        background: #e9eef3;
+        border-color: #d0d7df;
+    }
+    .btn.btn-primary {
+        background: #2563eb; /* clearer blue */
+        border-color: #1d4ed8;
+        color: #fff !important;
+    }
+    .sticky-top.bg-white { background: #fff !important; }
+    .leaflet-container { background: #fff; }
+    </style>
+
     @php
     $activeRole = session('active_role') ?? auth()->user()->getRoleNames()->first();
     @endphp
