@@ -8,6 +8,9 @@
         border: 1px solid #e1e1e1;
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-top: 14px;
     }
     .card-body {
         padding: 0 !important;
@@ -32,6 +35,7 @@
         padding: 12px 15px;
         vertical-align: middle;
         text-align: left !important;
+        font-size: 15px;
     }
     .table tbody tr:hover {
         background-color: #f1f5f9;
@@ -42,6 +46,7 @@
         color: #0d6efd;
         font-weight: 500;
         text-decoration: none;
+        font-size: 15px;
     }
     .table a:hover {
         text-decoration: underline;
