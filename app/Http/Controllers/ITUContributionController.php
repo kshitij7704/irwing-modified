@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\ITUContribution;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
+use League\Csv\Reader;use Carbon\Carbon;
+use League\Csv\Statement;
 
 class ITUContributionController extends Controller
 {
@@ -19,37 +21,46 @@ class ITUContributionController extends Controller
     {
         return view('itu.upload');
     }
+public function upload(Request $request)
+{
+    // Validate uploaded CSV
+    $request->validate([
+        'csv_file' => 'required|mimes:csv,txt|max:2048',
+    ]);
 
-    public function upload(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'excel_file' => 'required|mimes:xlsx,xls',
+    // Read CSV file
+    $csv = Reader::createFromPath($request->file('csv_file')->getRealPath(), 'r');
+    $csv->setHeaderOffset(0); // First row as header
+
+    foreach ($csv as $record) {
+        // Parse date like '31.05.2024' or 'Apr-22'
+        $rawDate = trim($record['Date of contribution'] ?? '');
+        $formattedDate = null;
+
+        if ($rawDate) {
+            try {
+                // Try various date formats
+                $formattedDate = Carbon::parse(str_replace('.', '-', $rawDate))->format('Y-m-d');
+            } catch (\Exception $e) {
+                $formattedDate = null;
+            }
+        }
+
+        ITUContribution::create([
+            'study_group'          => $record['Study Group'] ?? null,
+            'question'             => $record['Question'] ?? null,
+            'work_item'            => $record['Work item'] ?? null,
+            'contribution_type'    => $record['Contribution Type'] ?? null,
+            'contribution_brief'   => $record['Contribution in brief'] ?? null,
+            'date_of_contribution' => $formattedDate,
+            'officers'             => $record['Officer concerned/National Study Group'] ?? null,
+            'status'               => $record['Status of the work item'] ?? null,
+            'type'                 => $record['Type'] ?? 'ITU-R', // Add default ITU-R
         ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
-        }
-
-        $file = $request->file('excel_file');
-        $data = Excel::toArray([], $file);
-
-        // Read first sheet only
-        $rows = $data[0] ?? [];
-
-        // Skip header (first row)
-        foreach (array_slice($rows, 1) as $row) {
-            ITUContribution::create([
-                'study_group' => $row[1] ?? null,
-                'question' => $row[2] ?? null,
-                'work_item' => $row[3] ?? null,
-                'contribution_type' => $row[4] ?? null,
-                'contribution_brief' => $row[5] ?? null,
-                'date_of_contribution' => isset($row[6]) ? date('Y-m-d', strtotime($row[6])) : null,
-                'officers' => $row[7] ?? null,
-                'status' => $row[8] ?? null,
-            ]);
-        }
-
-        return redirect()->route('itu.index')->with('success', 'Excel uploaded successfully.');
     }
+
+    return redirect()->route('itu_contributions.index')
+                     ->with('success', 'CSV imported successfully!');
+}
+
 }
