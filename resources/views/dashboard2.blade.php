@@ -14,36 +14,31 @@
         <div class="col-12 d-flex align-items-center justify-content-between flex-wrap">
             <h4 class="mb-0">Contributions Dashboard</h4>
 
-            <div class="d-flex gap-2 align-items-center flex-wrap">
-                <label class="mb-0 me-2">Month</label>
+            <div class="d-flex gap-2 align-items-center">
                 <select id="filterMonth" class="form-select d-inline-block" style="width: 160px;">
-                    <option value="">All</option>
+                    <option value="">All Months</option>
                 </select>
 
-                <label class="mb-0 me-2">Study Group</label>
                 <select id="filterStudyGroup" class="form-select d-inline-block" style="width: 180px;">
-                    <option value="">All</option>
+                    <option value="">All Study Groups</option>
                 </select>
 
-                <label class="mb-0 me-2">Type</label>
                 <select id="filterType" class="form-select d-inline-block" style="width: 160px;">
-                    <option value="">All</option>
+                    <option value="">All Types</option>
                     <option value="ITU-T">ITU-T</option>
                     <option value="ITU-R">ITU-R</option>
                     <option value="ITU_D">ITU-D</option>
                     <option value="ITU_D">ITU_D</option>
                 </select>
 
-                <label class="mb-0 me-2">Priority</label>
                 <select id="filterPriority" class="form-select d-inline-block" style="width: 120px;">
-                    <option value="">All</option>
+                    <option value="">All Priorities</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
 
-                <label class="mb-0 me-2">Officer</label>
                 <select id="filterOfficer" class="form-select d-inline-block" style="width: 220px;">
-                    <option value="">All</option>
+                    <option value="">All Officers</option>
                 </select>
 
                 <button id="clearFilters" class="btn btn-outline-secondary">Clear</button>
@@ -212,22 +207,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // inject options
         // helper to populate preserving first "All" option
-        function setOptions(selectEl, list){
+        function setOptions(selectEl, list, allText){
             selectEl.innerHTML = '';
-            selectEl.appendChild(new Option('All', ''));
+            selectEl.appendChild(new Option(allText, ''));
             list.forEach(v => selectEl.appendChild(new Option(v, v)));
         }
-        setOptions(filterMonthEl, monthList);
-        setOptions(filterStudyGroupEl, studyGroupList);
+        setOptions(filterMonthEl, monthList, 'All Months');
+        setOptions(filterStudyGroupEl, studyGroupList, 'All Study Groups');
         // filterTypeEl already has some options from blade; let's merge
         // we will ensure default "All" exists then append any types not present
         (function fillType(){
             const existing = Array.from(filterTypeEl.options).map(o=>o.value);
+            if(!existing.includes('')) filterTypeEl.insertBefore(new Option('All Types', ''), filterTypeEl.firstChild);
             const toAdd = typeList.filter(t => !existing.includes(t));
             toAdd.forEach(t => filterTypeEl.appendChild(new Option(t, t)));
         })();
-        setOptions(filterPriorityEl, priorityList.length ? priorityList : ['yes','no']);
-        setOptions(filterOfficerEl, officerList);
+        setOptions(filterPriorityEl, priorityList.length ? priorityList : ['yes','no'], 'All Priorities');
+        setOptions(filterOfficerEl, officerList, 'All Officers');
     }
     populateSelects();
 
