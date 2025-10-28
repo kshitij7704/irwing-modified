@@ -2,24 +2,22 @@
 
 @section('content')
 
-                            @php
-                            $activeRole = session('active_role') ?? auth()->user()->getRoleNames()->first();
-
-                            @endphp
-                            @if($activeRole== 'admin')
+    @php
+    $activeRole = session('active_role') ?? auth()->user()->getRoleNames()->first();
+    @endphp
+    @if($activeRole == 'admin')
 <div class="container-xxl flex-grow-1 container-p-y">
 
     {{-- Header --}}
-    <div class="row g-6 mb-4">
+    <div class="row g-4 mb-2">
         <div class="col-12">
             <h4 class="mb-0">Dashboard</h4>
         </div>
     </div>
 
     {{-- FILTER ROW --}}
-    <div class="d-flex flex-wrap gap-2 mb-4">
+    <div class="d-flex flex-wrap gap-2 mb-3">
         <div class="mb-2" style="min-width: 200px;">
-            {{-- <label class="form-label">Filter by Officer:</label> --}}
             <select id="officerFilter" class="form-select">
                 <option value="">All officers</option>
                 @if(isset($officers))
@@ -31,27 +29,28 @@
                 @endif
             </select>
         </div>
-        <div class="mb-2" style="min-width: 120px;">
+        {{-- Min width adjusted for compactness --}}
+        <div class="mb-2" style="min-width: 100px;">
             <select id="filterMonth" class="form-select filter-select">
                 <option value="">All Months</option>
             </select>
         </div>
-        <div class="mb-2" style="min-width: 120px;">
+        <div class="mb-2" style="min-width: 100px;">
             <select id="filterMeeting" class="form-select filter-select">
                 <option value="">All Purposes</option>
             </select>
         </div>
-        <div class="mb-2" style="min-width: 120px;">
+        <div class="mb-2" style="min-width: 100px;">
             <select id="filterCountry" class="form-select filter-select">
                 <option value="">All Countries</option>
             </select>
         </div>
-        <div class="mb-2" style="min-width: 120px;">
+        <div class="mb-2" style="min-width: 100px;">
             <select id="filterCadre" class="form-select filter-select">
                 <option value="">All Cadres</option>
             </select>
         </div>
-        <div class="mb-2" style="min-width: 120px;">
+        <div class="mb-2" style="min-width: 100px;">
             <select id="filterGender" class="form-select filter-select">
                 <option value="">All Genders</option>
             </select>
@@ -61,66 +60,70 @@
         </div>
     </div>
 
-    {{-- Charts --}}
-    <div class="row g-6 mb-6">
+    {{-- Charts - Row 1 --}}
+    <div class="row g-4 mb-4">
         <div class="col-lg-7 col-12">
-            <div class="card">
+            <div class="card h-100"> {{-- Added h-100 --}}
                 <div class="card-header"><h5 class="card-title mb-0">Month wise visits</h5></div>
                 <div class="card-body"><div id="monthWiseVisitsChart"></div></div>
             </div>
         </div>
 
         <div class="col-lg-5 col-12">
-            <div class="card">
+            <div class="card h-100"> {{-- Added h-100 --}}
                 <div class="card-header"><h5 class="card-title mb-0">Types of meetings</h5></div>
                 <div class="card-body"><div id="meetingsTreemapChart"></div></div>
             </div>
         </div>
     </div>
 
-    <div class="row g-6 mb-6">
+    {{-- Charts - Row 2: Map and ITU Pie --}}
+    <div class="row g-4 mb-4">
         <div class="col-lg-8 col-12">
-            <div class="card">
+            <div class="card h-100"> {{-- Added h-100 --}}
                 <div class="card-header"><h5 class="card-title mb-0">Country and city wise visits (map)</h5></div>
-                <div class="card-body"><div id="visitsMap" style="height: 420px;"></div></div>
+                {{-- Map height increased slightly for better fit with the taller pie chart --}}
+                <div class="card-body"><div id="visitsMap" style="height: 450px;"></div></div>
             </div>
         </div>
 
         <div class="col-lg-4 col-12">
-            <div class="card">
+            <div class="card h-100"> {{-- Added h-100 --}}
                 <div class="card-header"><h5 class="card-title mb-0">ITU sectors (only for ITU related visits)</h5></div>
-                <div class="card-body d-flex justify-content-center"><div id="ituSectorsPieChart"></div></div>
+                {{-- Added flex utilities to ensure the pie chart centers vertically --}}
+                <div class="card-body d-flex justify-content-center align-items-center"><div id="ituSectorsPieChart"></div></div>
             </div>
         </div>
     </div>
 
-    {{-- Officer Profile Charts --}}
-    <div class="row g-6 mb-6">
+    {{-- Officer Profile Charts - Row 3 --}}
+    <div class="row g-4 mb-4">
         <div class="col-md-6 col-12">
-            <div class="card">
+            <div class="card h-100"> {{-- Added h-100 --}}
                 <div class="card-header"><h5 class="card-title mb-0">Levels of officers</h5></div>
                 <div class="card-body"><div id="officerLevelsTreemap"></div></div>
             </div>
         </div>
 
         <div class="col-md-6 col-12">
-            <div class="card">
+            <div class="card h-100"> {{-- Added h-100 --}}
                 <div class="card-header"><h5 class="card-title mb-0">Age profile</h5></div>
                 <div class="card-body"><div id="ageProfileBarChart"></div></div>
             </div>
         </div>
     </div>
 
-    <div class="row g-6 mb-6">
+    {{-- Officer Profile Charts - Row 4 --}}
+    <div class="row g-4 mb-4">
         <div class="col-md-4 col-12">
-            <div class="card">
+            <div class="card h-100"> {{-- Added h-100 --}}
                 <div class="card-header"><h5 class="card-title mb-0">Cadre of officers</h5></div>
-                <div class="card-body"><div id="cadrePieChart"></div></div>
+                <div class="card-body d-flex justify-content-center align-items-center"><div id="cadrePieChart"></div></div>
             </div>
         </div>
 
         <div class="col-md-8 col-12">
-            <div class="card">
+            <div class="card h-100"> {{-- Added h-100 --}}
                 <div class="card-header"><h5 class="card-title mb-0">Gender</h5></div>
                 <div class="card-body"><div id="genderBarChart"></div></div>
             </div>
@@ -128,11 +131,11 @@
     </div>
 
     {{-- Officer Details Table --}}
-    <div class="row g-6 mb-6">
+    <div class="row g-4 mb-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-header"><h5 class="card-title">Officer details</h5></div>
-                <div class="table-responsive text-nowrap" style="max-height: 400px; overflow-y: auto;">
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table">
                         <thead class="sticky-top bg-white">
                             <tr>
@@ -191,9 +194,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearFiltersBtn = document.getElementById('clearFilters');
 
     // Selected filters from chart clicks (these are additional to selects)
-    let selectedLevelFilter = null;   // from Levels treemap
-    let selectedSectorFilter = null;  // from ITU pie
-    let activeAgeBucket = null;       // from Age chart
+    let selectedLevelFilter = null;
+    let selectedSectorFilter = null;
+    let activeAgeBucket = null;
 
     // ---------- Populate selects with distinct values ----------
     function populateSelects(){
@@ -221,10 +224,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     populateSelects();
 
-    // ---------- ApexCharts instances ----------
+    // ---------- ApexCharts instances (HEIGHTS ADJUSTED) ----------
     const monthChart = new ApexCharts(document.querySelector("#monthWiseVisitsChart"), {
         chart: {
-            type: 'bar', height: 340,
+            type: 'bar', height: 380, // INCREASED from 340 to better utilize space
             events: {
                 dataPointSelection: function(event, chartContext, config){
                     const idx = config.dataPointIndex;
@@ -247,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const meetingsTreemap = new ApexCharts(document.querySelector("#meetingsTreemapChart"), {
         chart: {
-            type: 'treemap', height: 340,
+            type: 'treemap', height: 380, // INCREASED from 340 to match monthChart
             events: {
                 dataPointSelection: function(event, chartContext, config){
                     // treemap stores data in series[0].data
@@ -272,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const ituPie = new ApexCharts(document.querySelector("#ituSectorsPieChart"), {
         chart: {
-            type: 'pie', height: 340,
+            type: 'pie', height: 400, // INCREASED to fill the height next to the map
             events: {
                 dataPointSelection: function(event, chartContext, config){
                     const idx = config.dataPointIndex;
@@ -367,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const genderBar = new ApexCharts(document.querySelector("#genderBarChart"), {
         chart: {
-            type: 'bar', height: 300,
+            type: 'bar', height: 320,
             events: {
                 dataPointSelection: function(event, chartContext, config){
                     const idx = config.dataPointIndex;
