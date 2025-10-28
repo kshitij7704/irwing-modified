@@ -36,6 +36,15 @@
         background: #fff;
         color: #000 !important;
         border: 1px solid #ced4da;
+        /* remove native arrow and add custom SVG caret to the right */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M6 8l4 4 4-4' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 0.85rem;
+        padding-right: 2.2rem; /* room for the arrow */
     }
     .btn, .btn-outline-secondary {
         color: #000 !important;

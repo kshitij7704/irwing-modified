@@ -2,6 +2,64 @@
 
 @section('content')
 
+    {{-- Readability: force high-contrast, black text and muted backgrounds for dashboard elements (copied from dashboard.blade.php) --}}
+    <style>
+    /* Dashboard readability improvements */
+    .container-xxl, .card, .table, .form-select, .btn, .card-title, h4 {
+        color: #000 !important;
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+    .card {
+        background: #ffffff !important;
+        border: 1px solid #e6e9ee !important;
+        box-shadow: 0 1px 3px rgba(16,24,40,0.05);
+    }
+    .card-header, .card-title {
+        background: #f5f7fa;
+        color: #000 !important;
+        font-weight: 600;
+        border-bottom: 1px solid #e6e9ee;
+    }
+    .table thead th {
+        background: #f8fafc !important;
+        color: #000 !important;
+        border-bottom: 2px solid #e9eef3 !important;
+    }
+    .table tbody tr td {
+        color: #000 !important;
+    }
+    .table-hover tbody tr:hover {
+        background: #fbfdff;
+    }
+    .form-select {
+        background: #fff;
+        color: #000 !important;
+        border: 1px solid #ced4da;
+        /* show a consistent dropdown caret and remove native appearance for cross-browser look */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding-right: 2.25rem;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1rem;
+    }
+    .btn, .btn-outline-secondary {
+        color: #000 !important;
+        background: #e9eef3;
+        border-color: #d0d7df;
+    }
+    .btn.btn-primary {
+        background: #2563eb; /* clearer blue */
+        border-color: #1d4ed8;
+        color: #fff !important;
+    }
+    .sticky-top.bg-white { background: #fff !important; }
+    .leaflet-container { background: #fff; }
+    </style>
+
 @php
     $activeRole = session('active_role') ?? auth()->user()->getRoleNames()->first();
 @endphp
@@ -78,20 +136,20 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header"><h5 class="card-title">Contributions</h5></div>
-                <div class="table-responsive text-nowrap" style="max-height: 520px; overflow-y: auto;">
-                    <table class="table">
+                <div class="table-responsive" style="max-height: 520px; overflow-y: auto;">
+                    <table class="table table-hover"> {{-- improved readability with hover --}}
                         <thead class="sticky-top bg-white">
                             <tr>
-                                <th>Study Group</th>
-                                <th>Question</th>
-                                <th>Work Item</th>
-                                <th>Contribution Type</th>
-                                <th>Brief</th>
-                                <th>Date</th>
-                                <th>Officers</th>
-                                <th>Type</th>
-                                <th>Priority</th>
-                                <th>Status</th>
+                                <th style="width:12%;">Study Group</th>
+                                <th style="width:14%;">Question</th>
+                                <th style="width:12%;">Work Item</th>
+                                <th style="width:10%;">Contribution Type</th>
+                                <th style="width:20%;">Brief</th>
+                                <th style="width:8%;">Date</th>
+                                <th style="width:12%;">Officers</th>
+                                <th style="width:6%;">Type</th>
+                                <th style="width:6%;">Priority</th>
+                                <th style="width:8%;">Status</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0"></tbody>
@@ -197,13 +255,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // fill selects
-        // month: sorted by monthNames
-        const monthList = Array.from(months).sort((a,b)=> monthNames.indexOf(a) - monthNames.indexOf(b));
+    // month: always include full month list for discoverability (sorted by calendar order)
+    const monthList = monthNames.slice();
         // study groups
         const studyGroupList = Array.from(studyGroups).sort();
         const officerList = Array.from(officers).sort();
         const typeList = Array.from(types).sort();
-        const priorityList = Array.from(priorities).sort();
+    const priorityList = Array.from(priorities).map(p => String(p).toLowerCase()).sort();
+    // ensure both 'yes' and 'no' exist so users can always filter by them
+    const normalizedPriorities = Array.from(new Set([...'yes,no'.split(','), ...priorityList]));
 
         // inject options
         // helper to populate preserving first "All" option
@@ -222,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const toAdd = typeList.filter(t => !existing.includes(t));
             toAdd.forEach(t => filterTypeEl.appendChild(new Option(t, t)));
         })();
-        setOptions(filterPriorityEl, priorityList.length ? priorityList : ['yes','no'], 'All Priorities');
+    setOptions(filterPriorityEl, normalizedPriorities.length ? normalizedPriorities : ['yes','no'], 'All Priorities');
         setOptions(filterOfficerEl, officerList, 'All Officers');
     }
     populateSelects();
