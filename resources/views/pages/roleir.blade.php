@@ -96,7 +96,6 @@
             <!-- Overview -->
             <div class="tab-pane fade show active" id="overview" role="tabpanel">
                 <div class="tab-card">
-                    <h3>Overview</h3>
                     <p>{!! $roleir->description !!}</p>
                 </div>
             </div>
