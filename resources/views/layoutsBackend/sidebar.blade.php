@@ -40,6 +40,7 @@
                 <div data-i18n="Dashboard 2">Dashboard 2</div>
             </a>
         </li>
+        
 
         <!-- Apps & Pages Header -->
         <li class="menu-header small">
