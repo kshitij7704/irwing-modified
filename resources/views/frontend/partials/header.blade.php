@@ -586,7 +586,7 @@
                         <div class="nav-dropdown">
                             <a href="{{url('pressrelease')}}">Press Releases</a>
                             <a href="{{url('social-media')}}">Social Media</a>
-                            <a href="{{url('promotional-videos')}}">Promotional Videos</a>
+                            <!-- <a href="{{url('promotional-videos')}}">Promotional Videos</a> -->
                             <a href="{{url('brouches')}}">Brochures</a>
                         </div>
                     </li>

@@ -121,11 +121,12 @@ class HomeController extends Controller
             $twitter =  SocialMedia::where('platform','twitter')->latest()->get();
             $youtube =  SocialMedia::where('platform','youtube')->latest()->get();
             $linkedin =  SocialMedia::where('platform','linkedin')->latest()->get();
+            $PromotionalVideo =  PromotionalVideo::all();
             $orms = Orm::all(); // fetch all records
         } catch (\Exception $e) {
             $orms = collect([]);
         }
-        return view('pages.tweets', compact('orms','instagram','facebook','twitter','youtube','linkedin'));
+        return view('pages.tweets', compact('orms','instagram','facebook','twitter','youtube','linkedin','PromotionalVideo'));
     }
     public function message(Request $request, $id)
     {
@@ -190,7 +191,7 @@ class HomeController extends Controller
     public function engagement(Request $request, $id)
     {
         try {
-            $engagements = \App\Models\Engagement::where('status', 1)->get();
+            $engagements = \App\Models\Engagement::find($id);
 
         } catch (\Exception $e) {
             $InternationalForm = collect([]);
@@ -198,6 +199,24 @@ class HomeController extends Controller
         $section = $request->get('section');
         $sub = $request->get('sub');
         return view('pages.engagementpage', compact('engagements', 'section', 'sub'));
+    }
+    public function media(Request $request, $type)
+    {
+        try {
+            if($type == 'videos'){
+                $media = PromotionalVideo::all(); 
+            }else{
+                $media = SocialMedia::where('platform', $type)->latest()->get();
+            }
+            $types = $type;
+
+        } catch (\Exception $e) {
+            $InternationalForm = collect([]);
+        }
+        $section = $request->get('section');
+        $sub = $request->get('sub');
+        
+        return view('pages.media', compact('media', 'section', 'sub','types'));
     }
 
 

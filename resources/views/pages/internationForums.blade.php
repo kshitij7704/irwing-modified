@@ -213,7 +213,7 @@
         <div class="forum-content">
                 <!-- Overview Section -->
                 <div class="overview-section">
-                    <h3>Welcome to International Forums</h3>
+                    <!-- <h3>Welcome to International Forums</h3> -->
                     <p>{!! $InternationalForm->description !!}</p>
                 </div>
         </div>

@@ -95,15 +95,15 @@
                     }
                 @endphp
                 <li class="press-item" data-title="{{ strtolower($title) }}" data-date="{{ $date }}">
-                    <a href="{{ $url }}" class="press-link" target="_blank">{{ $title }}</a>
-                    <span class="press-date">{{ \Carbon\Carbon::parse($date)->format('F d, Y') }}</span>
+                    <a href="{{ $url }}" class="press-link" target="_blank" style="font-size: 22px;">{{ $title }}</a>
+                    <span class="press-date" style="font-size: 13px;">{{ \Carbon\Carbon::parse($date)->format('F d, Y') }}</span>
                 </li>
             @empty
                 <li>No press releases found.</li>
             @endforelse
         </ul>
-
-        <a href="https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1" class="btn btn-primary">View All</a>
+<!-- 
+        <a href="https://www.pib.gov.in/Allrel.aspx?reg=3&lang=1" class="btn btn-primary">View All</a> -->
     </div>
 </main>
 

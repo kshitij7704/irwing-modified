@@ -52,11 +52,14 @@
             <div class="col-md-6">
                 <div class="brochure-card">
                     <div>
-                        <div class="brochure-title">{{ $data->title }}</div>
-                        <div class="brochure-date">Published: {{ $data->published_at->format('F Y') }}</div>
+                        <div class="brochure-title" style="    font-size: 23px;
+">{{ $data->title }}</div>
+                        <div class="brochure-date" style="    font-size: 15px;
+">Published: {{ $data->published_at->format('F Y') }}</div>
                     </div>
-                    <a href="{{ asset('storage/'.$data->file_path) }}" class="btn btn-primary btn-download"
-                        download class="btn btn-primary">
+                    <a href="{{ asset('storage/'.$data->file_path) }}" 
+                        download  style="    font-size: 15px;
+">
                         Download PDF
                     </a>
                 </div>

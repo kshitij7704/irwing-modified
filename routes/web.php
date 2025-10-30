@@ -72,6 +72,7 @@ Route::PUT('/profiles/update', [App\Http\Controllers\ProfileController::class, '
  Route::get('slider-page/{id}', [HomeController::class, 'sliderPage'])->name('sliderPage');
  Route::get('message/{id}', [HomeController::class, 'message'])->name('message');
  Route::get('enagement/{id}', [HomeController::class, 'engagement'])->name('engagement');
+ Route::get('media/{type}', [HomeController::class, 'media'])->name('media');
  Route::get('role-ir', [HomeController::class, 'roleir'])->name('role-ir');
  Route::get('structure', [HomeController::class, 'structure'])->name('structure');
  Route::get('contact-us', [HomeController::class, 'contact'])->name('contact-us');

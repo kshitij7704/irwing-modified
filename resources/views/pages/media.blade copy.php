@@ -26,7 +26,7 @@
     }
 
     .social-card {
-        width: 100%;
+        width: 300%;
         height: 370px;
         display: flex;
         flex-direction: column;
@@ -1693,7 +1693,6 @@
             padding: 20px;
         }
     }
-    
 
 </style>
 
@@ -1701,158 +1700,20 @@
 <main class="main">
     <div class="page-header text-center" style="background-image: url('front/assets/images/page-header-bg.jpg')">
         <div class="container">
-            <h1 class="page-title">Social Media</h1>
+            <h1 class="page-title">@if($types == 'videos') Promotional Videos @else {{$types}} Feed @endif</h1>
         </div>
     </div>
 
     <div class="social-grid-container">
         <!-- Instagram Embed -->
         <div class="social-card">
-            <h4>Instagram feed</h4>
+            <h4></h4>
 
             <div class="social-media-scroll-container">
                 <div class="social-media-scroll-content" id="socialScrollContent">
                     <!-- Instagram Card -->
-                     @foreach($instagram as $item)
-                    <div class="social-media-item">
-                        <div class="social-simple-row">
-                            <div class="social-platform-icon" style="background: #E4405F;">
-                                <i class="bi bi-instagram"></i>
-                            </div>
-                            <div class="social-text-content">
-                                <a href="{{$item->url}}" target="_blank"
-                                    class="social-link">{{$item->description}}</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    
-
-
-                </div>
-            </div><a href="{{url('media/instagram')}}" class="btn-view-all" style="    font-size: 17px;
-">View All</a>
-        </div>
-
-        <!-- Facebook Page Plugin -->
-        <div class="social-card">
-            <h4>Facebook feed</h4>
-
-            <div class="social-media-scroll-container">
-                <div class="social-media-scroll-content" id="socialScrollContent">
-
-                    <!-- Facebook Card -->
-                     @foreach($facebook as $item)
-                    <div class="social-media-item">
-                        <div class="social-simple-row">
-                            <div class="social-platform-icon" style="background: #1877F2;">
-                                <i class="bi bi-facebook"></i>
-                            </div>
-                            <div class="social-text-content">
-                                <a href="{{$item->url}}" target="_blank"
-                                    class="social-link">{{$item->description}}</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-
-
-                </div>
-            </div><a href="{{url('media/facebook')}}" class="btn-view-all" style="    font-size: 17px;
-">View All</a>
-        </div>
-
-        <!-- YouTube Video Embed -->
-        <div class="social-card">
-            <h4>Youtube feed</h4>
-
-            <div class="social-media-scroll-container">
-                <div class="social-media-scroll-content" id="socialScrollContent">
-
-                    <!-- YouTube Card -->
-                     @foreach($youtube as $item)
-                    <div class="social-media-item">
-                        <div class="social-simple-row">
-                            <div class="social-platform-icon" style="background: #FF0000;">
-                                <i class="bi bi-youtube"></i>
-                            </div>
-                            <div class="social-text-content">
-                                <a href="{{$item->url}}" target="_blank"
-                                    class="social-link">{{$item->description}}</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-
-
-                </div>
-            </div><a href="{{url('media/linkedin')}}" class="btn-view-all" style="    font-size: 17px;
-">View All</a>
-        </div>
-
-        <!-- LinkedIn Manual Card -->
-        <div class="social-card">
-            <h4>Twitter feed</h4>
-
-            <div class="social-media-scroll-container">
-                <div class="social-media-scroll-content" id="socialScrollContent">
-                   
-
-                    <!-- Duplicate for seamless scrolling -->
-                     @foreach($twitter as $item)
-                    <div class="social-media-item">
-                        <div class="social-simple-row">
-                            <div class="social-platform-icon" style="background: #4048e4ff;">
-                                <i class="bi bi-twitter"></i>
-                            </div>
-                            <div class="social-text-content">
-                                <a href="{{$item->url}}" target="_blank"
-                                    class="social-link">{{$item->description}}</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-
-
-                </div>
-            </div><a href="{{url('media/youtube')}}" class="btn-view-all" style="    font-size: 17px;
-">View All</a>
-        </div>
-
-        <!-- Twitter Manual Card -->
-        <div class="social-card">
-            <h4>Linkedin feed</h4>
-
-            <div class="social-media-scroll-container">
-                <div class="social-media-scroll-content" id="socialScrollContent">
-                   
-
-                     @foreach($linkedin as $item)
-                    <div class="social-media-item">
-                        <div class="social-simple-row">
-                            <div class="social-platform-icon" style="background: #1877F2;">
-                                <i class="bi bi-linkediin"></i>
-                            </div>
-                            <div class="social-text-content">
-                                <a href="{{$item->url}}" target="_blank"
-                                    class="social-link">{{$item->description}}</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-
-                </div>
-            </div><a href="{{url('media/linkedin')}}" class="btn-view-all" style="    font-size: 17px;
-">View All</a>
-        </div>
-        <div class="social-card">
-            <h4>Promotional Videos</h4>
-
-            <div class="social-media-scroll-container">
-                <div class="social-media-scroll-content" id="socialScrollContent">
-                   
-
-                     @foreach($PromotionalVideo as $video)
+                    @foreach($media as $item)
+                    @if($types == 'videos')
                     <div class="social-media-item">
                         <div class="social-simple-row">
                             <div class="social-platform-icon" >
@@ -1865,13 +1726,51 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="social-media-item">
+                        <div class="social-simple-row">
+                            <div class="social-platform-icon" style="background: #E4405F;">
+                                @if($types == 'instagram')
+                                    
+                            <div class="social-platform-icon" style="background: #E4405F;">
+                                <i class="bi bi-instagram"></i>
+                            </div>
+                                @endif
+                                @if($types == 'facebook')
+                                    
+                            <div class="social-platform-icon" style="background: #1877F2;">
+                                <i class="bi bi-facebook"></i>
+                            </div>
+                                @endif
+                                @if($types == 'twitter')
+                                    <div class="social-platform-icon" style="background: #4048e4ff;">
+                                <i class="bi bi-twitter"></i>
+                            </div>
+                                @endif
+                                @if($types == 'youtube')
+                                    <div class="social-platform-icon" style="background: #FF0000;">
+                                <i class="bi bi-youtube"></i>
+                            </div>
+                                @endif
+                                @if($types == 'linkedin')
+                                    <div class="social-platform-icon" style="background: #1877F2;">
+                                <i class="bi bi-linkediin"></i>
+                            </div>
+                                @endif
+                            <div class="social-text-content">
+                                <a href="{{$item->url}}" target="_blank" class="social-link">{{$item->description}}</a>
+                            </div>
+                        </div>
+                    </div>@endif
                     @endforeach
+
+
 
                 </div>
             </div>
-            <a href="{{url('media/videos')}}" class="btn-view-all" style="    font-size: 17px;
-">View All</a>
         </div>
+
+
     </div>
 </main>
 

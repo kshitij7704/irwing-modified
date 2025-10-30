@@ -633,7 +633,7 @@
 
         /* Auto-scroll container for updates */
         .updates-scroll-container {
-            height: 600px;
+            height: 461px;
             overflow: hidden;
             position: relative;
             border-radius: 10px;
@@ -1883,7 +1883,7 @@ document.querySelector('.blue-banner-section').addEventListener('mouseleave', ()
         <section class="calendar-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">EVENTS CALENDAR</h2>
+                    <h2 class="section-title">EVENTS CALENDAR & SOCIAL MEDIA FEED</h2>
                 </div>
                 <div class="calendar-content-wrapper">
                     <!-- Left Column - Calendar -->
@@ -2008,6 +2008,7 @@ document.querySelector('.blue-banner-section').addEventListener('mouseleave', ()
         <div class="engagement-grid">
             @forelse ($engagements as $engagement)
                 <div class="engagement-card">
+                    <a href="{{url('enagement/'.$engagement->id)}}">
                     <div class="card-image-wrapper">
                         <img src="{{ asset('storage/' . $engagement->image) }}" 
                              alt="{{ $engagement->title }}" class="card-image">
@@ -2015,7 +2016,7 @@ document.querySelector('.blue-banner-section').addEventListener('mouseleave', ()
                     <div class="card-content">
                         <h3>{{ $engagement->title }}</h3>
                         <p>{!! nl2br(e($engagement->description)) !!}</p>
-                    </div>
+                    </div></a>
                 </div>
             @empty
                 <p>No engagements available at the moment.</p>

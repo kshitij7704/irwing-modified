@@ -207,16 +207,16 @@
         </div>
 
         <h1 class="forum-header">
-            {{$Slider->title}}
+            {{$engagements->title}}
         </h1>
 
         <div class="forum-content">
                 <!-- Overview Section -->
                 <div class="overview-section">
                     
-                        <img src="{{ $Slider ? asset('storage/' . $Slider->image) : asset('images/default.jpg') }}"
+                        <img src="{{ $engagements ? asset('storage/' . $engagements->image) : asset('images/default.jpg') }}"
                             alt="Banner Image" id="mainBannerImage">
-                    <p>{!! $Slider->description !!}</p>
+                    <p>{!! $engagements->description !!}</p>
                 </div>
         </div>
 

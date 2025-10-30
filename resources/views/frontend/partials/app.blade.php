@@ -59,7 +59,41 @@
     <!-- Government Theme CSS -->
     <link rel="stylesheet" href="{{asset('css/government-theme.css')}}">
     <!-- Google tag (gtag.js) -->
+<style>
+    .minister-photo{
+        margin: 0px auto 6px !important;
+            width: 90px !important;
+    height: 90px !important;
+}
 
+.minister-name{
+    line-height: 1.3;
+}
+
+
+.minister-card{
+    border-left: 6px solid #4a90e2 !important;
+}
+
+.updates-scroll-container {
+    min-height: 461px;
+    height: auto !important;
+}
+
+
+#scroll-top{
+        width: 4rem !important;
+    height: 4rem !important;
+    border-radius: 50% !important;
+    background-color:#FF9933 !important;
+    color: #fff !important;
+}
+
+
+#scroll-top:hover, #scroll-top:focus{
+    background-color: #4a90e2 !important;
+}
+</style>
 </head>
 
 <body>
