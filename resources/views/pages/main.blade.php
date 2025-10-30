@@ -1857,23 +1857,79 @@ document.querySelector('.blue-banner-section').addEventListener('mouseleave', ()
                         </div>
 
                         <!-- Single Tab Content -->
-                        <div class="tab-content">
-                            <div id="all-updates" class="tab-pane active">
-                                <div class="updates-scroll-container">
-                                    <div class="updates-scroll-content" id="scrollContent">
-                                        <!-- First set of items -->
-                                        @foreach($circulars as $circular)
-                                        <div class="update-item">
-                                            <a href="{{$circular->url}}" target="_blank"><div class="update-date">{{$circular->title}}</div></a>
-                                            <div class="update-text">{{$circular->description}}</div>
-                                        </div>
-                                        @endforeach
-
-                                    </div>
-                                </div>
-
-                            </div>
+                       <div class="tab-content">
+    <div id="all-updates" class="tab-pane active">
+        <div class="updates-scroll-container">
+            <div class="updates-scroll-content" id="scrollContent">
+                {{-- Repeat the circulars twice so it never goes blank --}}
+                @for($i = 0; $i < 2; $i++)
+                    @foreach($circulars as $circular)
+                        <div class="update-item">
+                            <a href="{{ $circular->url }}" target="_blank">
+                                <div class="update-date">{{ $circular->title }}</div>
+                            </a>
+                            <div class="update-text">{{ $circular->description }}</div>
                         </div>
+                    @endforeach
+                @endfor
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.updates-scroll-container {
+    height: 400px; /* Set visible height */
+    overflow-y: auto; /* Allow manual scroll */
+    scroll-behavior: smooth; /* Smooth scroll on mouse */
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    padding-right: 10px;
+}
+
+.updates-scroll-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.2s ease;
+}
+
+.update-item:hover {
+    background-color: #f8f9fa;
+}
+
+.update-date {
+    font-weight: 600;
+    color: #0d6efd;
+    margin-bottom: 5px;
+}
+
+.update-text {
+    color: #495057;
+    font-size: 14px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollContainer = document.querySelector('.updates-scroll-container');
+
+    // Optional smooth scroll on mouse wheel
+    scrollContainer.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        scrollContainer.scrollBy({
+            top: e.deltaY,
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
+
+
                     </div>
                 </div>
             </div>
@@ -1929,76 +1985,88 @@ document.querySelector('.blue-banner-section').addEventListener('mouseleave', ()
 
                     <!-- Right Column - Social Media Feed -->
                     <div class="calendar-right-column">
-                        <div class="social-media-header">Social Media Feed</div>
-                        <div class="social-media-scroll-container">
-                            <div class="social-media-scroll-content" id="socialScrollContent">
-                                <!-- Instagram Card -->
-                                <div class="social-media-item">
-                                    <div class="social-simple-row">
-                                        <div class="social-platform-icon" style="background: #E4405F;">
-                                            <i class="bi bi-instagram"></i>
-                                        </div>
-                                        <div class="social-text-content">
-                                            <a href="{{$instagram->url}}" target="_blank"
-                                                class="social-link">{{$instagram->description}}</a>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="social-media-header">Social Media Feed</div>
 
-                                <!-- Facebook Card -->
-                                <div class="social-media-item">
-                                    <div class="social-simple-row">
-                                        <div class="social-platform-icon" style="background: #1877F2;">
-                                            <i class="bi bi-facebook"></i>
-                                        </div>
-                                        <div class="social-text-content">
-                                            <a href="{{$facebook->url}}"
-                                                target="_blank" class="social-link">{{$facebook->description}}</a>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="social-media-scroll-container" style="max-height: 400px; overflow-y: auto; scroll-behavior: smooth;">
+        <div class="social-media-scroll-content" id="socialScrollContent">
 
-                                <!-- YouTube Card -->
-                                <div class="social-media-item">
-                                    <div class="social-simple-row">
-                                        <div class="social-platform-icon" style="background: #FF0000;">
-                                            <i class="bi bi-youtube"></i>
-                                        </div>
-                                        <div class="social-text-content">
-                                            <a href="{{$youtube->url}}" target="_blank"
-                                                class="social-link">{{$youtube->description}}</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Duplicate for seamless scrolling -->
-                                <div class="social-media-item">
-                                    <div class="social-simple-row">
-                                        <div class="social-platform-icon" style="background: #4048e4ff;">
-                                            <i class="bi bi-twitter"></i>
-                                        </div>
-                                        <div class="social-text-content">
-                                            <a href="{{$twitter->url}}" target="_blank"
-                                                class="social-link">{{$twitter->description}}</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="social-media-item">
-                                    <div class="social-simple-row">
-                                        <div class="social-platform-icon" style="background: #1877F2;">
-                                            <i class="bi bi-linkediin"></i>
-                                        </div>
-                                        <div class="social-text-content">
-                                            <a href="{{$linkedin->url}}"
-                                                target="_blank" class="social-link">{{$linkedin->description}}</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+            {{-- Loop entries twice so it never looks empty --}}
+            @for($i = 0; $i < 2; $i++)
+                <!-- Instagram -->
+                <div class="social-media-item">
+                    <div class="social-simple-row">
+                        <div class="social-platform-icon" style="background: #E4405F;">
+                            <i class="bi bi-instagram"></i>
+                        </div>
+                        <div class="social-text-content">
+                            <a href="{{ $instagram->url }}" target="_blank" class="social-link">
+                                {{ $instagram->description }}
+                            </a>
                         </div>
                     </div>
+                </div>
+
+                <!-- Facebook -->
+                <div class="social-media-item">
+                    <div class="social-simple-row">
+                        <div class="social-platform-icon" style="background: #1877F2;">
+                            <i class="bi bi-facebook"></i>
+                        </div>
+                        <div class="social-text-content">
+                            <a href="{{ $facebook->url }}" target="_blank" class="social-link">
+                                {{ $facebook->description }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- YouTube -->
+                <div class="social-media-item">
+                    <div class="social-simple-row">
+                        <div class="social-platform-icon" style="background: #FF0000;">
+                            <i class="bi bi-youtube"></i>
+                        </div>
+                        <div class="social-text-content">
+                            <a href="{{ $youtube->url }}" target="_blank" class="social-link">
+                                {{ $youtube->description }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Twitter -->
+                <div class="social-media-item">
+                    <div class="social-simple-row">
+                        <div class="social-platform-icon" style="background: #1DA1F2;">
+                            <i class="bi bi-twitter"></i>
+                        </div>
+                        <div class="social-text-content">
+                            <a href="{{ $twitter->url }}" target="_blank" class="social-link">
+                                {{ $twitter->description }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="social-media-item">
+                    <div class="social-simple-row">
+                        <div class="social-platform-icon" style="background: #0A66C2;">
+                            <i class="bi bi-linkedin"></i>
+                        </div>
+                        <div class="social-text-content">
+                            <a href="{{ $linkedin->url }}" target="_blank" class="social-link">
+                                {{ $linkedin->description }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endfor
+
+        </div>
+    </div>
+</div>
+
                 </div>
             </div>
         </section>

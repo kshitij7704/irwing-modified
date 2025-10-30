@@ -17,7 +17,7 @@
     }
     .card-header {
         background: #0d6efd;
-        color: #fff;
+        color: black;
         font-weight: 600;
         border-radius: 10px 10px 0 0;
         padding: 15px 20px;
@@ -89,7 +89,8 @@
 
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
-        <h4 class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="card-header d-flex justify-content-between align-items-center" style="    background: #4a90e2;
+">
             IR Wing Office Memoranda (OMs)
         </h4>
 

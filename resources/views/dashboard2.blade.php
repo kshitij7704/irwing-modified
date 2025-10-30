@@ -58,6 +58,30 @@
     }
     .sticky-top.bg-white { background: #fff !important; }
     .leaflet-container { background: #fff; }
+
+    /* Make all filter dropdowns uniform */
+.filter-row .form-select {
+    width: 180px;
+    min-width: 180px;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+    .filter-row .form-select {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #clearFilters {
+        width: 100%;
+    }
+}
+
     </style>
 
 @php
@@ -72,35 +96,35 @@
         <div class="col-12 d-flex align-items-center justify-content-between flex-wrap">
             <h4 class="mb-0">Contributions Dashboard</h4>
 
-            <div class="d-flex gap-2 align-items-center">
-                <select id="filterMonth" class="form-select d-inline-block" style="width: 160px;">
-                    <option value="">All Months</option>
-                </select>
+            <div class="d-flex flex-wrap gap-2 align-items-center filter-row">
+    <select id="filterMonth" class="form-select">
+        <option value="">All Months</option>
+    </select>
 
-                <select id="filterStudyGroup" class="form-select d-inline-block" style="width: 180px;">
-                    <option value="">All Study Groups</option>
-                </select>
+    <select id="filterStudyGroup" class="form-select">
+        <option value="">All Study Groups</option>
+    </select>
 
-                <select id="filterType" class="form-select d-inline-block" style="width: 160px;">
-                    <option value="">All Types</option>
-                    <option value="ITU-T">ITU-T</option>
-                    <option value="ITU-R">ITU-R</option>
-                    <option value="ITU_D">ITU-D</option>
-                    <option value="ITU_D">ITU_D</option>
-                </select>
+    <select id="filterType" class="form-select">
+        <option value="">All Types</option>
+        <option value="ITU-T">ITU-T</option>
+        <option value="ITU-R">ITU-R</option>
+        <option value="ITU_D">ITU-D</option>
+    </select>
 
-                <select id="filterPriority" class="form-select d-inline-block" style="width: 120px;">
-                    <option value="">All Priorities</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
+    <select id="filterPriority" class="form-select">
+        <option value="">All Priorities</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
 
-                <select id="filterOfficer" class="form-select d-inline-block" style="width: 220px;">
-                    <option value="">All Officers</option>
-                </select>
+    <select id="filterOfficer" class="form-select">
+        <option value="">All Officers</option>
+    </select>
 
-                <button id="clearFilters" class="btn btn-outline-secondary">Clear</button>
-            </div>
+    <button id="clearFilters" class="btn btn-outline-secondary ms-auto">Clear</button>
+</div>
+
         </div>
     </div>
 
@@ -123,7 +147,7 @@
 
     {{-- Priority bar --}}
     <div class="row g-6 mb-6">
-        <div class="col-md-8 col-12">
+        <div class="col-md-12 col-12">
             <div class="card">
                 <div class="card-header"><h5 class="card-title mb-0">Priority counts</h5></div>
                 <div class="card-body"><div id="priorityBarChart"></div></div>
