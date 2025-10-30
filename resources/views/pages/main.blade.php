@@ -1993,6 +1993,7 @@ document.addEventListener('DOMContentLoaded', () => {
             {{-- Loop entries twice so it never looks empty --}}
             @for($i = 0; $i < 2; $i++)
                 <!-- Instagram -->
+                @if($instagram)
                 <div class="social-media-item">
                     <div class="social-simple-row">
                         <div class="social-platform-icon" style="background: #E4405F;">
@@ -2005,8 +2006,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 </div>
+                @endif
 
                 <!-- Facebook -->
+                @if($facebook)
                 <div class="social-media-item">
                     <div class="social-simple-row">
                         <div class="social-platform-icon" style="background: #1877F2;">
@@ -2019,8 +2022,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 </div>
+                @endif
 
                 <!-- YouTube -->
+                @if($youtube)
                 <div class="social-media-item">
                     <div class="social-simple-row">
                         <div class="social-platform-icon" style="background: #FF0000;">
@@ -2033,8 +2038,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 </div>
+                @endif
 
                 <!-- Twitter -->
+                @if($twitter)
                 <div class="social-media-item">
                     <div class="social-simple-row">
                         <div class="social-platform-icon" style="background: #1DA1F2;">
@@ -2047,8 +2054,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 </div>
+                @endif
 
                 <!-- LinkedIn -->
+                @if($linkedin)
                 <div class="social-media-item">
                     <div class="social-simple-row">
                         <div class="social-platform-icon" style="background: #0A66C2;">
@@ -2061,6 +2070,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 </div>
+                @endif
             @endfor
 
         </div>
