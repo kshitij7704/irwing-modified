@@ -722,7 +722,7 @@
         }
 
         .social-media-scroll-container {
-            height: 650px;
+            height: 399px;
             overflow: hidden;
             position: relative;
             background: white;
@@ -989,7 +989,7 @@
         }
 
         .calendar-day {
-            min-height: 120px;
+            min-height: 70px;
             padding: 8px;
             border-right: 1px solid #dee2e6;
             border-bottom: 1px solid #dee2e6;
@@ -1681,9 +1681,6 @@
                             <i class="bi bi-chevron-right"></i>
                         </button>
                     </div>
-                    <div class="view-all-link" onclick="window.location.href='#updates'" style="cursor:pointer;">
-                        View All Updates
-                    </div>
                 </div>
 
                 <div class="thumbnail-gallery">
@@ -1846,7 +1843,7 @@ document.querySelector('.blue-banner-section').addEventListener('mouseleave', ()
                             <div class="minister-name">{{ $minister->postion }}</div>
                             <div class="minister-title">{{ $minister->minister_name }}</div>
                             <div class="minister-message">
-                                <p>{{ Str::limit($minister->message, 180, '...') }}</p>
+                                <p>{{ Str::limit($minister->message, 35, '...') }}</p>
                             </div>
                         </div>
                         @endforeach
@@ -1875,7 +1872,6 @@ document.querySelector('.blue-banner-section').addEventListener('mouseleave', ()
                                     </div>
                                 </div>
 
-                                <button class="read-more-btn">Read more ></button>
                             </div>
                         </div>
                     </div>

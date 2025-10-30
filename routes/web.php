@@ -71,6 +71,7 @@ Route::PUT('/profiles/update', [App\Http\Controllers\ProfileController::class, '
  Route::get('internation-forums/{id}', [HomeController::class, 'internationForums'])->name('internationForums');
  Route::get('slider-page/{id}', [HomeController::class, 'sliderPage'])->name('sliderPage');
  Route::get('message/{id}', [HomeController::class, 'message'])->name('message');
+ Route::get('enagement/{id}', [HomeController::class, 'engagement'])->name('engagement');
  Route::get('role-ir', [HomeController::class, 'roleir'])->name('role-ir');
  Route::get('structure', [HomeController::class, 'structure'])->name('structure');
  Route::get('contact-us', [HomeController::class, 'contact'])->name('contact-us');
@@ -79,6 +80,7 @@ Route::PUT('/profiles/update', [App\Http\Controllers\ProfileController::class, '
  Route::get('privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacyPolicy');
  Route::get('terms-of-use', [HomeController::class, 'termsOfUse'])->name('termsOfUse');
  Route::get('accessibility', [HomeController::class, 'accessibility'])->name('accessibility');
+
 
 
 Route::post('/contact-submit', [ContactController::class, 'store'])->name('contact.submit');

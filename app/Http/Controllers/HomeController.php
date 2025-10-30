@@ -187,6 +187,18 @@ class HomeController extends Controller
         $sub = $request->get('sub');
         return view('pages.sliderpage', compact('Slider', 'section', 'sub'));
     }
+    public function engagement(Request $request, $id)
+    {
+        try {
+            $engagements = \App\Models\Engagement::where('status', 1)->get();
+
+        } catch (\Exception $e) {
+            $InternationalForm = collect([]);
+        }
+        $section = $request->get('section');
+        $sub = $request->get('sub');
+        return view('pages.engagementpage', compact('engagements', 'section', 'sub'));
+    }
 
 
 
